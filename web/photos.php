@@ -25,58 +25,52 @@
     </div>
     <article>
         <h1> Welcome to Blurry Photos 4 You! </h1>
-        <!-- s<form name="Category"> -->
+        <form action="photos.php" method="POST">
         <p> Category:</p><select name="category" id="category"></p>
+        <option value="4">All</option>
         <option value="1">Scenic</option>
         <option value="2">Transportation</option>
         <option value="3">Industrial</option>
         </select>
         <br>
         <button value="filter selection" id="filter">Ok</button> 
+        </form>
         <br>
-
-        <!-- <script> 
-            filter.onclick = function filter() {
-            var cat = document.getElementById("category");
-            var val = cat.options[cat.selectedIndex].value;
-            if (val == "scenic") {
-                console.log(val);
-            }
-            else if (val == "transportation"){
-                console.log(val);
-            }
-            else if (val == "industrial") {
-                console.log(val);
-            }
-        }
-        </script> -->
         <?php
 
-        session_start();
+session_start();
 
-        include ('connection.php');
-        if () {
+include ('connection.php');
+// show all products
+$category = $_POST['category'];
+if ($category == "4") {
+    $result = mysqli_query($link,'select * from product');
+    if ($result)   {
+    $row_count = mysqli_num_rows($result);
+    print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
 
+    while ($row = mysqli_fetch_array($result)) {
+        print $row['id'] . ', ' . $row['name'] . ', ' . $row['description'] .', ' . $row['image'] .', ' . $row['price'] .  '<br>';
         }
-        else if () {
-
-        }
-        else if () {
-
-        }
-
-        $result = mysqli_query($link,'select * from product where productcategory.category_id = ');
-        if ($result)   {
-        $row_count = mysqli_num_rows($result);
-        print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
-     
-        while ($row = mysqli_fetch_array($result)) {
-            print $row['id'] . ', ' . $row['name'] . ', ' . $row['description'] .', ' . $row['image'] .', ' . $row['price'] .  '<br>';
-        }
-     
     }
+}
+// show products filtered by category id
+else if ($category != "4") {
+    $result = mysqli_query($link," select * 
+                                    from product p, productcategory pc
+                                    where p.id = pc.product_id
+                                    and pc.category_id = '$category'");
+    if ($result)   {
+    $row_count = mysqli_num_rows($result);
+    print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
 
-        ?>
+    while ($row = mysqli_fetch_array($result)) {
+        print $row['id'] . ', ' . $row['name'] . ', ' . $row['description'] .', ' . $row['image'] .', ' . $row['price'] .  '<br>';
+        }
+    }
+}
+
+?>
     </article>
 
     <footer class="footer">Copyright &copy;2018</footer>
