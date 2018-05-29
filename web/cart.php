@@ -7,6 +7,7 @@
 
     <title>Blurry Photos 4 You!</title>
     <style type="text/css"></style>
+	
 </head>
 
 <body>
@@ -20,7 +21,7 @@
             <li><a href="photos.php" title="Photos">Photos</a></li>
             <li><a href="login.php" title="Login">Login</a></li>
             <li><a href="cart.php" title="Cart">View Cart</a></li>
-            <li><a href="addproduct.php" title="AddProduct">AddProduct</a></li>
+            <li><a href="addproduct.php" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
     </div>
@@ -31,6 +32,7 @@
 
     </article>
 
+	
     <footer class="footer">Copyright &copy;2018</footer>
 
 </body>
