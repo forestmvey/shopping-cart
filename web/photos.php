@@ -20,6 +20,7 @@
             <li><a href="photos.php" title="Photos" class="viewing">Photos</a></li>
             <li><a href="login.php" title="Login">Login</a></li>
             <li><a href="cart.php" title="Cart">View Cart</a></li>
+            <li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
             <li><a href="addproduct.php" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
