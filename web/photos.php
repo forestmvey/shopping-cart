@@ -51,7 +51,7 @@ if ($category == "4") {
     print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
 
     while ($row = mysqli_fetch_array($result)) {
-        print $row['id'] . ', ' . $row['name'] . ', ' . $row['description'] .', ' . $row['image'] .', ' . $row['price'] .  '<br>';
+        print $row['id'] . ', ' . $row['name'] . ', ' . $row['size'] .', ' . $row['image'] .', ' . $row['price'] .  '<br>';
         }
     }
 }
@@ -66,7 +66,7 @@ else if ($category != "4") {
     print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
 
     while ($row = mysqli_fetch_array($result)) {
-        print $row['id'] . ', ' . $row['name'] . ', ' . $row['description'] .', ' . $row['image'] .', ' . $row['price'] .  '<br>';
+        print $row['id'] . ', ' . $row['name'] . ', ' . $row['size'] .', ' . $row['image'] .', ' . $row['price'] .  '<br>';
         }
     }
 }
