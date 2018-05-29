@@ -15,11 +15,11 @@
     <div>
     <nav>
         <ul>
-            <li><a href="index.php" title="Main page" class="viewing">Main</a></li>
+            <li><a href="index.php" title="Main page">Main</a></li>
             <li><a href="photos.php" title="Photos">Photos</a></li>
             <li><a href="login.php" title="Login">Login</a></li>
             <li><a href="cart.php" title="Cart">View Cart</a></li>
-            <li><a href="addproduct.php" title="AddProduct">Add Product</a></li>
+            <li><a href="addproduct.php" title="Add Product" class="viewing">Add Product</a></li>
         </ul>
     </nav>
     </div>
