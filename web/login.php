@@ -10,8 +10,12 @@
 </head>
 
 <body>
+<?php
+session_start();
+
+?>
     <header>
-        Blurry Photos 4 You!
+        Blurry Photos 42 You!
     </header>
     <div>
     <nav>
@@ -32,22 +36,47 @@
     </article>
 
 <?php
-//ini_set('display_errors',1);
-//session_start();
+<<<<<<< HEAD
+if(isset($_SESSION['user'])){
+	echo 'logged in';
+}
 
-//$_password = $_POST['password'];
-//$_email = $_POST['email'];
-//$hashpass = password_hash($_password, PASSWORD_DEFAULT);
+ini_set('display_errors',1);
 
-//include('mysqli_connect.php');
-//$passwordcheck = "SELECT password FROM customer WHERE email = '$_email'";
-//$check = mysqli_query($dbc, $passwordcheck);
+$password = $_POST['password'];
+$email = $_POST['email'];
+$hashpass = sha1($password);
 
-//if($check == $hashpass)) {
-  //  echo 'login successful!';
-//}else{
- //   echo 'invalid password';
-//}
+include('mysqli_connect.php');
+$passwordcheck = "SELECT password FROM customer WHERE email = '$email'";
+
+$check = mysqli_query($dbc, $passwordcheck);
+$row = mysqli_fetch_array($check);
+$pwstring = $row['password'];
+
+if($pwstring == $hashpass) {
+    echo 'login successful!';
+	$_SESSION['user'] = $_POST['email'];
+=======
+session_start();
+include('mysqli_connect.php');
+ini_set('display_errors',1);
+echo 'Hello';
+
+$_password = $_POST['password'];
+$_email = $_POST['email'];
+$hashpass = password_hash($_password, PASSWORD_DEFAULT);
+echo '$email';
+
+$passwordcheck = "SELECT password FROM customer WHERE email = '$_email'";
+$check = mysqli_query($dbc, $passwordcheck);
+
+if($check == $hashpass)) {
+   echo 'login successful!';
+>>>>>>> Photos show up and add button added
+}else{
+    echo 'invalid password';
+}
 
 
 ?>

@@ -30,55 +30,32 @@
         <h1> Welcome to Blurry Photos 4 You! </h1>
         <p class="paragraph">We provide the best blurry photos the market can provide. Ranging from scenic to industrial, we can guarantee that you can find a photo you will want to hang up in your home.</p>
         <br>
-
-    </article>
-    <form action="login.php" method="POST" onsubmit="return loginvalidation();">
-    <h1>Login</h1>
-    <p>Email: <input type="text" id="email" name="email" title="email"></p>
-    <p>Password: <input type="password" name="password" pattern="[a-zA-Z0-9]{4,10}" id="password" title="4 to 10 characters letters and numbers only"></p>
-    <input type="submit" value="SUBMIT"  />
-    </form>
-	<form action="register.php" method="POST" onsubmit="return registervalidation();">
-    <h1>Register: </h1>
+	<?php
+		
+		if(isset($_POST['id'])){
+			$name = $_POST['name'];
+			$id = $_POST['id'];
+			$email = $_POST['email'];
+			$address = $_POST['address'];
+			
+			insert
+		}else{
+			$id = $_GET['id'];
+			select...
+			Then load form
+		}
+	?>
+		
+		
+  	<form action="register.php" method="POST" onsubmit="return registervalidation();">
+    <h1>Account Info: </h1>
     <p>Email: <input type="text" name="registeremail" id="registeremail" title="email"></p>
     <p>Name: <input type="text" id="name" name="name" title="name"></p>
     <p>Address: <input type="text" id="address" name="address" title="address"></p>
+	<p>Password: <input type="password" name="oldpassword" pattern="[a-zA-Z0-9]{4,10}" id="oldpassword" title="4 to 10 characters letters and numbers only"></p>
     <p>Password: <input type="password" name="registerpassword" pattern="[a-zA-Z0-9]{4,10}" id="registerpassword" title="4 to 10 characters letters and numbers only"></p>
     <p>Confirm Password: <input type="password" name="confirmpassword" pattern="[a-zA-Z0-9]{4,10}" id="confirmpassword" title="4 to 10 characters letters and numbers only"></p>
     <input type="submit" value="SUBMIT"  />
-
-    <script>
-        function loginvalidation() {
-           if(document.getElementById('email').value == ''){
-               alert('You must enter a valid email');
-               return false;
-           }
-           if(document.getElementById('password').value == ''){
-               alert('You must enter a valid password');
-               return false;
-           }
-
-        }
-        function registervalidation() {
-            if(document.getElementById('registerpassword').value != document.getElementById('confirmpassword').value){
-                alert("Passwords are not same characters");
-                return false;
-            }
-            if(document.getElementById('registeremail').value == ''){
-               alert('You must enter a valid email');
-               return false;
-           }
-           if(document.getElementById('registerpassword').value == ''){
-               alert('You must enter a valid password');
-               return false;
-           }
-           if(document.getElementById('confirmpassword').value == ''){
-               alert('You must confirm the password');
-               return false;
-           }
-
-        }
-    </script>
     <footer class="footer">Copyright &copy;2018</footer>
 
 </body>

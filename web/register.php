@@ -39,7 +39,7 @@ $_password = $_POST['registerpassword'];
 $_email = $_POST['registeremail'];
 $_name = $_POST['name'];
 $_address = $_POST['address'];
-$hashpass = password_hash($_password, PASSWORD_DEFAULT);
+$hashpass = sha1($_password);
 
 //connection
 include('mysqli_connect.php');
