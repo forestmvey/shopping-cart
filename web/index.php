@@ -10,6 +10,10 @@
 </head>
 
 <body>
+<?php
+session_start();
+
+?>
     <header>
         Blurry Photos 4 You!
     </header>
@@ -30,7 +34,12 @@
         <br>
 
     </article>
+<?php
+if(isset($_SESSION['user'])){
+	echo 'logged in';
+}
 
+?>
     <footer class="footer">Copyright &copy;2018</footer>
 
 </body>
