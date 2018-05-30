@@ -18,9 +18,8 @@
         <ul>
             <li><a href="index.php" title="Main page">Main</a></li>
             <li><a href="photos.php" title="Photos" class="viewing">Photos</a></li>
-            <li><a href="login.php" title="Login">Login</a></li>
             <li><a href="cart.php" title="Cart">View Cart</a></li>
-            <li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
+			<li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
             <li><a href="addproduct.php" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
@@ -52,7 +51,12 @@ if ($category == "4") {
     print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
 
     while ($row = mysqli_fetch_array($result)) {
-        print $row['id'] . ', ' . $row['name'] . ', ' . $row['size'] .', ' . $row['image'] .', ' . $row['price'] .  '<br>';
+		$img = $row['image'];
+		$nm = $row['name'];
+        print $row['id'] . ', ' . $row['name'] . ', ' . $row['size'] . "<img src ='$img' alt='$nm' width='200' height='100'>" . $row['price'] .
+		"<input type='text' name='quantity' value='1' size='2' />" .
+		"<input type='submit' value='Add to cart'>" .
+		'<br>';
         }
     }
 }
@@ -67,7 +71,12 @@ else if ($category != "4") {
     print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
 
     while ($row = mysqli_fetch_array($result)) {
-        print $row['id'] . ', ' . $row['name'] . ', ' . $row['size'] .', ' . $row['image'] .', ' . $row['price'] .  '<br>';
+		$img = $row['image'];
+		$nm = $row['name'];
+	print $row['id'] . ', ' . $row['name'] . ', ' . $row['size'] . "<img src ='$img' alt='$nm' width='200' height='100'>" . $row['price'] .
+		"<input type='text' name='quantity' value='1' size='2' />" .
+		"<input type='submit' value='Add to cart'>" .
+		'<br>';
         }
     }
 }
