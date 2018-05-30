@@ -35,16 +35,30 @@
 ini_set('display_errors',1);
 session_start();
 
-$_password = $_POST['password'];
-$_email = $_POST['email'];
+$_password = $_POST['registerpassword'];
+$_email = $_POST['registeremail'];
+$_name = $_POST['name'];
+$_address = $_POST['address'];
+$hashpass = password_hash($_password, PASSWORD_DEFAULT);
 
+//connection
 include('mysqli_connect.php');
-$passwordcheck = "SELECT password FROM customer WHERE name = '$email'";
 
-if(mysqli_query($dbc, $passwordcheck) == $_password)) {
-    echo 'login successful!';
+//insert customer registration
+$insert = "INSERT INTO customer (name, password, email, address) 
+values('$_name', '$hashpass', '$_email', '$_address')";
+
+//validate email already not taken
+$emailcheck = "SELECT email FROM customer WHERE email = '$_email'";
+$check = mysqli_query($dbc, $emailcheck);
+
+
+if(mysqli_num_rows($check) > 0){
+    echo 'This email is already taken';
+}elseif(mysqli_query($dbc, $insert)) {
+    echo 'account successfully created!';
 }else{
-    echo 'invalid password';
+    echo 'invalid account info';
 }
 
 ?>
