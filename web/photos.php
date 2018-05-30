@@ -50,13 +50,27 @@ if ($category == "4") {
     $row_count = mysqli_num_rows($result);
     print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
 
+
+    echo "<table border='1'>
+    <tr>
+    <th>Name</th>
+    <th>Size</th>
+    <th>Photo</th>
+    <th>Price</th>";
+
     while ($row = mysqli_fetch_array($result)) {
 		$img = $row['image'];
-		$nm = $row['name'];
-        print $row['id'] . ', ' . $row['name'] . ', ' . $row['size'] . "<img src ='$img' alt='$nm' width='200' height='100'>" . $row['price'] .
-		"<input type='text' name='quantity' value='1' size='2' />" .
-		"<input type='submit' value='Add to cart'>" .
-		'<br>';
+        $nm = $row['name'];
+        echo "<tr>";
+        echo "<td>" . $row['name'] . "</td>";
+        echo "<td>" . $row['size'] . "</td>";
+        echo "<td>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
+        echo "<td>" . $row['price'] . "</td>";
+
+        // print $row['id'] . ', ' . $row['name'] . ', ' . $row['size'] . "<img src ='$img' alt='$nm' width='200' height='100'>" . $row['price'] .
+		// "<input type='text' name='quantity' value='1' size='2' />" .
+		// "<input type='submit' value='Add to cart'>" .
+		// '<br>';
         }
     }
 }
@@ -66,17 +80,31 @@ else if ($category != "4") {
                                     from product p, productcategory pc
                                     where p.id = pc.product_id
                                     and pc.category_id = '$category'");
+
+    echo "<table border='1'>
+    <tr>
+    <th>Name</th>
+    <th>Size</th>
+    <th>Photo</th>
+    <th>Price</th>";
+
     if ($result)   {
     $row_count = mysqli_num_rows($result);
     print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
 
     while ($row = mysqli_fetch_array($result)) {
-		$img = $row['image'];
-		$nm = $row['name'];
-	print $row['id'] . ', ' . $row['name'] . ', ' . $row['size'] . "<img src ='$img' alt='$nm' width='200' height='100'>" . $row['price'] .
-		"<input type='text' name='quantity' value='1' size='2' />" .
-		"<input type='submit' value='Add to cart'>" .
-		'<br>';
+	$img = $row['image'];
+    $nm = $row['name'];
+    echo "<tr>";
+    echo "<td>" . $row['name'] . "</td>";
+    echo "<td>" . $row['size'] . "</td>";
+    echo "<td>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
+    echo "<td>" . $row['price'] . "</td>";
+
+	// print $row['id'] . ', ' . $row['name'] . ', ' . $row['size'] . "<img src ='$img' alt='$nm' width='200' height='100'>" . $row['price'] .
+	// 	"<input type='text' name='quantity' value='1' size='2' />" .
+	// 	"<input type='submit' value='Add to cart'>" .
+	// 	'<br>';
         }
     }
 }
