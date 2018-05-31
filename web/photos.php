@@ -96,14 +96,14 @@ else if ($category != "4") {
     print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
 
     while ($row = mysqli_fetch_array($result)) {
-    echo "<table border='1'>
+    echo "<table border='1' style='width:50%'>
     <tr>
-    <th>Name</th>
-    <th>Size</th>
-    <th>Photo</th>
-    <th>Price</th>
-    <th>Quantity</th>
-    <th>Add to Cart</th>";
+    <th style='width:50%'>Name</th>
+    <th style='width:50%'>Size</th>
+    <th style='width:50%'>Photo</th>
+    <th style='width:50%'>Price</th>
+    <th style='width:50%'>Quantity</th>
+    <th style='width:50%'>Add to Cart</th>";
 
 	$img = $row['image'];
     $nm = $row['name'];
@@ -126,7 +126,7 @@ else if ($category != "4") {
 ?>
     </article>
     </body>
-    <footer class="footer">Copyright &copy;2018</footer>
+    <!-- <footer class="footer">Copyright &copy;2018</footer> -->
 <?php
     if(isset($_SESSION['adminprivilege'])){
         echo "<script>";
