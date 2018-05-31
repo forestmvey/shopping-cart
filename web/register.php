@@ -7,13 +7,9 @@
 
     <title>Blurry Photos 4 You!</title>
     <style type="text/css"></style>
-	
 </head>
 
 <body>
-<?php
-    session_start();
-?>
     <header>
         Blurry Photos 4 You!
     </header>
@@ -36,18 +32,47 @@
         <br>
 
     </article>
-
-	
-    <footer class="footer">Copyright &copy;2018</footer>
 <?php
-    if(isset($_SESSION['adminprivilege'])){
+ini_set('display_errors',1);
+session_start();
+
+$_password = $_POST['registerpassword'];
+$_email = $_POST['registeremail'];
+$_name = $_POST['name'];
+$_address = $_POST['address'];
+$hashpass = sha1($_password);
+
+//connection
+include('mysqli_connect.php');
+
+//insert customer registration
+$insert = "INSERT INTO customer (name, password, email, address) 
+values('$_name', '$hashpass', '$_email', '$_address')";
+
+//validate email already not taken
+$emailcheck = "SELECT email FROM customer WHERE email = '$_email'";
+$check = mysqli_query($dbc, $emailcheck);
+
+
+if(mysqli_num_rows($check) > 0){
+    echo 'This email is already taken';
+}elseif(mysqli_query($dbc, $insert)) {
+    echo 'account successfully created!';
+}else{
+    echo 'invalid account info';
+}
+
+if(isset($_SESSION['adminprivilege'])){
         echo "<script>";
         echo "document.getElementById('addprod').style.visibility = 'visible';";
         echo "</script>";
    
-    }
+}
+
 
 ?>
+    <footer class="footer">Copyright &copy;2018</footer>
+
 </body>
 
 </html>

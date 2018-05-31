@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if(!isset($_SESSION['adminprivilege'])){
+    header('location:index.php');
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,6 +16,7 @@
 
 </head>
 <body>
+
 <header>
         Blurry Photos 4 You!
     </header>
@@ -17,9 +25,10 @@
         <ul>
             <li><a href="index.php" title="Main page">Main</a></li>
             <li><a href="photos.php" title="Photos">Photos</a></li>
-            <li><a href="login.php" title="Login">Login</a></li>
             <li><a href="cart.php" title="Cart">View Cart</a></li>
-            <li><a href="addproduct.php" title="Add Product" class="viewing">Add Product</a></li>
+            <li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
+            <li><a href="logout.php" title="Logout">Logout</a></li>
+            <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
     </div>
@@ -36,11 +45,7 @@
 <form action="addproductvars.php" method="POST" onsubmit="return validation();">
 <p> Upload Photo URL: <input type="text" name="photo" id="photo"/></p>
 <p> Photo name: <input type="text" name="name" id="name"/></p>
-<<<<<<< HEAD
 <p> Price: <input type="text" pattern="[0-9]+(\.[0-9][0-9]?)?" title="Numbers Only" name="price" id="price"/></p>
-=======
-<p> Price: <input type="text" name="price" id="price" pattern="[0-9]+(\.[0-9][0-9]?)?" title="numbers only"/></p>
->>>>>>> origin
 <p> Dimensions:</p><select name="dimensions" id="dimensions"></p>
 <option value="5 x 7">5"x7"</option>
 <option value="8 x 10">8"x10"</option>
@@ -54,6 +59,7 @@
 </select>
 <input type="submit" value="SUBMIT"  />
 </form>
+
 <script>
 
 function validation() {
@@ -74,6 +80,15 @@ if(document.getElementById('name').value == ''){
 }
 
 </script>
+<?php
+    if(isset($_SESSION['adminprivilege'])){
+        echo "<script>";
+        echo "document.getElementById('addprod').style.visibility = 'visible';";
+        echo "</script>";
+   
+    }
+
+?>
 <footer class="footer">Copyright &copy;2018</footer>
 </body>
 </html>

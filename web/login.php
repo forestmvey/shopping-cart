@@ -7,15 +7,15 @@
 
     <title>Blurry Photos 4 You!</title>
     <style type="text/css"></style>
-	
 </head>
 
 <body>
 <?php
-    session_start();
+session_start();
+
 ?>
     <header>
-        Blurry Photos 4 You!
+        Blurry Photos 42 You!
     </header>
     <div>
     <nav>
@@ -37,7 +37,36 @@
 
     </article>
 
-	
+<?php
+
+
+ini_set('display_errors',1);
+
+$password = $_POST['password'];
+$email = $_POST['email'];
+$hashpass = sha1($password);
+
+include('mysqli_connect.php');
+$passwordcheck = "SELECT password FROM customer WHERE email = '$email'";
+
+$check = mysqli_query($dbc, $passwordcheck);
+$row = mysqli_fetch_array($check);
+$pwstring = $row['password'];
+
+if($pwstring == $hashpass && $email == 'admin@gmail.com'){
+    $_SESSION['user'] = $_POST['email'];
+    $_SESSION['adminprivilege'] = true;
+    echo 'login successful!';
+}elseif($pwstring == $hashpass) {
+    echo 'login successful!';
+	$_SESSION['user'] = $_POST['email'];
+}else{
+    echo 'invalid password';
+}
+
+
+?>
+
     <footer class="footer">Copyright &copy;2018</footer>
 <?php
     if(isset($_SESSION['adminprivilege'])){
