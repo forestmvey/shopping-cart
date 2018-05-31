@@ -36,7 +36,6 @@ session_start();
     </article>
 
 <?php
-<<<<<<< HEAD
 if(isset($_SESSION['user'])){
 	echo 'logged in';
 }
@@ -57,23 +56,6 @@ $pwstring = $row['password'];
 if($pwstring == $hashpass) {
     echo 'login successful!';
 	$_SESSION['user'] = $_POST['email'];
-=======
-session_start();
-include('mysqli_connect.php');
-ini_set('display_errors',1);
-echo 'Hello';
-
-$_password = $_POST['password'];
-$_email = $_POST['email'];
-$hashpass = password_hash($_password, PASSWORD_DEFAULT);
-echo '$email';
-
-$passwordcheck = "SELECT password FROM customer WHERE email = '$_email'";
-$check = mysqli_query($dbc, $passwordcheck);
-
-if($check == $hashpass)) {
-   echo 'login successful!';
->>>>>>> Photos show up and add button added
 }else{
     echo 'invalid password';
 }
