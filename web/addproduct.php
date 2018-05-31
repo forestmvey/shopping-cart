@@ -39,45 +39,62 @@ if(!isset($_SESSION['adminprivilege'])){
 
     </article>
 
+
+<?php
+include('mysqli_connect.php');
+
+//find all categories
+$cats = mysqli_query($dbc, "SELECT * FROM category");
+$dimensions = mysqli_query($dbc, "SELECT size FROM product");
+
+	echo "<form action='addproductvars.php' method='POST' onsubmit='return validation();'>";
+	echo "<p> Upload Photo URL: <input type='text' name='photo' id='photo'/></p>";
+	echo "<p> Photo name: <input type='text' name='name' id='name'/></p>";
+	echo "<p> Price: <input type='text' pattern='[0-9]+(\.[0-9][0-9]?)?' title='Numbers Only' name='price' id='price'/></p>";
+
+	echo "<p> Dimensions:</p><select name='dimensions' id='dimensions'></p>";
+	while($row = mysqli_fetch_array($dimensions)){
+		$size = $row['size'];
+		echo "<option value='$size'>" . $size . "</option>";
+	}
+	echo "</select>";
+
+
+	echo "<p> Category: <select name='category' id='category'></p>";
+	while($row = mysqli_fetch_array($cats)){
+		$cat = $row['name'];
+		$id = $row['id'];
+		echo "<option value='$id'>" . $cat . "</option>";
+	}
 	
-    
+	echo "</select>";
+	echo "<input type='submit' value='SUBMIT'  />";
+	echo "</form>";
+	
+	
+	echo "<form action='addcategory.php' method='POST'>";
+	echo "<p> Add a new category: <input type='text' pattern='.*' name='newcategory' id='newcategory'/></p>"; 
+	echo "<input type='submit' value='SUBMIT'  />";
+	echo "</form>";
 
-<form action="addproductvars.php" method="POST" onsubmit="return validation();">
-<p> Upload Photo URL: <input type="text" name="photo" id="photo"/></p>
-<p> Photo name: <input type="text" name="name" id="name"/></p>
-<p> Price: <input type="text" pattern="[0-9]+(\.[0-9][0-9]?)?" title="Numbers Only" name="price" id="price"/></p>
-<p> Dimensions:</p><select name="dimensions" id="dimensions"></p>
-<option value="5 x 7">5"x7"</option>
-<option value="8 x 10">8"x10"</option>
-<option value="11 x 14">11"x10"</option>
-<option value="16 x 20">16"x20"</option>
-</select>
-<p> Category: <select name="category" id="category"></p>
-<option value="1">scenic</option>
-<option value="2">transportation</option>
-<option value="3">industrial</option>
-</select>
-<input type="submit" value="SUBMIT"  />
-</form>
-
+?>
 <script>
-
 function validation() {
 // VALIDATION CODE HERE!
-if(document.getElementById('photo').value == ''){
-	alert("You must include a photo");
-	return false;
-}
-if(document.getElementById('price').value == ''){
-	alert("You must include a product price");
-	return false;
-}
-if(document.getElementById('name').value == ''){
-	alert("You must include a photoname");
-	return false;
+	if(document.getElementById('photo').value == ''){
+		alert("You must include a photo");
+		return false;
+	}
+	if(document.getElementById('price').value == ''){
+		alert("You must include a product price");
+		return false;
+	}
+	if(document.getElementById('name').value == ''){
+		alert("You must include a photoname");
+		return false;
+	}
 }
 
-}
 
 </script>
 <?php

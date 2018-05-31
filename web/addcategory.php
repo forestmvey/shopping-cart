@@ -43,6 +43,32 @@ session_start();
         echo "</script>";
    
     }
+	
+	//insert new category
+		include('mysqli_connect.php');
+		$cat = $_POST['newcategory'];
+		$insertcat = "INSERT INTO category (name) VALUES ('$cat')";
+		$catcheck = "SELECT name FROM category WHERE name = '$cat'";
+		$check = mysqli_query($dbc, $catcheck);
+		
+		
+		if(mysqli_num_rows($check) > 0){
+			echo "<script>";
+			echo "alert('This category name is already taken!')";
+			echo "window.location='addproduct.php';";
+			echo "</script>";
+		}elseif(mysqli_query($dbc, $insertcat)){
+			echo "<script>";
+			echo "alert('Category successfully entered!');";
+			echo "window.location='addproduct.php';";
+			echo "</script>";
+		}else{
+			echo "<script>";
+			echo "alert('Category not entered successfully!');";
+			echo "window.location='addproduct.php';";
+			echo "</script>";
+		}
+	
 
 ?>
     <footer class="footer">Copyright &copy;2018</footer>
