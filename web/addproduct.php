@@ -36,11 +36,7 @@
 <form action="addproductvars.php" method="POST" onsubmit="return validation();">
 <p> Upload Photo URL: <input type="text" name="photo" id="photo"/></p>
 <p> Photo name: <input type="text" name="name" id="name"/></p>
-<<<<<<< HEAD
 <p> Price: <input type="text" pattern="[0-9]+(\.[0-9][0-9]?)?" title="Numbers Only" name="price" id="price"/></p>
-=======
-<p> Price: <input type="text" name="price" id="price" pattern="[0-9]+(\.[0-9][0-9]?)?" title="numbers only"/></p>
->>>>>>> origin
 <p> Dimensions:</p><select name="dimensions" id="dimensions"></p>
 <option value="5 x 7">5"x7"</option>
 <option value="8 x 10">8"x10"</option>

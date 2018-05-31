@@ -25,14 +25,6 @@ footer {
     clear: left;
     text-align: center;
 }
-/* Table CSS*/
-th, td {
-    padding: 90px;
-}
-table {
-    width: 100%;
-}
-
 /* Navigation Bar */
 nav {
     margin: 0;
