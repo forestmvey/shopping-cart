@@ -11,7 +11,8 @@
 
 <body>
 <?php
-    session_start();
+session_start();
+
 ?>
     <header>
         Blurry Photos 42 You!

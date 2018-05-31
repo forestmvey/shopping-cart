@@ -11,7 +11,8 @@
 
 <body>
 <?php
-    session_start();
+session_start();
+
 ?>
     <header>
         Blurry Photos 4 You!
@@ -51,6 +52,7 @@ function showaddprod(id){
 }
 </script>
 
+?>
     <footer class="footer">Copyright &copy;2018</footer>
 
 </body>
