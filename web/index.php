@@ -11,8 +11,7 @@
 
 <body>
 <?php
-session_start();
-
+    session_start();
 ?>
     <header>
         Blurry Photos 4 You!
@@ -24,7 +23,9 @@ session_start();
             <li><a href="photos.php" title="Photos">Photos</a></li>
             <li><a href="cart.php" title="Cart">View Cart</a></li>
             <li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
-            <li><a href="addproduct.php" title="AddProduct">Add Product</a></li>
+            <li><a href="myaccount.php" title="MyAccount">My Account</a></li>
+            <li><a href="logout.php" title="Logout">Logout</a></li>
+            <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
     </div>
@@ -35,11 +36,21 @@ session_start();
 
     </article>
 <?php
-if(isset($_SESSION['user'])){
-	echo 'logged in';
-}
+    if(isset($_SESSION['adminprivilege'])){
+        echo "<script>";
+        echo "document.getElementById('addprod').style.visibility = 'visible';";
+        echo "</script>";
+   
+    }
 
 ?>
+<script>
+function showaddprod(id){
+   // var elem = document.getElementById(id);
+   // elem.style.visibility = (elem.style.visibility === 'hidden')? 'visibile' : 'hidden';
+}
+</script>
+
     <footer class="footer">Copyright &copy;2018</footer>
 
 </body>
