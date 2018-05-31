@@ -74,13 +74,12 @@ if ($category == "4") {
         echo "<td style='width:60%'>" . $row['size'] . "</td>";
         echo "<td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
         echo "<td style='width:60%'>" . $row['price'] . "</td>";
+		echo "<form action = 'addToCart.php' method = 'POST'>";
         echo "<td style='width:60%'>" . "<input type='text' name='quantity' value='1' size='2' />" . "</td>";
         echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";
-
-        // print $row['id'] . ', ' . $row['name'] . ', ' . $row['size'] . "<img src ='$img' alt='$nm' width='200' height='100'>" . $row['price'] .
-		// "<input type='text' name='quantity' value='1' size='2' />" .
-		// "<input type='submit' value='Add to cart'>" .
-		// '<br>';
+		echo "<input type='hidden' name='prodID' value='" . $row['id'] . "'";
+		echo "</form>";
+		
         }
     }
 }
@@ -96,14 +95,14 @@ else if ($category != "4") {
     print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
 
     while ($row = mysqli_fetch_array($result)) {
-    echo "<table border='1'>
+    echo "<table border='1' style='width:50%'>
     <tr>
-    <th>Name</th>
-    <th>Size</th>
-    <th>Photo</th>
-    <th>Price</th>
-    <th>Quantity</th>
-    <th>Add to Cart</th>";
+        <th style='width:50%'>Name</th>
+        <th style='width:50%'>Size</th>
+        <th style='width:50%'>Photo</th>
+        <th style='width:50%'>Price</th>
+        <th style='width:50%'>Quantity</th>
+        <th style='width:50%'>Add to Cart</th>";
 
 	$img = $row['image'];
     $nm = $row['name'];
@@ -112,13 +111,11 @@ else if ($category != "4") {
     echo "<td style='width:60%'>" . $row['size'] . "</td>";
     echo "<td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
     echo "<td style='width:60%'>" . $row['price'] . "</td>";
+	echo "<form action = 'addToCart.php' method = 'POST'>";
     echo "<td style='width:60%'>" . "<input type='text' name='quantity' value='1' size='2' />" . "</td>";
     echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";
-
-	// print $row['id'] . ', ' . $row['name'] . ', ' . $row['size'] . "<img src ='$img' alt='$nm' width='200' height='100'>" . $row['price'] .
-	// 	"<input type='text' name='quantity' value='1' size='2' />" .
-	// 	"<input type='submit' value='Add to cart'>" .
-	// 	'<br>';
+	echo "<input type='hidden' name='prodID' value='" . $row['id'] . "'";
+	echo "</form>";
         }
     }
 }
@@ -126,7 +123,6 @@ else if ($category != "4") {
 ?>
     </article>
     </body>
-    <footer class="footer">Copyright &copy;2018</footer>
 <?php
     if(isset($_SESSION['adminprivilege'])){
         echo "<script>";
