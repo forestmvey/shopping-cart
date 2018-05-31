@@ -52,7 +52,7 @@ $dimensions = mysqli_query($dbc, "SELECT size FROM product");
 	echo "<p> Photo name: <input type='text' name='name' id='name'/></p>";
 	echo "<p> Price: <input type='text' pattern='[0-9]+(\.[0-9][0-9]?)?' title='Numbers Only' name='price' id='price'/></p>";
 
-	echo "<p> Dimensions:</p><select name='dimensions' id='dimensions'></p>";
+	echo "<p> Dimensions: </p><select name='dimensions' id='dimensions'></p>";
 	while($row = mysqli_fetch_array($dimensions)){
 		$size = $row['size'];
 		echo "<option value='$size'>" . $size . "</option>";
@@ -60,14 +60,13 @@ $dimensions = mysqli_query($dbc, "SELECT size FROM product");
 	echo "</select>";
 
 
-	echo "<p> Category: <select name='category' id='category'></p>";
+	echo "<p> Category: </p><select name='category' id='category'></p>";
 	while($row = mysqli_fetch_array($cats)){
 		$cat = $row['name'];
 		$id = $row['id'];
-		echo "<option value='$id'>" . $cat . "</option>";
+		echo "<option value='$id'>" . $cat . "<br>";
 	}
-	
-	echo "</select>";
+	echo "</select>" . "<br>" . "<br>";
 	echo "<input type='submit' value='SUBMIT'  />";
 	echo "</form>";
 	
