@@ -7,14 +7,10 @@
 ini_set('display_errors',1);
 session_start();
 $price = $_POST['price'];
-//$category = $_POST['category'];
 $dimensions = $_POST['dimensions'];
 $photo = $_POST['photo'];
 $name = $_POST['name'];
 
-
-//echo "$price $category $dimensions $photo $photoname";
-// connect to database
 
 include('mysqli_connect.php');
 //CREATE QUERY
