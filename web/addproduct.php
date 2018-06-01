@@ -59,18 +59,18 @@ $dimensions = mysqli_query($dbc, "SELECT size FROM product");
 	}
 	echo "</select>";
 
-
-	echo "<p> Category: </p><select name='category' id='category'></p>";
+	//print all categories as checkboxes
+	echo "<p> Category: </p></p>";
 	while($row = mysqli_fetch_array($cats)){
 		$cat = $row['name'];
 		$id = $row['id'];
-		echo "<option value='$id'>" . $cat . "<br>";
+		echo "<input type='checkbox' name='catlist[]' value='$id'>" . $cat . "<br>";
 	}
-	echo "</select>" . "<br>" . "<br>";
+	echo "<br>" . "<br>";
 	echo "<input type='submit' value='SUBMIT'  />";
 	echo "</form>";
 	
-	
+	//adding a new category
 	echo "<form action='addcategory.php' method='POST'>";
 	echo "<p> Add a new category: <input type='text' pattern='.*' name='newcategory' id='newcategory'/></p>"; 
 	echo "<input type='submit' value='SUBMIT'  />";
