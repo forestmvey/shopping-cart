@@ -37,6 +37,9 @@ session_start();
 
     </article>
 <?php
+	// This checks if the admin is logged in and allows them to 
+    // add products to the database on when the admin is logged in
+    // and is disabled when the admin is logged out
     if(isset($_SESSION['adminprivilege'])){
         echo "<script>";
         echo "document.getElementById('addprod').style.visibility = 'visible';";

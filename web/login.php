@@ -41,12 +41,13 @@ session_start();
 
 
 ini_set('display_errors',1);
-
+//post password (hashed) and email
 $password = $_POST['password'];
 $email = $_POST['email'];
 $hashpass = sha1($password);
 
 include('mysqli_connect.php');
+//check whether email/password combo matches
 $passwordcheck = "SELECT password FROM customer WHERE email = '$email'";
 
 $check = mysqli_query($dbc, $passwordcheck);
@@ -69,6 +70,9 @@ if($pwstring == $hashpass && $email == 'admin@gmail.com'){
 
     <footer class="footer">Copyright &copy;2018</footer>
 <?php
+	// This checks if the admin is logged in and allows them to 
+    // add products to the database on when the admin is logged in
+    // and is disabled when the admin is logged out
     if(isset($_SESSION['adminprivilege'])){
         echo "<script>";
         echo "document.getElementById('addprod').style.visibility = 'visible';";
