@@ -39,6 +39,7 @@ include ('connection.php');
 
 // variables from photos.php
 $userid= $_SESSION['userid'];
+echo "echo" . $userid;
 $rowid = $_POST['prodid'];
 $value = $_POST['quantity'];
 

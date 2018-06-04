@@ -1,7 +1,4 @@
-<?php
-session_start();
-session_destroy();
-?>
+
 <script type="text/javascript">
 alert ('You are now logged out');
 window.location="index.php";
@@ -16,6 +13,15 @@ window.location="index.php";
     <style type="text/css"></style>
 </head>
 <body>
+<?php
+session_start();
+session_destroy();
+unset($_SESSION['userid'];
+unset($_SESSION['user'];
+$_SESSION['adminprivilege'] = false;
+echo "You have successfully logged out";
+echo "<h3>To log back in: <a href='login_register.php'>Login</a></h3>";
+?>
 <footer class="footer">Copyright &copy;2018</footer>
 <?php
 	// This checks if the admin is logged in and allows them to 

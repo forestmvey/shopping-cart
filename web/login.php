@@ -15,7 +15,7 @@ session_start();
 
 ?>
     <header>
-        Blurry Photos 42 You!
+        Blurry Photos 4 You!
     </header>
     <div>
     <nav>
@@ -49,18 +49,24 @@ $hashpass = sha1($password);
 include('mysqli_connect.php');
 //check whether email/password combo matches
 $passwordcheck = "SELECT password FROM customer WHERE email = '$email'";
+$getid = "Select id from customer where email = '$email'";
 
 $check = mysqli_query($dbc, $passwordcheck);
 $row = mysqli_fetch_array($check);
 $pwstring = $row['password'];
+$id = mysqli_query($dbc, $getid);
+$userid = mysqli_fetch_array($id);
+echo $userid['id'];
 
 if($pwstring == $hashpass && $email == 'admin@gmail.com'){
     $_SESSION['user'] = $_POST['email'];
     $_SESSION['adminprivilege'] = true;
+	$_SESSION['userid'] = $userid['id'];
     echo 'login successful!';
 }elseif($pwstring == $hashpass) {
     echo 'login successful!';
 	$_SESSION['user'] = $_POST['email'];
+	$_SESSION['userid'] = $userid['id'];
 }else{
     echo 'invalid password';
 }
