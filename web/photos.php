@@ -74,12 +74,13 @@ if ($category == "4") {
         echo "<td style='width:60%'>" . $row['size'] . "</td>";
         echo "<td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
         echo "<td style='width:60%'>" . $row['price'] . "</td>";
-		// add to cart button, POSTs to database 
 		echo "<form action = 'addToCart.php' method = 'POST'>";
         echo "<td style='width:60%'>" . "<input type='text' name='quantity' value='1' size='2' />" . "</td>";
         echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";
-		echo "<input type='hidden' name='prodID' value='" . $row['id'] . "'";
-		echo "</form>";
+	?>
+	<input type='hidden' name='prodid' value="<?php echo $row['id'];?>"/>;
+	<?php
+	echo "</form>";
 		
         }
     }
@@ -112,11 +113,12 @@ else if ($category != "4") {
     echo "<td style='width:60%'>" . $row['size'] . "</td>";
     echo "<td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
     echo "<td style='width:60%'>" . $row['price'] . "</td>";
-	// add to cart button, POSTs to database 
 	echo "<form action = 'addToCart.php' method = 'POST'>";
     echo "<td style='width:60%'>" . "<input type='text' name='quantity' value='1' size='2' />" . "</td>";
     echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";
-	echo "<input type='hidden' name='prodID' value='" . $row['id'] . "'";
+	?>
+	<input type='hidden' name='prodid' value="<?php echo $row['id'];?>"/>;
+	<?php
 	echo "</form>";
         }
     }
@@ -125,12 +127,7 @@ else if ($category != "4") {
 ?>
     </article>
     </body>
-
-	 
 <?php
-	// This checks if the admin is logged in and allows them to 
-    // add products to the database on when the admin is logged in
-    // and is disabled when the admin is logged out
     if(isset($_SESSION['adminprivilege'])){
         echo "<script>";
         echo "document.getElementById('addprod').style.visibility = 'visible';";
