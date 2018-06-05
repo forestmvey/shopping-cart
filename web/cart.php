@@ -42,7 +42,7 @@
         include ('connection.php');
         // show all products
         $userID = $_SESSION['userid'];
-        echo $userID;
+        // echo $userID;
         $result = mysqli_query($link," select p.name, p.image, p.size, c.quantity, p.price
              from product p, cart c, customer cu
              where cu.id = c.customer_id
@@ -51,7 +51,7 @@
              if ($result)   {
                  $row_count = mysqli_num_rows($result);
                  print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
-
+                 echo "<button>" . "Update Cart" . "</button>" . "<button>" . "Checkout" . "</button>";
                  while ($row = mysqli_fetch_array($result)) {
                      echo "<table border='1' style='width:50%'>
                      <tr>
@@ -67,16 +67,15 @@
                      echo "<td style='width:60%'>" . $row['name'] . "</td>";
                      echo "<td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
                      echo "<td style='width:60%'>" . $row['size'] . "</td>";
-                     echo "<td style='width:60%'>" . $row['quantity'] . "</td>";
+                     echo "<td style='width:70%'>" . $row['quantity'] .  "<button>" . "+" . "</button>" . "<button>" . "-" . "</button>" . "</td>";
                      echo "<td style='width:60%'>" . $row['price'] . "</td>";
-
         //             // add to cart button, POSTs to database 
         //             // echo "<form action = 'addToCart.php' method = 'POST'>";
         //             // echo "<td style='width:60%'>" . "<input type='text' name='quantity' value='1' size='2' />" . "</td>";
         //             // echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";
         //             // echo "<input type='hidden' name='prodID' value='" . $row['id'] . "'";
         //             // echo "</form>";
-		        }
+                }
             }
 ?>
     </article>
