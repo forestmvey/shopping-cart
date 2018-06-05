@@ -37,6 +37,10 @@
 session_start();
 include ('connection.php');
 
+if(!isset($_SESSION['user'])){
+    header('location:login_register.php');
+}
+
 // variables from photos.php
 $userid= $_SESSION['userid'];
 echo "echo" . $userid;
