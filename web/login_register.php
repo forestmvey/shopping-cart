@@ -23,9 +23,9 @@
             <li><a href="index.php" title="Main page">Main</a></li>
             <li><a href="photos.php" title="Photos">Photos</a></li>
             <li><a href="cart.php" title="Cart">View Cart</a></li>
-            <li><a href="login_register.php" title="LoginRegister" class="viewing">Login/Register</a></li>
-			<li><a href="myaccount.php" title="MyAccount">My Account</a></li>
-            <li><a href="logout.php" title="Logout">Logout</a></li>
+            <li><a href="login_register.php" title="LoginRegister" class="viewing" id="loginregister">Login/Register</a></li>
+			<li><a href="myaccount.php" style="visibility:hidden; title="MyAccount" id="myaccount">My Account</a></li>
+            <li><a href="logout.php" style="visibility:hidden; title="Logout" id=="logout">Logout</a></li>
             <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
@@ -104,8 +104,13 @@
         echo "<script>";
         echo "document.getElementById('addprod').style.visibility = 'visible';";
         echo "</script>";
-   
     }
+	if(isset($_SESSION['user'])){
+		echo "<script>";
+        echo "document.getElementById('logout').style.visibility = 'visible';";
+		echo "document.getElementById('myaccount').style.visibility = 'visible';";
+        echo "</script>";
+	}
 
 ?>
 </body>
