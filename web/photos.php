@@ -77,8 +77,10 @@ if ($category == "4") {
 		echo "<form action = 'addToCart.php' method = 'POST'>";
         echo "<td style='width:60%'>" . "<input type='text' name='quantity' value='1' size='2' />" . "</td>";
         echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";
-		echo "<input type='hidden' name='prodID' value='" . $row['id'] . "'";
-		echo "</form>";
+	?>
+	<input type='hidden' name='prodid' value="<?php echo $row['id'];?>"/>;
+	<?php
+	echo "</form>";
 		
         }
     }
@@ -114,7 +116,9 @@ else if ($category != "4") {
 	echo "<form action = 'addToCart.php' method = 'POST'>";
     echo "<td style='width:60%'>" . "<input type='text' name='quantity' value='1' size='2' />" . "</td>";
     echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";
-	echo "<input type='hidden' name='prodID' value='" . $row['id'] . "'";
+	?>
+	<input type='hidden' name='prodid' value="<?php echo $row['id'];?>"/>;
+	<?php
 	echo "</form>";
         }
     }

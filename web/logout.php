@@ -1,8 +1,6 @@
-<?php
-session_start();
-session_destroy();
-?>
+
 <script type="text/javascript">
+// Popup window which confirms that the session is over
 alert ('You are now logged out');
 window.location="index.php";
 </script>
@@ -16,15 +14,12 @@ window.location="index.php";
     <style type="text/css"></style>
 </head>
 <body>
-<footer class="footer">Copyright &copy;2018</footer>
 <?php
-    if(isset($_SESSION['adminprivilege'])){
-        echo "<script>";
-        echo "document.getElementById('addprod').style.visibility = 'visible';";
-        echo "</script>";
-   
-    }
-
+// Destroy session data, resets admin privileges
+session_start();
+session_destroy();
 ?>
+<footer class="footer">Copyright &copy;2018</footer>
+
 </body>
 </html>

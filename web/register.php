@@ -63,6 +63,9 @@ if(mysqli_num_rows($check) > 0){
 }
 
 if(isset($_SESSION['adminprivilege'])){
+	// This checks if the admin is logged in and allows them to 
+    // add products to the database on when the admin is logged in
+    // and is disabled when the admin is logged out
         echo "<script>";
         echo "document.getElementById('addprod').style.visibility = 'visible';";
         echo "</script>";

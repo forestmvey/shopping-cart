@@ -15,7 +15,7 @@ session_start();
 
 ?>
     <header>
-        Blurry Photos 42 You!
+        Blurry Photos 4 You!
     </header>
     <div>
     <nav>
@@ -41,25 +41,32 @@ session_start();
 
 
 ini_set('display_errors',1);
-
+//post password (hashed) and email
 $password = $_POST['password'];
 $email = $_POST['email'];
 $hashpass = sha1($password);
 
 include('mysqli_connect.php');
+//check whether email/password combo matches
 $passwordcheck = "SELECT password FROM customer WHERE email = '$email'";
+$getid = "Select id from customer where email = '$email'";
 
 $check = mysqli_query($dbc, $passwordcheck);
 $row = mysqli_fetch_array($check);
 $pwstring = $row['password'];
+$id = mysqli_query($dbc, $getid);
+$userid = mysqli_fetch_array($id);
+echo $userid['id'];
 
 if($pwstring == $hashpass && $email == 'admin@gmail.com'){
     $_SESSION['user'] = $_POST['email'];
     $_SESSION['adminprivilege'] = true;
+	$_SESSION['userid'] = $userid['id'];
     echo 'login successful!';
 }elseif($pwstring == $hashpass) {
     echo 'login successful!';
 	$_SESSION['user'] = $_POST['email'];
+	$_SESSION['userid'] = $userid['id'];
 }else{
     echo 'invalid password';
 }
@@ -69,6 +76,9 @@ if($pwstring == $hashpass && $email == 'admin@gmail.com'){
 
     <footer class="footer">Copyright &copy;2018</footer>
 <?php
+	// This checks if the admin is logged in and allows them to 
+    // add products to the database on when the admin is logged in
+    // and is disabled when the admin is logged out
     if(isset($_SESSION['adminprivilege'])){
         echo "<script>";
         echo "document.getElementById('addprod').style.visibility = 'visible';";
