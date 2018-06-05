@@ -61,7 +61,7 @@ echo $userid['id'];
 if($pwstring == $hashpass && $email == 'admin@gmail.com'){
     $_SESSION['user'] = $_POST['email'];
     $_SESSION['adminprivilege'] = true;
-    $_SESSION['userid'] = $userid['id'];
+	$_SESSION['userid'] = $userid['id'];
     echo 'login successful!';
 }elseif($pwstring == $hashpass) {
     echo 'login successful!';

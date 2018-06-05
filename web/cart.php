@@ -13,13 +13,7 @@
 <body>
 <?php
     session_start();
-    // if (isset($_SESSION['user'])) {
-    //     echo "logged in";
-    //     echo $_SESSION['user'];
-    //     echo $_SESSION['userid'];
-    //     $userID = $_SESSION['userid'];
-
-    }
+    ini_set('display_errors',1);
 ?>
     <header>
         Blurry Photos 4 You!
@@ -100,7 +94,30 @@
         echo "</script>";
    
     }
-
+    if(!isset($_SESSION['user'])){//if user is not signed in, redirect to login page!
+        echo "<script>";
+        echo "alert(You must sign in or register to continue to your cart!);";
+        echo "</script>";
+        header('location:login_register.php');
+    }else{//display cart items
+        $userid = $_SESSION['userid'];
+        $query = "SELECT customer_id, product_id, image, name, price, quantity FROM cart c JOIN product p WHERE c.product_id = p.id AND customer_id = '$userid'";
+        include('mysqli_connect.php');
+        $cart = mysqli_query($dbc, $query);
+        echo "<tr>";
+        echo "<td style='width:60%'>" . $_SESSION['user'] . "</td>";
+        while($row = mysqli_fetch_array($cart)){
+            $img = $row['image'];
+            $nm = $row['name'];
+            echo "<tr>";
+            echo "<p>Product ID: .<td style='width:60%'>" . $row['product_id'] . "</td>" . "</p>";
+            echo "<p>Image Name: <td style='width:60%'>" . $row['name'] . "</td>";
+            echo "<p><td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>" . "</p>";
+            echo "<p>Price: <td style='width:60%'>" . $row['price'] . "</td>" . "</p>";
+            echo "<p>Quantity: <td style='width:60%'>" . $row['quantity'] . "</td>" . "</p>";
+       }
+       
+    }
 ?>
 </body>
 
