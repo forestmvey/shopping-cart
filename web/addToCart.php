@@ -37,13 +37,8 @@
 session_start();
 include ('connection.php');
 
-if(!isset($_SESSION['user'])){
-    header('location:login_register.php');
-}
-
 // variables from photos.php
 $userid= $_SESSION['userid'];
-echo "echo" . $userid;
 $rowid = $_POST['prodid'];
 $value = $_POST['quantity'];
 
@@ -61,6 +56,7 @@ $insertExisting = "UPDATE cart SET quantity = '$combinedQuantity' WHERE customer
 $insertNew = "INSERT INTO cart (customer_id, product_id, quantity) VALUES ('$userid', '$rowid', '$value')";
 
 // check if item exists in cart, then either add a new item or update an existing one
+if (isset($userid)){
 if ($result=mysqli_query($link,$prodQuantity)){
 	$rowcount=mysqli_num_rows($result);
 	if ($rowcount == 0){
@@ -76,6 +72,17 @@ if ($result=mysqli_query($link,$prodQuantity)){
 echo "<form action = 'photos.php'>";
 echo "<td style='width:60%'>" . "<input type='submit' value='Return to homepage'>" . "</td>";
 echo "</form>";
+echo "<form action = 'cart.php'>";
+echo "<td style='width:60%'>" . "<input type='submit' value='View cart'>" . "</td>";
+echo "</form>";
+} else {
+	$_SESSION['savedQuantity'] = $value;
+	$_SESSION['savedProduct'] = $rowid;
+	echo "Please log in or register to add this item to your cart.";
+	echo "<form action = 'login_register.php'>";
+	echo "<td style='width:60%'>" . "<input type='submit' value='Login/Register'>" . "</td>";
+	echo "</form>";
+}
 ?>
 
 
