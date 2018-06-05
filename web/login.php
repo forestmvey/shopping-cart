@@ -56,7 +56,6 @@ $row = mysqli_fetch_array($check);
 $pwstring = $row['password'];
 $id = mysqli_query($dbc, $getid);
 $userid = mysqli_fetch_array($id);
-echo $userid['id'];
 
 if($pwstring == $hashpass && $email == 'admin@gmail.com'){
     $_SESSION['user'] = $_POST['email'];

@@ -26,7 +26,7 @@
             <li><a href="photos.php" title="Photos">Photos</a></li>
             <li><a href="cart.php" title="Cart">View Cart</a></li>
             <li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
-			      <li><a href="myaccount.php" id="myaccount" style="visibility:hidden; title="MyAccount">My Account</a></li>
+			<li><a href="myaccount.php" id="myaccount" style="visibility:hidden; title="MyAccount">My Account</a></li>
             <li><a href="logout.php" id="logout" style="visibility:hidden; title="Logout">Logout</a></li>
             <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
@@ -37,7 +37,7 @@
         <p class="paragraph">We provide the best blurry photos the market can provide. Ranging from scenic to industrial, we can guarantee that you can find a photo you will want to hang up in your home.</p>
         <br>
 	<?php
-		
+		include('mysqli_connect.php');
         if(isset($_POST['id'])){//update user info
 			$name = $_POST['name'];
 			//$id = $_POST['id'];
@@ -53,20 +53,20 @@
                 }
 
 		}elseif(isset($_POST['newpassword']){
-            include('mysqli_connect.php');
-            $pass = $_POST['oldpassword'];
+            $oldpass = $_POST['oldpassword'];
             $confirmpassword = $_POST['confirmpassword'];
-            $newpass = $_POST['newpassword'];
-            $hashpass = sha1($newpass);
+            $newpassword = $_POST['newpassword'];
+            $hasholdpass = sha1($oldpass);
+			$hashnewpass = sha1($newpassword);
             $email = $_POST['email'];
-            $insertnewpass = "UPDATE customer SET password='$hashpass' WHERE email='$email';";
+            $insertnewpass = "UPDATE customer SET password='$hashnewpass' WHERE email='$email';";
             $passwordcheck = "SELECT password FROM customer WHERE email = '$email'";
 
             $check = mysqli_query($dbc, $passwordcheck);
             $row = mysqli_fetch_array($check);
             $pwstring = $row['password'];
 
-            if($pwstring == $hashpass && $newpassword == $confirmpassword) {
+            if($pwstring == $hasholdpass && $newpassword == $confirmpassword) {//updating new password
                 if(mysqli_query($dbc, $insertnewpass)) {
                    echo "user password updated successfully!";
                  }else {
@@ -74,20 +74,19 @@
                    echo "<a href='myaccount.php'> Back to my account </a>";
                  }
 
-            }elseif($newpassword != $confirmpassword){
-              echo "Both passwords entered were not the same";
-              echo "<a href='myaccount.php'> Back to my account </a>";
+            }elseif($newpassword != $confirmpassword){//confirmed password does not match
+				/*echo "Both passwords entered were not the same";
+				*/echo "<a href='myaccount.php'> Back to my account </a>";
             }else{
               echo "Incorrect previous password";
-               echo "<a href='myaccount.php'> Back to my account </a>";
+              echo "<a href='myaccount.php'> Back to my account </a>";
             }
-         }else{
-             $email = $_SESSION['user'];
-             $query = "SELECT * FROM customer WHERE email = '$email'";
-             $r = mysqli_query ($dbc, $query);
-             $row = mysqli_fetch_array ($r, MYSQLI_ASSOC);
-         
-         }
+		}else{//display old user info
+			//$useremail = $_SESSION['user'];
+			//$userinfo = "SELECT name, email, address FROM customer WHERE email = '$useremail'";
+           // $r = mysqli_query ($dbc, $userinfo);
+          //  $row = mysqli_fetch_array ($r, MYSQLI_ASSOC);
+        }
         ?>
 		
 		
@@ -110,7 +109,7 @@
     </form>
     
     <footer class="footer">Copyright &copy;2018</footer>
-    
+		 
 <?php
 	// This checks if the admin is logged in and allows them to 
     // add products to the database on when the admin is logged in
