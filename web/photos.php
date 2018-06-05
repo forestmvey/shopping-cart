@@ -23,8 +23,8 @@
             <li><a href="photos.php" title="Photos" class="viewing">Photos</a></li>
             <li><a href="cart.php" title="Cart">View Cart</a></li>
 			<li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
-            <li><a href="myaccount.php" id="myaccount" style="visibility:hidden; title="MyAccount">My Account</a></li>
-            <li><a href="logout.php" id="logout" style="visibility:hidden; title="Logout">Logout</a></li>
+           <li><a href="myaccount.php" id="myaccount" style="visibility:hidden;" title="MyAccount">My Account</a></li>
+			<li><a href="logout.php" id="logout" style="visibility:hidden;" title="Logout">Logout</a></li>
             <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
@@ -141,6 +141,7 @@ else if ($category != "4") {
 		echo "document.getElementById('myaccount').style.visibility = 'visible';";
         echo "</script>";
 	}
+
 
 ?>
 </body>
