@@ -26,8 +26,8 @@
             <li><a href="photos.php" title="Photos">Photos</a></li>
             <li><a href="cart.php" title="Cart">View Cart</a></li>
             <li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
-			<li><a href="myaccount.php" id="myaccount" style="visibility:hidden; title="MyAccount">My Account</a></li>
-            <li><a href="logout.php" id="logout" style="visibility:hidden; title="Logout">Logout</a></li>
+			<li><a href="myaccount.php" id="myaccount" style="visibility:hidden;" title="MyAccount">My Account</a></li>
+            <li><a href="logout.php" id="logout" style="visibility:hidden;" title="Logout">Logout</a></li>
             <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
@@ -37,21 +37,23 @@
         <p class="paragraph">We provide the best blurry photos the market can provide. Ranging from scenic to industrial, we can guarantee that you can find a photo you will want to hang up in your home.</p>
         <br>
 	<?php
-        if(isset($_POST['id'])){//update user info
+        if(isset($_POST['name'])){//update user info
 			$name = $_POST['name'];
-			//$id = $_POST['id'];
 			$email = $_POST['email'];
 			$address = $_POST['address'];
 			
             $insertnew ="UPDATE customer SET name='$name', email='$email', address = '$address' WHERE email='$email';";
-                if(mysqli_query($dbc, $insertnew)){
-                    echo "user info updated successfully!";
+                if(mysqli_query($link, $insertnew)){
+                    echo "<script>";
+                    echo "alert('user info updated successfully!')";
+                    echo "</script>";
                 }else{
-                    echo "error updating user info!" . mysqli_error($dbc);
-                    echo "<a href='myaccount.php'> Back to my account </a>";
+                    echo "<script>";
+                    echo "alert('error updating user info!')" . mysqli_error($link);
+                    echo "<script>";
                 }
 
-		}/*elseif(isset($_POST['newpassword']){
+		}elseif(isset($_POST['newpassword'])){//user changes password
             $oldpass = $_POST['oldpassword'];
             $confirmpassword = $_POST['confirmpassword'];
             $newpassword = $_POST['newpassword'];
@@ -59,35 +61,37 @@
 			$hashnewpass = sha1($newpassword);
             $email = $_POST['email'];
             $insertnewpass = "UPDATE customer SET password='$hashnewpass' WHERE email='$email';";
-            $passwordcheck = "SELECT password FROM customer WHERE email = '$email'";
-
-            $check = mysqli_query($dbc, $passwordcheck);
+            $passwordcheck = "SELECT password FROM customer WHERE email = '$email';";
+            ini_set('display_errors',1);
+            $check = mysqli_query($link, $passwordcheck);
             $row = mysqli_fetch_array($check);
             $pwstring = $row['password'];
 
             if($pwstring == $hasholdpass && $newpassword == $confirmpassword) {//updating new password
-                if(mysqli_query($dbc, $insertnewpass)) {
-                   echo "user password updated successfully!";
+                if(mysqli_query($link, $insertnewpass)) {
+                   echo "<script>";
+                   echo "alert('user password updated successfully!');";
+                   echo "</script>";
                  }else {
-                    echo "error updating user password!" . mysqli_error($dbc);
-                   echo "<a href='myaccount.php'> Back to my account </a>";
+                    echo "<script>";
+                    echo "alert('error updating user password!');" . mysqli_error($link);
+                    echo "</script>";
                  }
 
             }elseif($newpassword != $confirmpassword){//confirmed password does not match
-				echo "Both passwords entered were not the same";
-				echo "<a href='myaccount.php'> Back to my account </a>";
+                echo "<script>";
+                echo "alert('Both passwords entered were not the same');";
+                echo "</script>";
             }else{
+              echo "<script>";
               echo "Incorrect previous password";
-              echo "<a href='myaccount.php'> Back to my account </a>";
-            }
-		}*/
-		else{//display old user info
+              echo "</script>";
+             }
+		}//display old user info
 			$useremail = $_SESSION['user'];
 			$userinfo = "SELECT name, email, address FROM customer WHERE email = '$useremail'";
-            $r = mysqli_query ($dbc, $userinfo);
+            $r = mysqli_query ($link, $userinfo);
             $row = mysqli_fetch_array ($r, MYSQLI_ASSOC);
-        }
-		
         ?>
 		
 		
@@ -100,7 +104,7 @@
     <input type="submit" value="SUBMIT"  />
     </form>
 
-    <form action="myacount.php" method="POST">
+    <form action="myaccount.php" method="POST">
     <h1>Change password</h1>
     <p>Email: <input type="text" name="email" id="email" value="<?php echo $row['email']; ?>" title="email"></p>
     <p>Previous Password: <input type="password" name="oldpassword" pattern="[a-zA-Z0-9]{4,10}" id="oldpassword" title="4 to 10 characters letters and numbers only"></p>

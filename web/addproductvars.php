@@ -20,13 +20,13 @@ values('$name', '$dimensions', '$photo', '$price')";
 
 
 // Check the result
-if (mysqli_query($dbc, $insert1)) {
-	$last_id = mysqli_insert_id($dbc);
+if (mysqli_query($link, $insert1)) {
+	$last_id = mysqli_insert_id($link);
 	if(!empty($_POST['catlist'])){
 		foreach($_POST['catlist'] as $cat){
 			$insert2 = "INSERT INTO productcategory (product_id, category_id) 
 			values('$last_id','$cat')";
-			mysqli_query($dbc, $insert2);
+			mysqli_query($link, $insert2);
 		}
 	}
 	echo "Insert successful";
