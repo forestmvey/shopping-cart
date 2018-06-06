@@ -129,13 +129,14 @@ if ($result=mysqli_query($link,$prodQuantity)){
         echo "</script>";
    
     }
-	if(isset($_SESSION['user'])){
-	//displays logout and my account only when user is signed in
+	
+	if(isset($_SESSION['userid'])){
 		echo "<script>";
-        echo "document.getElementById('logout').style.visibility = 'visible';";
+		echo "document.getElementById('logout').style.visibility = 'visible';";
 		echo "document.getElementById('myaccount').style.visibility = 'visible';";
-        echo "</script>";
+		echo "</script>";
 	}
+	
 
 ?>
 </body>

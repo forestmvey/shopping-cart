@@ -37,7 +37,6 @@
         <p class="paragraph">We provide the best blurry photos the market can provide. Ranging from scenic to industrial, we can guarantee that you can find a photo you will want to hang up in your home.</p>
         <br>
 	<?php
-		include('mysqli_connect.php');
         if(isset($_POST['id'])){//update user info
 			$name = $_POST['name'];
 			//$id = $_POST['id'];
@@ -52,7 +51,7 @@
                     echo "<a href='myaccount.php'> Back to my account </a>";
                 }
 
-		}elseif(isset($_POST['newpassword']){
+		}/*elseif(isset($_POST['newpassword']){
             $oldpass = $_POST['oldpassword'];
             $confirmpassword = $_POST['confirmpassword'];
             $newpassword = $_POST['newpassword'];
@@ -75,18 +74,20 @@
                  }
 
             }elseif($newpassword != $confirmpassword){//confirmed password does not match
-				/*echo "Both passwords entered were not the same";
-				*/echo "<a href='myaccount.php'> Back to my account </a>";
+				echo "Both passwords entered were not the same";
+				echo "<a href='myaccount.php'> Back to my account </a>";
             }else{
               echo "Incorrect previous password";
               echo "<a href='myaccount.php'> Back to my account </a>";
             }
-		}else{//display old user info
-			//$useremail = $_SESSION['user'];
-			//$userinfo = "SELECT name, email, address FROM customer WHERE email = '$useremail'";
-           // $r = mysqli_query ($dbc, $userinfo);
-          //  $row = mysqli_fetch_array ($r, MYSQLI_ASSOC);
+		}*/
+		else{//display old user info
+			$useremail = $_SESSION['user'];
+			$userinfo = "SELECT name, email, address FROM customer WHERE email = '$useremail'";
+            $r = mysqli_query ($dbc, $userinfo);
+            $row = mysqli_fetch_array ($r, MYSQLI_ASSOC);
         }
+		
         ?>
 		
 		
