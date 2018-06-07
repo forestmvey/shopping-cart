@@ -46,23 +46,40 @@ $hashpass = sha1($password);
 include('connection.php');
 //check whether email/password combo matches
 $passwordcheck = "SELECT password FROM customer WHERE email = '$email'";
+//get user ID
 $getid = "Select id from customer where email = '$email'";
+//check if they have accepted the user policy
+$policy = "Select policy from customer where email = '$email'";
 
 $check = mysqli_query($link, $passwordcheck);
 $row = mysqli_fetch_array($check);
 $pwstring = $row['password'];
+//get userID from database
 $id = mysqli_query($link, $getid);
 $userid = mysqli_fetch_array($id);
+//Check policy acceptance from database
+$check2 = mysqli_query($link, $policy);
+$policycheck = mysqli_fetch_array($check2);
 
 if($pwstring == $hashpass && $email == 'admin@gmail.com'){
+	if ($policycheck['policy'] == true){
     $_SESSION['user'] = $_POST['email'];
     $_SESSION['adminprivilege'] = true;
 	$_SESSION['userid'] = $userid['id'];
     echo 'login successful!';
+	}  else {
+		// go to policy.php 
+	}
 }elseif($pwstring == $hashpass) {
-    echo 'login successful!';
-	$_SESSION['user'] = $_POST['email'];
-	$_SESSION['userid'] = $userid['id'];
+	if ($policycheck['policy'] == true){
+		echo 'login successful!';
+		$_SESSION['user'] = $_POST['email'];
+		$_SESSION['userid'] = $userid['id'];
+		// set login time 
+	} else {
+		// alert then redirect go policy.php 
+		//if accepted, insert true for policy
+	}
 }else{
     echo 'invalid password';
 }
