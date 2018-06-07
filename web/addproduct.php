@@ -27,8 +27,7 @@ if(!isset($_SESSION['adminprivilege'])){
             <li><a href="photos.php" title="Photos">Photos</a></li>
             <li><a href="cart.php" title="Cart">View Cart</a></li>
             <li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
-            <li><a href="myaccount.php" id="myaccount" style="visibility:hidden; title="MyAccount">My Account</a></li>
-            <li><a href="logout.php" id="logout" style="visibility:hidden; title="Logout">Logout</a></li>
+            <li><a href="logout.php" title="Logout">Logout</a></li>
             <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
@@ -42,11 +41,11 @@ if(!isset($_SESSION['adminprivilege'])){
 
 
 <?php
-include('mysqli_connect.php');
+include('connection.php');
 
 //find all categories
-$cats = mysqli_query($dbc, "SELECT * FROM category");
-$dimensions = mysqli_query($dbc, "SELECT size FROM product");
+$cats = mysqli_query($link, "SELECT * FROM category");
+$dimensions = mysqli_query($link, "SELECT size FROM product");
 
 	echo "<form action='addproductvars.php' method='POST' onsubmit='return validation();'>";
 	echo "<p> Upload Photo URL: <input type='text' name='photo' id='photo'/></p>";
@@ -107,13 +106,6 @@ function validation() {
         echo "</script>";
    
     }
-	if(isset($_SESSION['user'])){
-	//displays logout and my account only when user is signed in
-		echo "<script>";
-        echo "document.getElementById('logout').style.visibility = 'visible';";
-		echo "document.getElementById('myaccount').style.visibility = 'visible';";
-        echo "</script>";
-	}
 
 ?>
 <footer class="footer">Copyright &copy;2018</footer>
