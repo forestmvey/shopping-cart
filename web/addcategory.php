@@ -24,8 +24,8 @@ session_start();
             <li><a href="photos.php" title="Photos">Photos</a></li>
             <li><a href="cart.php" title="Cart">View Cart</a></li>
             <li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
-                  <li><a href="myaccount.php" id="myaccount" style="visibility:hidden; title="MyAccount">My Account</a></li>
-            <li><a href="logout.php" id="logout" style="visibility:hidden; title="Logout">Logout</a></li>
+            <li><a href="myaccount.php" title="MyAccount">My Account</a></li>
+            <li><a href="logout.php" title="Logout">Logout</a></li>
             <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
@@ -46,20 +46,13 @@ session_start();
         echo "</script>";
    
     }
-	if(isset($_SESSION['user'])){
-	//displays logout and my account only when user is signed in
-		echo "<script>";
-        echo "document.getElementById('logout').style.visibility = 'visible';";
-		echo "document.getElementById('myaccount').style.visibility = 'visible';";
-        echo "</script>";
-	}
 	
 	//insert new category
 		include('mysqli_connect.php');
 		$cat = $_POST['newcategory'];
 		$insertcat = "INSERT INTO category (name) VALUES ('$cat')";
 		$catcheck = "SELECT name FROM category WHERE name = '$cat'";
-		$check = mysqli_query($link, $catcheck);
+		$check = mysqli_query($dbc, $catcheck);
 		
 		
 		if(mysqli_num_rows($check) > 0){
@@ -67,7 +60,7 @@ session_start();
 			echo "alert('This category name is already taken!')";
 			echo "window.location='addproduct.php';";
 			echo "</script>";
-		}elseif(mysqli_query($link, $insertcat)){
+		}elseif(mysqli_query($dbc, $insertcat)){
 			echo "<script>";
 			echo "alert('Category successfully entered!');";
 			echo "window.location='addproduct.php';";

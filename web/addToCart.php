@@ -23,8 +23,8 @@
             <li><a href="photos.php" title="Photos" class="viewing">Photos</a></li>
             <li><a href="cart.php" title="Cart">View Cart</a></li>
 			<li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
-			<li><a href="myaccount.php" id="myaccount" style="visibility:hidden;" title="MyAccount">My Account</a></li>
-			<li><a href="logout.php" id="logout" style="visibility:hidden;" title="Logout">Logout</a></li>
+            <li><a href="myaccount.php" title="MyAccount">My Account</a></li>
+            <li><a href="logout.php" title="Logout">Logout</a></li>
             <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
@@ -39,6 +39,7 @@ include ('connection.php');
 
 // variables from photos.php
 $userid= $_SESSION['userid'];
+echo "echo" . $userid;
 $rowid = $_POST['prodid'];
 $value = $_POST['quantity'];
 
@@ -56,7 +57,6 @@ $insertExisting = "UPDATE cart SET quantity = '$combinedQuantity' WHERE customer
 $insertNew = "INSERT INTO cart (customer_id, product_id, quantity) VALUES ('$userid', '$rowid', '$value')";
 
 // check if item exists in cart, then either add a new item or update an existing one
-if (isset($userid)){
 if ($result=mysqli_query($link,$prodQuantity)){
 	$rowcount=mysqli_num_rows($result);
 	if ($rowcount == 0){
@@ -72,17 +72,6 @@ if ($result=mysqli_query($link,$prodQuantity)){
 echo "<form action = 'photos.php'>";
 echo "<td style='width:60%'>" . "<input type='submit' value='Return to homepage'>" . "</td>";
 echo "</form>";
-echo "<form action = 'cart.php'>";
-echo "<td style='width:60%'>" . "<input type='submit' value='View cart'>" . "</td>";
-echo "</form>";
-} else {
-	$_SESSION['savedQuantity'] = $value;
-	$_SESSION['savedProduct'] = $rowid;
-	echo "Please log in or register to add this item to your cart.";
-	echo "<form action = 'login_register.php'>";
-	echo "<td style='width:60%'>" . "<input type='submit' value='Login/Register'>" . "</td>";
-	echo "</form>";
-}
 ?>
 
 
@@ -96,12 +85,6 @@ echo "</form>";
         echo "</script>";
    
     }
-	if(isset($_SESSION['user'])){
-	echo "<script>";
-	echo "document.getElementById('logout').style.visibility = 'visible';";
-	echo "document.getElementById('myaccount').style.visibility = 'visible';";
-	echo "</script>";
-	}
 
 ?>
 </article>

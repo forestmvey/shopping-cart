@@ -7,12 +7,12 @@
 
     <title>Blurry Photos 4 You!</title>
     <style type="text/css"></style>
+	
 </head>
 
 <body>
 <?php
-session_start();
-
+    session_start();
 ?>
     <header>
         Blurry Photos 4 You!
@@ -36,6 +36,9 @@ session_start();
         <br>
 
     </article>
+
+	
+    <footer class="footer">Copyright &copy;2018</footer>
 <?php
 	// This checks if the admin is logged in and allows them to 
     // add products to the database on when the admin is logged in
@@ -48,8 +51,6 @@ session_start();
     }
 
 ?>
-    <footer class="footer">Copyright &copy;2018</footer>
-
 </body>
 
 </html>

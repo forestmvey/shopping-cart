@@ -73,7 +73,7 @@ $dimensions = mysqli_query($link, "SELECT size FROM product");
 	//adding a new category
 	echo "<form action='addcategory.php' method='POST'>";
 	echo "<p> Add a new category: <input type='text' pattern='.*' name='newcategory' id='newcategory'/></p>"; 
-	echo "<input type='submit' value='SUBMIT'  />"
+	echo "<input type='submit' value='SUBMIT'  />";
 	echo "</form>";
 
 ?>
@@ -97,6 +97,9 @@ function validation() {
 
 </script>
 <?php
+	// This checks if the admin is logged in and allows them to 
+    // add products to the database on when the admin is logged in
+    // and is disabled when the admin is logged out
     if(isset($_SESSION['adminprivilege'])){
         echo "<script>";
         echo "document.getElementById('addprod').style.visibility = 'visible';";
