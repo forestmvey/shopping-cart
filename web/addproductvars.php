@@ -38,3 +38,4 @@ if (mysqli_query($dbc, $insert1)) {
 ?>
 <br><a href="index.php">Return to main page</a>
 </body>
+</html>
