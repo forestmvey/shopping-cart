@@ -106,6 +106,13 @@ function validation() {
         echo "</script>";
    
     }
+    if(isset($_SESSION['user'])){
+	//displays logout and my account only when user is signed in
+		echo "<script>";
+        echo "document.getElementById('logout').style.visibility = 'visible';";
+		echo "document.getElementById('myaccount').style.visibility = 'visible';";
+        echo "</script>";
+	}
 
 ?>
 <footer class="footer">Copyright &copy;2018</footer>
