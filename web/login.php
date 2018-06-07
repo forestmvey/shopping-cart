@@ -46,10 +46,18 @@ $hashpass = sha1($password);
 include('connection.php');
 //check whether email/password combo matches
 $passwordcheck = "SELECT password FROM customer WHERE email = '$email'";
+
 //get user ID
 $getid = "Select id from customer where email = '$email'";
+
 //check if they have accepted the user policy
 $policy = "Select policy from customer where email = '$email'";
+
+// check if the user is an admin
+$admin= "Select admin from customer where email = '$email'";
+
+//update privacy policy acceptance
+$policyupdate = "UPDATE customer SET policy = '$accept' where email = '$email'";
 
 $check = mysqli_query($link, $passwordcheck);
 $row = mysqli_fetch_array($check);
@@ -60,29 +68,55 @@ $userid = mysqli_fetch_array($id);
 //Check policy acceptance from database
 $check2 = mysqli_query($link, $policy);
 $policycheck = mysqli_fetch_array($check2);
+//Check if admin
+$check3 = mysqli_query($link, $admin)
+$admincheck = mysqli_fetch_array($check3);
 
-if($pwstring == $hashpass && $email == 'admin@gmail.com'){
-	if ($policycheck['policy'] == true){
-    $_SESSION['user'] = $_POST['email'];
-    $_SESSION['adminprivilege'] = true;
-	$_SESSION['userid'] = $userid['id'];
-    echo 'login successful!';
-	}  else {
-		// go to policy.php 
-	}
-}elseif($pwstring == $hashpass) {
-	if ($policycheck['policy'] == true){
-		echo 'login successful!';
-		$_SESSION['user'] = $_POST['email'];
-		$_SESSION['userid'] = $userid['id'];
-		// set login time 
-	} else {
-		// alert then redirect go policy.php 
-		//if accepted, insert true for policy
-	}
-}else{
-    echo 'invalid password';
+
+
+if (isset($_SESSION['acceptpolicy'])){
+		$accept = $_SESSION['acceptpolicy'];
+		if ($accept == 1){
+			//update privacy policy setting
+			$set1 = mysqli_query($link, $policyupdate);
+			echo "Please login to confirm you;ve read the privacy policy";
+		}
+		elseif($accept == 0){
+			//update privacy policy setting
+			$set1 = mysqli_query($link, $policyupdate);
+			echo "You must accept the privacy policy before logging in";
+			//redirect to policy.php
+		}
 }
+if($pwstring == $hashpass){
+	if ($admincheck['admin'] == 1){
+		if ($policycheck['policy'] == 1){
+			$_SESSION['user'] = $_POST['email'];
+			$_SESSION['userid'] = $userid['id'];
+			//set admin privileges to true to add products etc.
+			$_SESSION['adminprivilege'] = true;
+			//set login time
+		echo 'login successful!';
+		}  elseif ($policycheck['policy'] == 2) {
+			// alert then redirect go policy.php 
+			
+		}
+	}elseif($admincheck['admin'] == 0) {
+		if ($policycheck['policy'] == 1){
+			echo 'login successful!';
+			$_SESSION['user'] = $_POST['email'];
+			$_SESSION['userid'] = $userid['id'];
+			// set login time 
+		} elseif ($policycheck['policy'] == 2 {
+			// alert then redirect go policy.php 
+		}
+			
+	}
+}
+else{
+	echo 'invalid password';
+}
+
 
 
 
