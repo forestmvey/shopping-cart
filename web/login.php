@@ -50,6 +50,7 @@ include('connection.php');
 //check whether email/password combo matches
 $passwordcheck = "SELECT password FROM customer WHERE email = '$email'";
 $getid = "Select id from customer where email = '$email'";
+$datepost= "INSERT into customer ('lastlogin') values ('$date') where email = '$email'";
 
 $check = mysqli_query($link, $passwordcheck);
 $row = mysqli_fetch_array($check);
@@ -66,6 +67,11 @@ if($pwstring == $hashpass && $email == 'admin@gmail.com'){
     echo 'login successful!';
 	$_SESSION['user'] = $_POST['email'];
 	$_SESSION['userid'] = $userid['id'];
+    // update lastlogin to sysdate
+	$date = date('Y-m-d H:i:s');
+	mysql_query($link, $datepost);
+	// if hasnt accepted privacy policy, harass else continue to harass
+	
 }else{
     echo 'invalid password';
 }

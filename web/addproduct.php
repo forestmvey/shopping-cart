@@ -41,7 +41,7 @@ if(!isset($_SESSION['adminprivilege'])){
 
 
 <?php
-include('mysqli_connect.php');
+include('connection.php');
 
 //find all categories
 $cats = mysqli_query($link, "SELECT * FROM category");
