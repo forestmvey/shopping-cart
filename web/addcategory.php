@@ -48,11 +48,11 @@ session_start();
     }
 	
 	//insert new category
-		include('mysqli_connect.php');
+		include('connection.php');
 		$cat = $_POST['newcategory'];
 		$insertcat = "INSERT INTO category (name) VALUES ('$cat')";
 		$catcheck = "SELECT name FROM category WHERE name = '$cat'";
-		$check = mysqli_query($dbc, $catcheck);
+		$check = mysqli_query($link, $catcheck);
 		
 		
 		if(mysqli_num_rows($check) > 0){
@@ -60,7 +60,7 @@ session_start();
 			echo "alert('This category name is already taken!')";
 			echo "window.location='addproduct.php';";
 			echo "</script>";
-		}elseif(mysqli_query($dbc, $insertcat)){
+		}elseif(mysqli_query($link, $insertcat)){
 			echo "<script>";
 			echo "alert('Category successfully entered!');";
 			echo "window.location='addproduct.php';";
