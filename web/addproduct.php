@@ -27,7 +27,8 @@ if(!isset($_SESSION['adminprivilege'])){
             <li><a href="photos.php" title="Photos">Photos</a></li>
             <li><a href="cart.php" title="Cart">View Cart</a></li>
             <li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
-            <li><a href="logout.php" title="Logout">Logout</a></li>
+			<li><a href="myaccount.php" title="MyAccount" id="myaccount" style="visibility:hidden;">My Account</a></li>
+            <li><a href="logout.php" title="Logout" id="logout" style="visibility:hidden;">Logout</a></li>
             <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
@@ -102,8 +103,11 @@ function validation() {
     // and is disabled when the admin is logged out
     if(isset($_SESSION['adminprivilege'])){
         echo "<script>";
-        echo "document.getElementById('addprod').style.visibility = 'visible';";
-        echo "</script>";
+		echo "document.getElementById('addprod').style.visibility = 'visible';";
+		echo "</script>";
+		echo "<script>";
+		echo "document.getElementById('myaccount').style.visibility = 'visible';";
+		echo "</script>";
    
     }
     if(isset($_SESSION['user'])){
