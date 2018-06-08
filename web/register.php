@@ -65,48 +65,6 @@ if(mysqli_num_rows($check) > 0){
     echo 'invalid account info';
 }
 
-/*
-// checks if user has add to cart session variables set
-if (isset($_SESSION['savedQuantity'])){
-
-	// variables from photos.php
-	$userid= $_SESSION['userid'];
-	$rowid = $_SESSION['savedProduct'];
-	$value = $_SESSION['savedQuantity'];
-
-	// select quantity of chosen item from current users cart
-	$prodQuantity = "SELECT quantity FROM cart WHERE product_id = '$rowid' AND customer_id = '$userid'";
-	// run query
-	$result2 = mysqli_query($link, $prodQuantity);
-	// retrieve result as array
-	$prodQuantityInt = mysqli_fetch_assoc($result2);
-	// select quantity from array as int and add it to value from add to cart button
-	$combinedQuantity = $prodQuantityInt['quantity'] + $value;
-	// update cart quantity with existing item
-	$insertExisting = "UPDATE cart SET quantity = '$combinedQuantity' WHERE customer_id = '$userid' AND product_id = '$rowid'";
-	// insert new item and quantity to cart
-	$insertNew = "INSERT INTO cart (customer_id, product_id, quantity) VALUES ('$userid', '$rowid', '$value')";
-
-// check if item exists in cart, then either add a new item or update an existing one
-if ($result=mysqli_query($link,$prodQuantity)){
-	$rowcount=mysqli_num_rows($result);
-	if ($rowcount == 0){
-		echo "Added product to cart!";
-		mysqli_query($link, $insertNew);
-	} else if ($rowcount != 0){
-		echo "Updated existing product quantity!";
-		mysqli_query($link, $insertExisting);
-	} else {
-		echo "Error" . $insertExisting . "<br>" . mysqli_error($insertExisting) . "<br>" . $insertNew . "<br>" . mysqli_error($insertNew);
-	}
-		echo "Your product was added to cart!";
-	}
-	//unset variables
-	unset($_SESSION['savedProduct']);
-	unset($_SESSION['savedQuantity']);
-}
-*/
-
 if(isset($_SESSION['adminprivilege'])){
 	// This checks if the admin is logged in and allows them to 
     // add products to the database on when the admin is logged in
@@ -122,7 +80,6 @@ if(isset($_SESSION['userid'])){
 	echo "document.getElementById('myaccount').style.visibility = 'visible';";
 	echo "</script>";
 	}
-
 
 
 ?>
