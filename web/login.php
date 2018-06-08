@@ -57,11 +57,12 @@ $pwstring = $row['password'];
 $id = mysqli_query($link, $getid);
 $userid = mysqli_fetch_array($id);
 
+
 if($pwstring == $hashpass && $email == 'admin@gmail.com'){
     $_SESSION['user'] = $_POST['email'];
     $_SESSION['adminprivilege'] = true;
 	$_SESSION['userid'] = $userid['id'];
-    echo 'login successful!';
+	echo 'login successful!';
 }elseif($pwstring == $hashpass) {
     echo 'login successful!';
 	$_SESSION['user'] = $_POST['email'];
