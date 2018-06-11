@@ -30,8 +30,9 @@ if(isset($_POST['acceptpolicy'])){
     }
 } elseif(isset($_POST['declinedpolicy'])){
     echo "<script>";
-    echo "alert('You will regret this at checkout');";
+    echo "alert('You have been logged out for not accepting our policy!' . <br> . 'Please accept in order to use our services');";
     echo "</script>";
+    session_destroy();
 }   
 
 ?>

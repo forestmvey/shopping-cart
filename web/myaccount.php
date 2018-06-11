@@ -92,6 +92,7 @@
 			$userinfo = "SELECT name, email, address FROM customer WHERE email = '$useremail'";
             $r = mysqli_query ($link, $userinfo);
             $row = mysqli_fetch_array ($r, MYSQLI_ASSOC);
+            $accept = $_SESSION['acceptpolicy'];
         ?>
 		
 		
@@ -101,6 +102,7 @@
     <p>Name: <input type="text" id="name" name="name" value="<?php echo $row['name']; ?>" title="name"></p>
     <p>Address: <input type="text" id="address" name="address" value="<?php echo $row['address']; ?>" title="address"></p>
 	<p>Password: <input type="password" name="password" pattern="[a-zA-Z0-9]{4,10}" id="password" title="4 to 10 characters letters and numbers only"></p>
+    <input type="checkbox" id="policycheck" value="<?php if($_SESSION['acceptpolicy']==1){document.getElementById('policycheck').checked = true;}else{document.getElementById('policycheck').checked = false;} ?>"> . 'Accept blur corp's terms and policy' . <br>
     <input type="submit" value="SUBMIT"  />
     </form>
 
