@@ -58,7 +58,7 @@ include ('connection.php');
 // show all products
 $category = $_POST['category'];
 
-echo "<table border='1' style='width:50%'>
+echo "<table border='2px solid black' style='width:50%'>
 <tr>
 <th style='width:50%'>Name</th>
 <th style='width:50%'>Size</th>
