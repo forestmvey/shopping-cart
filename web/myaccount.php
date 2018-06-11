@@ -41,14 +41,13 @@
 			$name = $_POST['name'];
 			$email = $_POST['email'];
             $address = $_POST['address'];
-
-            //Check if user has accepted privacy policy
-            $policy = "Select policy from customer where email = '$email'";
-            $check2 = mysqli_query($link, $policy);
-            $policy2 = mysqli_fetch_array($check2);
-            $policycheck = $policy2['policy'];
+            if(isset($_POST['policybox'])){
+                $updatepolicy = $_POST['policybox'];
+            }else{
+                $updatepolicy = 0;
+            }
 			
-            $insertnew ="UPDATE customer SET name='$name', email='$email', address = '$address' WHERE email='$email';";
+            $insertnew ="UPDATE customer SET name='$name', email='$email',policy='$updatepolicy', address = '$address' WHERE email='$email';";
                 if(mysqli_query($link, $insertnew)){
                     echo "<script>";
                     echo "alert('user info updated successfully!')";
@@ -98,7 +97,8 @@
 			$userinfo = "SELECT name, email, address FROM customer WHERE email = '$useremail'";
             $r = mysqli_query ($link, $userinfo);
             $row = mysqli_fetch_array ($r, MYSQLI_ASSOC);
-            //$polbox = document.getElementById('policybox');
+
+            
         ?>
 		
 		
@@ -108,7 +108,7 @@
     <p>Name: <input type="text" id="name" name="name" value="<?php echo $row['name']; ?>" title="name"></p>
     <p>Address: <input type="text" id="address" name="address" value="<?php echo $row['address']; ?>" title="address"></p>
 	<p>Password: <input type="password" name="password" pattern="[a-zA-Z0-9]{4,10}" id="password" title="4 to 10 characters letters and numbers only"></p>
-    <input type="checkbox" id="policybox" value="<?php if(policycheck == 1){$polbox.checked = true;}else{$polbox.checked = false;} ?>">
+    <input type="checkbox" id="policybox" name="policybox" value="1"> Accept Terms and Services! <br>
     <input type="submit" value="SUBMIT"  />
     </form>
 
@@ -124,6 +124,24 @@
     <footer class="footer">Copyright &copy;2018</footer>
 		 
 <?php
+//Check if user has accepted privacy policy
+$policy = "Select policy from customer where email = '$useremail'";
+$check2 = mysqli_query($link, $policy);
+$policy2 = mysqli_fetch_array($check2);
+$policycheck = $policy2['policy'];
+
+if($policycheck == 1){//check box if already accepted policy
+    echo "<script>";
+    echo "document.getElementById('policybox').checked = true;";
+    echo "document.getElementById('policybox').value = 1;";
+    echo "</script>";
+}else{
+    echo "<script>";
+    echo "document.getElementById('polixybox').checked = false;";
+    echo "</script>";
+}
+
+
 	// This checks if the admin is logged in and allows them to 
     // add products to the database on when the admin is logged in
     // and is disabled when the admin is logged out
