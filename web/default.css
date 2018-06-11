@@ -31,11 +31,6 @@ header {
     text-align: center;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 96.9%;
-}
 /* Navigation Bar */
 nav {
     margin: 0;
@@ -69,4 +64,18 @@ nav ul li a {
 .viewing {
     background-color: #313C53;
     outline: solid #9CFF00 1px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 96.9%;
+}
+
+.center {
+    align-self: center;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    padding-left: 20%;
 }
