@@ -11,17 +11,29 @@
 
 <body>
 <?php
+
 session_start();
 if(isset($_POST['acceptpolicy'])){
-    echo "<script>";
-    echo "alert('Thank you for accepting our privacy policy.');";
-    echo "</script>";
-    $_SESSION['acceptpolicy'] = 1;
+    $_SESSION['policy'] = 1;
+    include('mysqli_connect.php');
+    $id = $_SESSION['userid'];
+    $policyupdate = "UPDATE customer SET policy = '1' WHERE id = $id;";
+    
+    if(mysqli_query($link, $policyupdate)){
+        echo "<script>";
+        echo "alert('Thank you for accepting our privacy policy.');";
+        echo "</script>";
+    }else{
+        echo "<script>";
+        echo "alert('error of accepting our privacy policy');";
+        echo "</script>";
+    }
 } elseif(isset($_POST['declinedpolicy'])){
     echo "<script>";
-    echo "alert('You got to accept it man!!!');";
+    echo "alert('You will regret this at checkout');";
     echo "</script>";
 }   
+
 ?>
 
     <header>

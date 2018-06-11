@@ -29,6 +29,14 @@
         </ul>
     </nav>
     </div>
+    <div>
+        <?php
+            $user = $_SESSION['user'];
+            if(isset($_SESSION['user'])){ 
+                echo "<h4 style='float:right'>Logged in as: $user</h4>";
+            }
+        ?>
+    </div>
     <article>
         <h1> Welcome to Blurry Photos 4 You! </h1>
         <form action="photos.php" method="POST">
