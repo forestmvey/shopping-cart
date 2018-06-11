@@ -10,6 +10,12 @@
 #FFFFFF
 
 */
+body {
+    background-image: url("https://pre00.deviantart.net/e810/th/pre/f/2013/147/1/e/1e9bb8554f534067f2e52bb2b9eaea3b-d63kxbv.jpg");
+    background-size: 2000px 2500px;
+    background-attachment: fixed;
+}
+
 
 header {
     font-size: 36px;
