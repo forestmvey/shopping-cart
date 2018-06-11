@@ -40,7 +40,13 @@
         if(isset($_POST['name'])){//update user info
 			$name = $_POST['name'];
 			$email = $_POST['email'];
-			$address = $_POST['address'];
+            $address = $_POST['address'];
+
+            //Check if user has accepted privacy policy
+            $policy = "Select policy from customer where email = '$email'";
+            $check2 = mysqli_query($link, $policy);
+            $policy2 = mysqli_fetch_array($check2);
+            $policycheck = $policy2['policy'];
 			
             $insertnew ="UPDATE customer SET name='$name', email='$email', address = '$address' WHERE email='$email';";
                 if(mysqli_query($link, $insertnew)){
@@ -92,7 +98,7 @@
 			$userinfo = "SELECT name, email, address FROM customer WHERE email = '$useremail'";
             $r = mysqli_query ($link, $userinfo);
             $row = mysqli_fetch_array ($r, MYSQLI_ASSOC);
-            $accept = $_SESSION['acceptpolicy'];
+            //$polbox = document.getElementById('policybox');
         ?>
 		
 		
@@ -102,7 +108,7 @@
     <p>Name: <input type="text" id="name" name="name" value="<?php echo $row['name']; ?>" title="name"></p>
     <p>Address: <input type="text" id="address" name="address" value="<?php echo $row['address']; ?>" title="address"></p>
 	<p>Password: <input type="password" name="password" pattern="[a-zA-Z0-9]{4,10}" id="password" title="4 to 10 characters letters and numbers only"></p>
-    <input type="checkbox" id="policycheck" value="<?php if($_SESSION['acceptpolicy']==1){document.getElementById('policycheck').checked = true;}else{document.getElementById('policycheck').checked = false;} ?>"> . 'Accept blur corp's terms and policy' . <br>
+    <input type="checkbox" id="policybox" value="<?php if(policycheck == 1){$polbox.checked = true;}else{$polbox.checked = false;} ?>">
     <input type="submit" value="SUBMIT"  />
     </form>
 
