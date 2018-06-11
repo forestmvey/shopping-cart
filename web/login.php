@@ -56,8 +56,8 @@ $policy = "Select policy from customer where email = '$email'";
 // check if the user is an admin
 $admin= "Select admin from customer where email = '$email'";
 
-//update privacy policy acceptance
-$policyupdate = "UPDATE customer SET policy = '$accept' where email = '$email'";
+//update last login of user or admin
+$loginupdate = "UPDATE customer SET lastlogin = now() WHERE email = '$email'";
 
 $check = mysqli_query($link, $passwordcheck);
 $row = mysqli_fetch_array($check);
@@ -67,38 +67,49 @@ $id = mysqli_query($link, $getid);
 $userid = mysqli_fetch_array($id);
 //Check policy acceptance from database
 $check2 = mysqli_query($link, $policy);
+
 $policycheck = mysqli_fetch_array($check2);
+echo $userid;
 //Check if admin
-$check3 = mysqli_query($link, $admin)
-$admincheck = mysqli_fetch_array($check3);
+//$check3 = mysqli_query($link, $admin)
+//$admincheck = mysqli_fetch_array($check3);
+// Update lastlogin to now
+//$login = mysqli_query($link, $loginupdate);
+//echo $admincheck;
+//echo $policycheck;
 
-
-
-if (isset($_SESSION['acceptpolicy'])){
+/*if (isset($_SESSION['acceptpolicy'])){
 		$accept = $_SESSION['acceptpolicy'];
 		if ($accept == 1){
 			//update privacy policy setting
 			$set1 = mysqli_query($link, $policyupdate);
-			echo "Please login to confirm you;ve read the privacy policy";
-		}
-		elseif($accept == 0){
-			//update privacy policy setting
-			$set1 = mysqli_query($link, $policyupdate);
-			echo "You must accept the privacy policy before logging in";
-			//redirect to policy.php
+			unset session
 		}
 }
 if($pwstring == $hashpass){
 	if ($admincheck['admin'] == 1){
 		if ($policycheck['policy'] == 1){
+			echo 'login successful!';
 			$_SESSION['user'] = $_POST['email'];
 			$_SESSION['userid'] = $userid['id'];
 			//set admin privileges to true to add products etc.
 			$_SESSION['adminprivilege'] = true;
-			//set login time
-		echo 'login successful!';
-		}  elseif ($policycheck['policy'] == 2) {
-			// alert then redirect go policy.php 
+			// Update lastlogin to now
+			$login = mysqli_query($link, $loginupdate);
+			echo $login;
+			echo $admincheck;
+			echo $policycheck;
+		} elseif ($policycheck['policy'] == 2) {
+			echo 'login successful!';
+			$_SESSION['user'] = $_POST['email'];
+			$_SESSION['userid'] = $userid['id'];
+			//set admin privileges to true to add products etc.
+			$_SESSION['adminprivilege'] = true;
+			// Update lastlogin to now
+			$login = mysqli_query($link, $loginupdate);
+			echo $login;
+			//redirect to policy.php
+			header('location: policy.php');
 			
 		}
 	}elseif($admincheck['admin'] == 0) {
@@ -106,9 +117,18 @@ if($pwstring == $hashpass){
 			echo 'login successful!';
 			$_SESSION['user'] = $_POST['email'];
 			$_SESSION['userid'] = $userid['id'];
-			// set login time 
+			// Update lastlogin to now
+			$login = mysqli_query($link, $loginupdate);
+			echo $login;
 		} elseif ($policycheck['policy'] == 2 {
-			// alert then redirect go policy.php 
+			echo 'login successful!';
+			$_SESSION['user'] = $_POST['email'];
+			$_SESSION['userid'] = $userid['id'];
+			// Update lastlogin to now
+			$login = mysqli_query($link, $loginupdate);
+			echo $login;
+			//redirect to policy.php 
+			header("location: policy.php");
 		}
 			
 	}
@@ -116,7 +136,7 @@ if($pwstring == $hashpass){
 else{
 	echo 'invalid password';
 }
-
+*/
 
 
 
