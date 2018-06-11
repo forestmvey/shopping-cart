@@ -29,72 +29,43 @@
         </ul>
     </nav>
     </div>
-    <div>
-        <?php
-            $user = $_SESSION['user'];
-            if(isset($_SESSION['user'])){ 
-                echo "<h4 style='float:right'>Logged in as: $user</h4>";
-            }
-        ?>
-    </div>
     <article>
-        <form action="photos.php" method="POST" class="center">
+        <h1> Welcome to Blurry Photos 4 You! </h1>
+        <form action="photos.php" method="POST">
         <p> Category:</p><select name="category" id="category"></p>
         <option value="4">All</option>
         <option value="1">Scenic</option>
         <option value="2">Transportation</option>
         <option value="3">Industrial</option>
         </select>
-        <button value="filter selection" id="filter">Ok</button> 
         <br>
+        <button value="filter selection" id="filter">Ok</button> 
         </form>
         <br>
-        
-        <div class="center">
+
+
         <?php
 session_start();
 
 include ('connection.php');
 // show all products
 $category = $_POST['category'];
-
-echo "<table border='1' style='width:50%'>
-<tr>
-<th style='width:50%'>Name</th>
-<th style='width:50%'>Size</th>
-<th style='width:50%'>Photo</th>
-<th style='width:50%'>Price</th>
-<th style='width:50%'>Quantity</th>
-<th style='width:50%'>Add to Cart</th>";
-
-// Display all products when customer moves to the photos.php page
-if ($category == "") {
-    $result = mysqli_query($link,'select * from product');
-    if ($result)   {
-        $row_count = mysqli_num_rows($result);
-
-        while ($row = mysqli_fetch_array($result)) {
-        
-                $img = $row['image'];
-                $nm = $row['name'];
-                echo "<tr>";
-                echo "<td style='width:60%'>" . $row['name'] . "</td>";
-                echo "<td style='width:60%'>" . $row['size'] . "</td>";
-                echo "<td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
-                echo "<td style='width:60%'>" . $row['price'] . "</td>";
-                echo "<form action = 'addToCart.php' method = 'POST'>";
-                echo "<td style='width:60%'>" . "<input type='text' pattern='^[1-9]\d*$' name='quantity' value='1' size='2' />" . "</td>";
-                echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";
-        }
-    }
-}
-
-
 if ($category == "4") {
     $result = mysqli_query($link,'select * from product');
     if ($result)   {
     $row_count = mysqli_num_rows($result);
+    print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
+
+
     while ($row = mysqli_fetch_array($result)) {
+        echo "<table border='1' style='width:50%'>
+        <tr>
+        <th style='width:50%'>Name</th>
+        <th style='width:50%'>Size</th>
+        <th style='width:50%'>Photo</th>
+        <th style='width:50%'>Price</th>
+        <th style='width:50%'>Quantity</th>
+        <th style='width:50%'>Add to Cart</th>";
 
 		$img = $row['image'];
         $nm = $row['name'];
@@ -123,7 +94,18 @@ else if ($category != "4") {
 
     if ($result)   {
     $row_count = mysqli_num_rows($result);
+    print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
+
     while ($row = mysqli_fetch_array($result)) {
+    echo "<table border='1' style='width:50%'>
+    <tr>
+        <th style='width:50%'>Name</th>
+        <th style='width:50%'>Size</th>
+        <th style='width:50%'>Photo</th>
+        <th style='width:50%'>Price</th>
+        <th style='width:50%'>Quantity</th>
+        <th style='width:50%'>Add to Cart</th>";
+
 	$img = $row['image'];
     $nm = $row['name'];
     echo "<tr>";
@@ -143,7 +125,6 @@ else if ($category != "4") {
 }
 
 ?>
-</div>
     </article>
     </body>
 <?php
@@ -165,3 +146,4 @@ else if ($category != "4") {
 ?>
 </body>
 </html>
+
