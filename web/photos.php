@@ -29,14 +29,6 @@
         </ul>
     </nav>
     </div>
-    <div>
-        <?php
-            $user = $_SESSION['user'];
-            if(isset($_SESSION['user'])){ 
-                echo "<h4 style='float:right'>Logged in as: $user</h4>";
-            }
-        ?>
-    </div>
     <article>
         <form action="photos.php" method="POST" class="center">
         <p> Category:</p><select name="category" id="category"></p>
@@ -165,3 +157,4 @@ else if ($category != "4") {
 ?>
 </body>
 </html>
+
