@@ -10,6 +10,12 @@
 #FFFFFF
 
 */
+body {
+    background-image: url("https://pre00.deviantart.net/e810/th/pre/f/2013/147/1/e/1e9bb8554f534067f2e52bb2b9eaea3b-d63kxbv.jpg");
+    background-size: 2000px 2500px;
+    background-attachment: fixed;
+}
+
 
 header {
     font-size: 36px;
@@ -25,11 +31,6 @@ header {
     text-align: center;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 96.9%;
-}
 /* Navigation Bar */
 nav {
     margin: 0;
@@ -63,4 +64,18 @@ nav ul li a {
 .viewing {
     background-color: #313C53;
     outline: solid #9CFF00 1px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 96.9%;
+}
+
+.center {
+    align-self: center;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    padding-left: 20%;
 }
