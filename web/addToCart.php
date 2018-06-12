@@ -10,9 +10,6 @@
 </head>
 
 <body>
-<?php
-    session_start();
-?>
     <header>
         Blurry Photos 4 You!
     </header>
@@ -95,37 +92,24 @@ if(isset($_SESSION['savedQuantity'])){//if user just accepted our privacy policy
 	$insertNew = "INSERT INTO cart (customer_id, product_id, quantity) VALUES ('$userid', '$rowid', '$value')";
 
 	
-// check if item exists in cart, then either add a new item or update an existing one
-if ($result=mysqli_query($link,$prodQuantity)){
-	$rowcount=mysqli_num_rows($result);
-	if ($rowcount == 0){
-		echo "<br>" . "Added product to cart!";
-		mysqli_query($link, $insertNew);
-	} else if ($rowcount != 0){
-		echo "<br>" . "Updated existing product quantity!";
-		mysqli_query($link, $insertExisting);
-	} else {
-		echo "Error" . $insertExisting . "<br>" . mysqli_error($insertExisting) . "<br>" . $insertNew . "<br>" . mysqli_error($insertNew);
-	}
-	}
-	
-	//unset variables
-	unset($_SESSION['savedProduct']);
-	unset($_SESSION['savedQuantity']);
-	echo "<script>
-            alert('Your item will now be added to your cart!');
-            window.location='cart.php';
-            </script>";
 }
-
+// check if item exists in cart, then either add a new item or update an existing one
 if ($result=mysqli_query($link,$prodQuantity)){
 	$rowcount=mysqli_num_rows($result);
 	if ($rowcount == 0){
 		echo "Added product to cart!";
 		mysqli_query($link, $insertNew);
+		echo "<script>
+            alert('Your item will now be added to your cart!');
+            window.location='cart.php';
+            </script>";
 	} else if ($rowcount != 0){
 		echo "Updated existing product quantity!";
 		mysqli_query($link, $insertExisting);
+		echo "<script>
+            alert('Your item will now be added to your cart!');
+            window.location='cart.php';
+            </script>";
 	} else {
 		echo "Error" . $insertExisting . "<br>" . mysqli_error($insertExisting) . "<br>" . $insertNew . "<br>" . mysqli_error($insertNew);
 	}
