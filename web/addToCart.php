@@ -41,6 +41,7 @@ include ('connection.php');
 $userid= $_SESSION['userid'];
 $rowid = $_POST['prodid'];
 $value = $_POST['quantity'];
+$useremail = $_SESSION['user'];
 
 // select quantity of chosen item from current users cart
 $prodQuantity = "SELECT quantity FROM cart WHERE product_id = '$rowid' AND customer_id = '$userid'";
@@ -57,6 +58,21 @@ $insertNew = "INSERT INTO cart (customer_id, product_id, quantity) VALUES ('$use
 
 // check if item exists in cart, then either add a new item or update an existing one
 if (isset($userid)){
+
+	//Check if user has accepted privacy policy
+//$policy = "Select policy from customer where email = '$useremail'";
+//$check2 = mysqli_query($link, $policy);
+//$policy2 = mysqli_fetch_array($check2);
+//$policycheck = $policy2['policy'];
+//echo '$policycheck';
+/*
+if($policycheck != 1){
+	echo "<script>";
+	echo "alert('You must accept our policy agreement in order to use the cart!');";
+	echo "window.location='policy.php';";
+	echo "</script>";
+}
+*/
 if ($result=mysqli_query($link,$prodQuantity)){
 	$rowcount=mysqli_num_rows($result);
 	if ($rowcount == 0){
