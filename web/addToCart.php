@@ -10,9 +10,6 @@
 </head>
 
 <body>
-<?php
-    session_start();
-?>
     <header>
         Blurry Photos 4 You!
     </header>
@@ -41,6 +38,14 @@ include ('connection.php');
 $userid= $_SESSION['userid'];
 $rowid = $_POST['prodid'];
 $value = $_POST['quantity'];
+$useremail = $_SESSION['user'];
+if(isset($_SESSION['savedQuantity'])){//if user just accepted our privacy policy when adding an item to their cart
+	
+	// variables from photos.php
+	$userid= $_SESSION['userid'];
+	$rowid = $_SESSION['savedProduct'];
+	$value = $_SESSION['savedQuantity'];
+}
 
 // select quantity of chosen item from current users cart
 $prodQuantity = "SELECT quantity FROM cart WHERE product_id = '$rowid' AND customer_id = '$userid'";
@@ -57,14 +62,37 @@ $insertNew = "INSERT INTO cart (customer_id, product_id, quantity) VALUES ('$use
 
 // check if item exists in cart, then either add a new item or update an existing one
 if (isset($userid)){
-if ($result=mysqli_query($link,$prodQuantity)){
+
+	//Check if user has accepted privacy policy
+$policy = "Select policy from customer where email = '$useremail'";
+$check2 = mysqli_query($link, $policy);
+$policy2 = mysqli_fetch_array($check2);
+$policycheck = $policy2['policy'];
+
+if($policycheck != 1){ // if user has not accepted our policies, they will be redirected to the policy page
+	$_SESSION['savedQuantity'] = $value;
+	$_SESSION['savedProduct'] = $rowid;
+	echo "<script>;
+	alert('You must accept our policy agreement in order to use the cart!');
+	window.location='policy.php';
+	</script>";
+}
+// check if item exists in cart, then either add a new item or update an existing one
+elseif ($result=mysqli_query($link,$prodQuantity)){
 	$rowcount=mysqli_num_rows($result);
 	if ($rowcount == 0){
 		echo "Added product to cart!";
 		mysqli_query($link, $insertNew);
+		echo "<script>
+            window.location='photos.php';
+            </script>";
 	} else if ($rowcount != 0){
 		echo "Updated existing product quantity!";
 		mysqli_query($link, $insertExisting);
+		echo "<script>
+            alert('Your item will now be added to your cart!');
+            window.location='cart.php';
+            </script>";
 	} else {
 		echo "Error" . $insertExisting . "<br>" . mysqli_error($insertExisting) . "<br>" . $insertNew . "<br>" . mysqli_error($insertNew);
 	}
@@ -107,5 +135,3 @@ echo "</form>";
 </article>
 </body>
 </html>
-
-

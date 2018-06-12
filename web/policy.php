@@ -20,9 +20,15 @@ if(isset($_POST['acceptpolicy'])){
     $policyupdate = "UPDATE customer SET policy = '1' WHERE id = $id;";
     
     if(mysqli_query($link, $policyupdate)){
-        echo "<script>";
-        echo "alert('Thank you for accepting our privacy policy.');";
-        echo "</script>";
+        echo "<script>
+        alert('Thank you for accepting our privacy policy.');
+        </script>";
+        if (isset($_SESSION['savedQuantity'])){//if user added items to cart before accepting our policy!
+            echo "<script>
+            alert('Your item will now be added to your cart!');
+            window.location='addToCart.php';
+            </script>";
+}
     }else{
         echo "<script>";
         echo "alert('error of accepting our privacy policy');";
