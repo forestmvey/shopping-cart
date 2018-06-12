@@ -35,10 +35,11 @@ if(isset($_POST['acceptpolicy'])){
         echo "</script>";
     }
 } elseif(isset($_POST['declinedpolicy'])){
-    echo "<script>";
-    echo "alert('You have been logged out for not accepting our policy!' . <br> . 'Please accept in order to use our services');";
-    echo "</script>";
     session_destroy();
+    echo "<script>
+    alert('You have been logged out for not accepting our policy! Please accept in order to use our services');
+    window.location='index.php';
+    </script>";
 }   
 
 ?>

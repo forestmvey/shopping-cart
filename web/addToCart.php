@@ -90,7 +90,6 @@ elseif ($result=mysqli_query($link,$prodQuantity)){
 		echo "Updated existing product quantity!";
 		mysqli_query($link, $insertExisting);
 		echo "<script>
-            alert('Your item will now be added to your cart!');
             window.location='cart.php';
             </script>";
 	} else {
