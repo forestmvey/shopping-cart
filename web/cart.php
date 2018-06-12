@@ -58,21 +58,23 @@
 				 echo "</form>";
 				 } else {
 				 echo "Your cart is empty!";
-				 }
+                 }
+                 if ($row_count >= 1) {
+                    echo "<table border='1' style='width:50%'>
+                    <tr>
+                    <th style='width:50%'>Name</th>
+                    <th style='width:50%'>Photo</th>
+                    <th style='width:50%'>Size</th>
+                    <th style='width:50%'>Quantity</th>
+                    <th style='width:50%'>Price</th>
+                    <th style='width:50%'>Tax</th>
+                    <th style='width:50%'>Sub-total</th>
+                    <th style='width:50%'>+1 Product</th>
+                    <th style='width:50%'>-1 Product</th>
+                    <th style='width:50%'>Remove Product</th>
+                    </tr>";
+                 }
                  while ($row = mysqli_fetch_array($result)) {
-                     echo "<table border='1' style='width:50%'>
-                     <tr>
-                     <th style='width:50%'>Name</th>
-                     <th style='width:50%'>Photo</th>
-                     <th style='width:50%'>Size</th>
-                     <th style='width:50%'>Quantity</th>
-                     <th style='width:50%'>Price</th>
-					 <th style='width:50%'>Tax</th>
-					 <th style='width:50%'>Sub-total</th>
-					 <th style='width:50%'>+1 Product</th>
-					 <th style='width:50%'>-1 Product</th>
-					 <th style='width:50%'>Remove Product</th>
-					 </tr>";
 					 
 		             $img = $row['image'];
                      $nm = $row['name'];
