@@ -22,8 +22,6 @@ if(isset($_POST['acceptpolicy'])){
     if(mysqli_query($link, $policyupdate)){
         echo "<script>
         alert('Thank you for accepting our privacy policy.');
-        $echoerrr = $_SESSION['savedQuantity'];
-        alert($echoerrr);
         </script>";
         if (isset($_SESSION['savedQuantity'])){//if user added items to cart before accepting our policy!
             echo "<script>
