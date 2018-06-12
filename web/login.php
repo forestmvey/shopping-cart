@@ -85,8 +85,6 @@ if($pwstring == $hashpass){
 	$check4 = mysqli_query($link, $lastlogin);
 	$login2 = mysqli_fetch_array($check4);
 	$logincheck = $login2['lastlogin'];
-	echo $logincheck;
-	echo $policycheck;
 		if ($admincheck == 1){
 			$_SESSION['user'] = $_POST['email'];
 			$_SESSION['userid'] = $userid['id'];
@@ -95,7 +93,11 @@ if($pwstring == $hashpass){
 			if ($policycheck == 1){
 				echo 'login successful!';
 				header('location: myaccount.php');
-			} elseif ($policycheck == 2) {
+			} elseif ($policycheck == 0){
+				echo 'login successful! Please Read the Policy Statement update';
+				//redirect to policy.php
+				header('location: policy.php');
+			}elseif ($policycheck == 2) {
 				echo 'login successful! Please Read the Policy Statement update';
 				//redirect to policy.php
 				header('location: policy.php');
@@ -107,7 +109,12 @@ if($pwstring == $hashpass){
 			if ($policycheck == 1){
 				echo 'login successful!';
 				header('location: myaccount.php');
-			} elseif ($policycheck == 2) {
+			} elseif ($policycheck == 0){
+				echo 'login successful! Please Read the Policy Statement update';
+				//redirect to policy.php
+				header('location: policy.php');
+			}
+				elseif ($policycheck == 2) {
 				echo 'login successful! Please Read the Policy Statement update';
 				//redirect to policy.php
 				header('location: policy.php');
