@@ -13,10 +13,21 @@
 <body>
 <?php
     session_start();
-    // if (isset($_SESSION['user'])) {
-    //     echo "logged in";
-    //     echo $_SESSION['user'];
-    //     echo $_SESSION['userid'];
+    //Check if user has accepted privacy policy
+    include ('connection.php');
+    $useremail = $_SESSION['user'];
+    $policy = "Select policy from customer where email = '$useremail'";
+    $check2 = mysqli_query($link, $policy);
+    $policy2 = mysqli_fetch_array($check2);
+    $policycheck = $policy2['policy'];
+
+    if($policycheck != 1 && isset($_SESSION['user'])){ // if user has not accepted our policies, they will be redirected to the policy page
+
+        echo "<script>;
+        alert('You must accept our policy agreement in order to use the cart!');
+        window.location='policy.php';
+        </script>";
+    }
 ?>
     <header>
         Blurry Photos 4 You!
