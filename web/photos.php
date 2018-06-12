@@ -77,6 +77,10 @@ if ($category == "") {
                 echo "<form action = 'addToCart.php' method = 'POST'>";
                 echo "<td style='width:60%'>" . "<input type='text' pattern='^[1-9]\d*$' name='quantity' value='1' size='2' />" . "</td>";
                 echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";
+        ?>
+        <input type='hidden' name='prodid' value="<?php echo $row['id']?>"/>
+        <?php
+        echo "</form>";
         }
     }
 }
