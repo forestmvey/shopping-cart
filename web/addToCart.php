@@ -98,7 +98,7 @@ elseif ($result=mysqli_query($link,$prodQuantity)){
 	}
 }
 echo "<form action = 'photos.php'>";
-echo "<td style='width:60%'>" . "<input type='submit' value='Return to homepage'>" . "</td>";
+echo "<td style='width:60%'>" . "<input type='submit' value='Return to photos'>" . "</td>";
 echo "</form>";
 echo "<form action = 'cart.php'>";
 echo "<td style='width:60%'>" . "<input type='submit' value='View cart'>" . "</td>";
