@@ -78,14 +78,13 @@ if($policycheck != 1){ // if user has not accepted our policies, they will be re
 	</script>";
 }
 // check if item exists in cart, then either add a new item or update an existing one
-if ($result=mysqli_query($link,$prodQuantity)){
+elseif ($result=mysqli_query($link,$prodQuantity)){
 	$rowcount=mysqli_num_rows($result);
 	if ($rowcount == 0){
 		echo "Added product to cart!";
 		mysqli_query($link, $insertNew);
 		echo "<script>
-			alert('Your item will now be added to your cart!');
-            window.location='cart.php';
+            window.location='photos.php';
             </script>";
 	} else if ($rowcount != 0){
 		echo "Updated existing product quantity!";
@@ -136,5 +135,3 @@ echo "</form>";
 </article>
 </body>
 </html>
-
-
