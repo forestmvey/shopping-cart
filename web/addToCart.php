@@ -39,6 +39,13 @@ $userid= $_SESSION['userid'];
 $rowid = $_POST['prodid'];
 $value = $_POST['quantity'];
 $useremail = $_SESSION['user'];
+if(isset($_SESSION['savedQuantity'])){//if user just accepted our privacy policy when adding an item to their cart
+	
+	// variables from photos.php
+	$userid= $_SESSION['userid'];
+	$rowid = $_SESSION['savedProduct'];
+	$value = $_SESSION['savedQuantity'];
+}
 
 // select quantity of chosen item from current users cart
 $prodQuantity = "SELECT quantity FROM cart WHERE product_id = '$rowid' AND customer_id = '$userid'";
@@ -70,29 +77,6 @@ if($policycheck != 1){ // if user has not accepted our policies, they will be re
 	window.location='policy.php';
 	</script>";
 }
-if(isset($_SESSION['savedQuantity'])){//if user just accepted our privacy policy when adding an item to their cart
-	
-	// variables from photos.php
-	$userid= $_SESSION['userid'];
-	$rowid = $_SESSION['savedProduct'];
-	$value = $_SESSION['savedQuantity'];
-	
-	
-	// select quantity of chosen item from current users cart
-	$prodQuantity = "SELECT quantity FROM cart WHERE product_id = '$rowid' AND customer_id = '$userid'";
-	// run query
-	$result2 = mysqli_query($link, $prodQuantity);
-	// retrieve result as array
-	$prodQuantityInt = mysqli_fetch_assoc($result2);
-	// select quantity from array as int and add it to value from add to cart button
-	$combinedQuantity = $prodQuantityInt['quantity'] + $value;
-	// update cart quantity with existing item
-	$insertExisting = "UPDATE cart SET quantity = '$combinedQuantity' WHERE customer_id = '$userid' AND product_id = '$rowid'";
-	// insert new item and quantity to cart
-	$insertNew = "INSERT INTO cart (customer_id, product_id, quantity) VALUES ('$userid', '$rowid', '$value')";
-
-	
-}
 // check if item exists in cart, then either add a new item or update an existing one
 if ($result=mysqli_query($link,$prodQuantity)){
 	$rowcount=mysqli_num_rows($result);
@@ -100,7 +84,7 @@ if ($result=mysqli_query($link,$prodQuantity)){
 		echo "Added product to cart!";
 		mysqli_query($link, $insertNew);
 		echo "<script>
-            alert('Your item will now be added to your cart!');
+			alert('Your item will now be added to your cart!');
             window.location='cart.php';
             </script>";
 	} else if ($rowcount != 0){
