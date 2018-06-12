@@ -46,8 +46,8 @@ $hashpass = sha1($_password);
 include('connection.php');
 
 //insert customer registration
-$insert = "INSERT INTO customer (name, password, email, address) 
-values('$_name', '$hashpass', '$_email', '$_address')";
+$insert = "INSERT INTO customer (name, password, email, address, policy) 
+values('$_name', '$hashpass', '$_email', '$_address', 2)";
 
 //validate email already not taken
 $emailcheck = "SELECT email FROM customer WHERE email = '$_email'";
