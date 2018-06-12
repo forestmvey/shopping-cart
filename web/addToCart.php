@@ -90,7 +90,6 @@ elseif ($result=mysqli_query($link,$prodQuantity)){
 		echo "Updated existing product quantity!";
 		mysqli_query($link, $insertExisting);
 		echo "<script>
-            alert('Your item will now be added to your cart!');
             window.location='cart.php';
             </script>";
 	} else {
@@ -99,7 +98,7 @@ elseif ($result=mysqli_query($link,$prodQuantity)){
 header('location: photos.php');
 }
 echo "<form action = 'photos.php'>";
-echo "<td style='width:60%'>" . "<input type='submit' value='Return to photos'>" . "</td>";
+echo "<td style='width:60%'>" . "<input type='submit' value='Return to homepage'>" . "</td>";
 echo "</form>";
 echo "<form action = 'cart.php'>";
 echo "<td style='width:60%'>" . "<input type='submit' value='View cart'>" . "</td>";
