@@ -23,6 +23,12 @@ if(isset($_POST['acceptpolicy'])){
         echo "<script>";
         echo "alert('Thank you for accepting our privacy policy.');";
         echo "</script>";
+        if (isset($_SESSION['savedQuantity'])){//if user added items to cart before accepting our policy!
+            echo "<script>
+            alert('Your item will now be added to your cart!');
+            window.location='addToCart.php';
+            </script>";
+}
     }else{
         echo "<script>";
         echo "alert('error of accepting our privacy policy');";

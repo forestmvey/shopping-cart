@@ -60,19 +60,64 @@ $insertNew = "INSERT INTO cart (customer_id, product_id, quantity) VALUES ('$use
 if (isset($userid)){
 
 	//Check if user has accepted privacy policy
-//$policy = "Select policy from customer where email = '$useremail'";
-//$check2 = mysqli_query($link, $policy);
-//$policy2 = mysqli_fetch_array($check2);
-//$policycheck = $policy2['policy'];
-//echo '$policycheck';
-/*
-if($policycheck != 1){
-	echo "<script>";
-	echo "alert('You must accept our policy agreement in order to use the cart!');";
-	echo "window.location='policy.php';";
-	echo "</script>";
+$policy = "Select policy from customer where email = '$useremail'";
+$check2 = mysqli_query($link, $policy);
+$policy2 = mysqli_fetch_array($check2);
+$policycheck = $policy2['policy'];
+
+if($policycheck != 1){ // if user has not accepted our policies, they will be redirected to the policy page
+	$_SESSION['savedQuantity'] = $value;
+	$_SESSION['savedProduct'] = $rowid;
+	echo "<script>;
+	alert('You must accept our policy agreement in order to use the cart!');
+	window.location='policy.php';
+	</script>";
 }
-*/
+if(isset($_SESSION['savedQuantity'])){//if user just accepted our privacy policy when adding an item to their cart
+	
+	// variables from photos.php
+	$userid= $_SESSION['userid'];
+	$rowid = $_SESSION['savedProduct'];
+	$value = $_SESSION['savedQuantity'];
+	
+	
+	// select quantity of chosen item from current users cart
+	$prodQuantity = "SELECT quantity FROM cart WHERE product_id = '$rowid' AND customer_id = '$userid'";
+	// run query
+	$result2 = mysqli_query($link, $prodQuantity);
+	// retrieve result as array
+	$prodQuantityInt = mysqli_fetch_assoc($result2);
+	// select quantity from array as int and add it to value from add to cart button
+	$combinedQuantity = $prodQuantityInt['quantity'] + $value;
+	// update cart quantity with existing item
+	$insertExisting = "UPDATE cart SET quantity = '$combinedQuantity' WHERE customer_id = '$userid' AND product_id = '$rowid'";
+	// insert new item and quantity to cart
+	$insertNew = "INSERT INTO cart (customer_id, product_id, quantity) VALUES ('$userid', '$rowid', '$value')";
+
+	
+// check if item exists in cart, then either add a new item or update an existing one
+if ($result=mysqli_query($link,$prodQuantity)){
+	$rowcount=mysqli_num_rows($result);
+	if ($rowcount == 0){
+		echo "<br>" . "Added product to cart!";
+		mysqli_query($link, $insertNew);
+	} else if ($rowcount != 0){
+		echo "<br>" . "Updated existing product quantity!";
+		mysqli_query($link, $insertExisting);
+	} else {
+		echo "Error" . $insertExisting . "<br>" . mysqli_error($insertExisting) . "<br>" . $insertNew . "<br>" . mysqli_error($insertNew);
+	}
+	}
+	
+	//unset variables
+	unset($_SESSION['savedProduct']);
+	unset($_SESSION['savedQuantity']);
+	echo "<script>
+            alert('Your item will now be added to your cart!');
+            window.location='cart.php';
+            </script>";
+}
+
 if ($result=mysqli_query($link,$prodQuantity)){
 	$rowcount=mysqli_num_rows($result);
 	if ($rowcount == 0){
