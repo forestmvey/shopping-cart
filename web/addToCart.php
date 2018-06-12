@@ -96,6 +96,7 @@ elseif ($result=mysqli_query($link,$prodQuantity)){
 	} else {
 		echo "Error" . $insertExisting . "<br>" . mysqli_error($insertExisting) . "<br>" . $insertNew . "<br>" . mysqli_error($insertNew);
 	}
+header('location: photos.php');
 }
 echo "<form action = 'photos.php'>";
 echo "<td style='width:60%'>" . "<input type='submit' value='Return to photos'>" . "</td>";
