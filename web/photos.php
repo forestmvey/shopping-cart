@@ -30,8 +30,8 @@
     </nav>
     </div>
     <article>
-        <form action="photos.php" method="POST" class="center">
-        <p> Category:</p><select name="category" id="category"></p>
+        <form action="photos.php" method="POST">
+        <p align="center"><strong>Category:</strong><select name="category" id="category"></p>
         <option value="4">All</option>
         <option value="1">Scenic</option>
         <option value="2">Transportation</option>
@@ -42,7 +42,6 @@
         </form>
         <br>
         
-        <div class="center">
         <?php
 session_start();
 
@@ -50,7 +49,7 @@ include ('connection.php');
 // show all products
 $category = $_POST['category'];
 
-echo "<table border='2px solid black' style='width:50%'>
+echo "<table align='center' border='5px solid' style='width:50%' bordercolor='#313C53'>
 <tr>
 <th style='width:50%'>Name</th>
 <th style='width:50%'>Size</th>
@@ -139,7 +138,6 @@ else if ($category != "4") {
 }
 
 ?>
-</div>
     </article>
     </body>
 <?php
