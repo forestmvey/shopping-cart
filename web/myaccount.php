@@ -130,7 +130,7 @@ $check2 = mysqli_query($link, $policy);
 $policy2 = mysqli_fetch_array($check2);
 $policycheck = $policy2['policy'];
 
-if($policycheck == 1){//check box if already accepted policy
+if($policycheck == 1){//check policy box if already accepted policy
     echo "<script>";
     echo "document.getElementById('policybox').checked = true;";
     echo "document.getElementById('policybox').value = 1;";
