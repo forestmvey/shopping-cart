@@ -34,7 +34,21 @@ session_start();
         <h1> Welcome to Blurry Photos 4 You! </h1>
         <p class="paragraph">We provide the best blurry photos the market can provide. Ranging from scenic to industrial, we can guarantee that you can find a photo you will want to hang up in your home.</p>
         <br>
+        <?php
+        include ('connection.php');
+        $rand = rand(1, 9);
+        $result = mysqli_query($link,"select * from product where id='$rand'");
+        if ($result)   {
+            $row_count = mysqli_num_rows($result);
+            while ($row = mysqli_fetch_array($result)) {
+                $img = $row['image'];
+                echo "<strong>Featured Photo</strong>";
+                echo "<br>";
+                echo "<img src ='$img' alt='$nm' width='1000' height='500'>";
+            }
+        } 
 
+        ?>
     </article>
 <?php
 	// This checks if the admin is logged in and allows them to 
