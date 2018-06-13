@@ -12,6 +12,7 @@
 <body>
 <?php
     session_start();
+    include ('connection.php');
 ?>
     <header>
         Blurry Photos 4 You!
@@ -30,22 +31,30 @@
     </nav>
     </div>
     <article>
-        <form action="photos.php" method="POST">
-        <p align="center"><strong>Category:</strong><select name="category" id="category"></p>
-        <option value="4">All</option>
-        <option value="1">Scenic</option>
-        <option value="2">Transportation</option>
-        <option value="3">Industrial</option>
-        </select>
-        <button value="filter selection" id="filter">Ok</button> 
-        <br>
-        </form>
-        <br>
+    <?php//search for all categories to display in form
+        echo "<form action='photos.php' method='POST'>";
+        echo "<p align='center'><strong>Category:</strong><select name='category' id='category'></p>";
+        echo "<option value='0'>All</option>";
         
-        <?php
-session_start();
 
-include ('connection.php');
+        $cats = mysqli_query($link, "SELECT DISTINCT * FROM category");
+        while($row = mysqli_fetch_array($cats)){
+            $cat = $row['name'];
+            $id = $row['id'];
+            echo $cat;
+            echo $id;
+            echo $row;
+            echo "<option value='$id'>" . $cat . "</option>";
+        }
+        
+        echo "</select>";
+        echo "<button value='filter selection' id='filter'>Ok</button>"; 
+        echo "<br>";
+        echo "</form>";
+        <br>
+
+
+
 // show all products
 $category = $_POST['category'];
 
@@ -59,7 +68,7 @@ echo "<table align='center' border='5px solid' style='width:50%' bordercolor='#3
 <th style='width:50%'>Add to Cart</th>";
 
 // Display all products when customer moves to the photos.php page
-if ($category == "") {
+if ($category == "" || $category == "0") {
     $result = mysqli_query($link,'select * from product');
     if ($result)   {
         $row_count = mysqli_num_rows($result);
@@ -78,14 +87,14 @@ if ($category == "") {
                 echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";
         ?>
         <input type='hidden' name='prodid' value="<?php echo $row['id']?>"/>
-        <?php
+<?php
         echo "</form>";
         }
     }
 }
+/*
 
-
-if ($category == "4") {
+if ($category == "0") {
     $result = mysqli_query($link,'select * from product');
     if ($result)   {
     $row_count = mysqli_num_rows($result);
@@ -109,8 +118,10 @@ if ($category == "4") {
         }
     }
 }
+
+*/
 // show products filtered by category id
-else if ($category != "4") {
+else if ($category != "0" && $category != "") {
     $result = mysqli_query($link," select * 
                                     from product p, productcategory pc
                                     where p.id = pc.product_id
