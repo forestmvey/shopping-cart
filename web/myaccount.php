@@ -38,25 +38,40 @@
         <br>
 	<?php
         if(isset($_POST['name'])){//update user info
+
 			$name = $_POST['name'];
 			$email = $_POST['email'];
             $address = $_POST['address'];
-            if(isset($_POST['policybox'])){
+            $pass = $_POST['password'];
+
+            if(isset($_POST['policybox'])){//if user has accepted privacy policy, have box checked
                 $updatepolicy = $_POST['policybox'];
             }else{
                 $updatepolicy = 0;
             }
-			
-            $insertnew ="UPDATE customer SET name='$name', email='$email',policy='$updatepolicy', address = '$address' WHERE email='$email';";
-                if(mysqli_query($link, $insertnew)){
-                    echo "<script>";
-                    echo "alert('user info updated successfully!')";
-                    echo "</script>";
-                }else{
-                    echo "<script>";
-                    echo "alert('error updating user info!')" . mysqli_error($link);
-                    echo "<script>";
-                }
+            $passwordcheck = "SELECT password FROM customer WHERE email = '$email';";
+            $check = mysqli_query($link, $passwordcheck);
+            $row = mysqli_fetch_array($check);
+            $pwstring = $row['password'];
+            $hashpass = sha1($pass);
+
+            if($pwstring == $hashpass) {
+
+                $insertnew ="UPDATE customer SET name='$name', email='$email',policy='$updatepolicy', address = '$address' WHERE email='$email';";
+                    if(mysqli_query($link, $insertnew)){
+                        echo "<script>";
+                        echo "alert('user info updated successfully!')";
+                        echo "</script>";
+                    }else{
+                        echo "<script>";
+                        echo "alert('error updating user info!')" . mysqli_error($link);
+                        echo "<script>";
+                    }
+            }else{
+                echo "<script>
+                alert('You must enter your correct account password!');
+                </script>";
+            }
 
 		}elseif(isset($_POST['newpassword'])){//user changes password
             $oldpass = $_POST['oldpassword'];
@@ -67,7 +82,6 @@
             $email = $_POST['email'];
             $insertnewpass = "UPDATE customer SET password='$hashnewpass' WHERE email='$email';";
             $passwordcheck = "SELECT password FROM customer WHERE email = '$email';";
-            ini_set('display_errors',1);
             $check = mysqli_query($link, $passwordcheck);
             $row = mysqli_fetch_array($check);
             $pwstring = $row['password'];
