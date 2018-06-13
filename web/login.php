@@ -77,7 +77,6 @@ $check3 = mysqli_query($link, $admin);
 $admin2 = mysqli_fetch_array($check3);
 $admincheck = $admin2['admin'];
 
-echo $admincheck;
  
 if($pwstring == $hashpass){
 	// Update lastlogin to now
