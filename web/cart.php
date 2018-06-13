@@ -65,13 +65,15 @@
 				 //checkout button here
 				 if ($row_count != 0){
 				 echo "<form action='deleteAllItems.php'>";
-				 echo "<input type='submit' value='Delete all items from cart'>";
+                 echo "<input type='submit' value='Delete all items from cart'>";
+                 echo "<br>";
 				 echo "</form>";
 				 } else {
 				 echo "Your cart is empty!";
                  }
                  if ($row_count >= 1) {
-                    echo "<table border='1' style='width:50%'>
+                    echo "<br>";
+                    echo "<table border='5px solid' style='width:50%' bordercolor='#313C53'>
                     <tr>
                     <th style='width:50%'>Name</th>
                     <th style='width:50%'>Photo</th>
@@ -122,7 +124,7 @@
 					 <?php
 					 echo "</form>";					 
                 }
-				echo "<table border='1'>
+				echo "<table border='5px solid' bordercolor='#313C53'>
 				<tr>
 				<th style='width:50%'>Total Tax</th>
 				</tr>

@@ -78,4 +78,6 @@ nav ul li a {
     width: 50%;
     padding: 10px;
     padding-left: 20%;
+    clear: left;
+    text-align: center;
 }
