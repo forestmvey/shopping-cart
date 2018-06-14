@@ -12,6 +12,7 @@
 <body>
 <?php
     session_start();
+    ini_set('display_errors',1);
     include ('connection.php');
 ?>
     <header>
@@ -31,32 +32,43 @@
     </nav>
     </div>
     <article>
-    <?php//search for all categories to display in form
-        echo "<form action='photos.php' method='POST'>";
-        echo "<p align='center'><strong>Category:</strong><select name='category' id='category'></p>";
-        echo "<option value='0'>All</option>";
-        
+    <?php
+    if(!isset($_POST['category'])){
+        $category=0;//displays all items in products
+    }else{
+        $category = $_POST['category'];//displays only specified category
+    }
+
+        echo "<form action='photos.php' method='POST'>
+        <p align='center'><strong>Category:</strong><select name='category' id='category'></p>
+        <option value='0'>All</option>";
+       
+
+         
+        //search for all categories to display in form
 
         $cats = mysqli_query($link, "SELECT DISTINCT * FROM category");
+
         while($row = mysqli_fetch_array($cats)){
             $cat = $row['name'];
             $id = $row['id'];
-            echo $cat;
-            echo $id;
-            echo $row;
-            echo "<option value='$id'>" . $cat . "</option>";
+            echo "<option value='$id'";
+            if ($category == $id)
+                echo " selected";
+            echo ">$cat</option>";
+            
         }
         
-        echo "</select>";
-        echo "<button value='filter selection' id='filter'>Ok</button>"; 
-        echo "<br>";
-        echo "</form>";
+        ?>
+        </select>
+        <button value='filter selection' id='filter'>Ok</button> 
+        <br>
+        </form>
         <br>
 
 
-
+<?php
 // show all products
-$category = $_POST['category'];
 
 echo "<table align='center' border='5px solid' style='width:50%' bordercolor='#313C53'>
 <tr>
@@ -92,34 +104,7 @@ if ($category == "" || $category == "0") {
         }
     }
 }
-/*
 
-if ($category == "0") {
-    $result = mysqli_query($link,'select * from product');
-    if ($result)   {
-    $row_count = mysqli_num_rows($result);
-    while ($row = mysqli_fetch_array($result)) {
-
-		$img = $row['image'];
-        $nm = $row['name'];
-        echo "<tr>";
-        echo "<td style='width:60%'>" . $row['name'] . "</td>";
-        echo "<td style='width:60%'>" . $row['size'] . "</td>";
-        echo "<td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
-        echo "<td style='width:60%'>" . $row['price'] . "</td>";
-		echo "<form action = 'addToCart.php' method = 'POST'>";
-        echo "<td style='width:60%'>" . "<input type='text' pattern='^[1-9]\d*$' name='quantity' value='1' size='2' />" . "</td>";
-        echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";
-	?>
-	<input type='hidden' name='prodid' value="<?php echo $row['id']?>"/>
-	<?php
-	echo "</form>";
-		
-        }
-    }
-}
-
-*/
 // show products filtered by category id
 else if ($category != "0" && $category != "") {
     $result = mysqli_query($link," select * 
