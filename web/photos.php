@@ -56,7 +56,6 @@
             if ($category == $id)
                 echo " selected";
             echo ">$cat</option>";
-            
         }
         
         ?>
