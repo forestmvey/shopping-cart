@@ -29,9 +29,9 @@ if (mysqli_query($link, $insert1)) {
 			mysqli_query($link, $insert2);
 		}
 	}
-	echo "alert('Insert successful');";
 	echo "<script>
-	window.location="addproduct.php";
+	alert('Insert successful');
+	window.location='addproduct.php';
 	</script>";
 }else { //not a match
 	echo "Error" . $insert1 . "<br>" . mysqli_error($insert1) . mysqli_error($insert2);
