@@ -56,9 +56,6 @@ $check = mysqli_query($link, $emailcheck);
 
 if(mysqli_num_rows($check) > 0){
     echo 'This email is already taken';
-    echo "<form action = 'login_register.php'>";
-	echo "<td style='width:60%'>" . "<input type='submit' value='Click here to egister again'>" . "</td>";
-	echo "</form>";
 }elseif(mysqli_query($link, $insert)) {
     echo 'account successfully created!';
 	echo "<form action = 'login_register.php'>";

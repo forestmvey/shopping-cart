@@ -45,8 +45,8 @@ if(!isset($_SESSION['adminprivilege'])){
 include('connection.php');
 
 //find all categories
-$cats = mysqli_query($link, "SELECT DISTINCT * FROM category");
-$dimensions = mysqli_query($link, "SELECT DISTINCT UPPER(size) FROM product ORDER BY UPPER(size) ASC");
+$cats = mysqli_query($link, "SELECT * FROM category");
+$dimensions = mysqli_query($link, "SELECT size FROM product");
 
 	echo "<form action='addproductvars.php' method='POST' onsubmit='return validation();'>";
 	echo "<p> Upload Photo URL: <input type='text' name='photo' id='photo'/></p>";
@@ -55,7 +55,7 @@ $dimensions = mysqli_query($link, "SELECT DISTINCT UPPER(size) FROM product ORDE
 
 	echo "<p> Dimensions: </p><select name='dimensions' id='dimensions'></p>";
 	while($row = mysqli_fetch_array($dimensions)){
-		$size = $row['UPPER(size)'];
+		$size = $row['size'];
 		echo "<option value='$size'>" . $size . "</option>";
 	}
 	echo "</select>";

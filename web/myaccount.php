@@ -38,40 +38,25 @@
         <br>
 	<?php
         if(isset($_POST['name'])){//update user info
-
 			$name = $_POST['name'];
 			$email = $_POST['email'];
             $address = $_POST['address'];
-            $pass = $_POST['password'];
-
-            if(isset($_POST['policybox'])){//if user has accepted privacy policy, have box checked
+            if(isset($_POST['policybox'])){
                 $updatepolicy = $_POST['policybox'];
             }else{
                 $updatepolicy = 0;
             }
-            $passwordcheck = "SELECT password FROM customer WHERE email = '$email';";
-            $check = mysqli_query($link, $passwordcheck);
-            $row = mysqli_fetch_array($check);
-            $pwstring = $row['password'];
-            $hashpass = sha1($pass);
-
-            if($pwstring == $hashpass) {
-
-                $insertnew ="UPDATE customer SET name='$name', email='$email',policy='$updatepolicy', address = '$address' WHERE email='$email';";
-                    if(mysqli_query($link, $insertnew)){
-                        echo "<script>";
-                        echo "alert('user info updated successfully!')";
-                        echo "</script>";
-                    }else{
-                        echo "<script>";
-                        echo "alert('error updating user info!')" . mysqli_error($link);
-                        echo "<script>";
-                    }
-            }else{
-                echo "<script>
-                alert('You must enter your correct account password!');
-                </script>";
-            }
+			
+            $insertnew ="UPDATE customer SET name='$name', email='$email',policy='$updatepolicy', address = '$address' WHERE email='$email';";
+                if(mysqli_query($link, $insertnew)){
+                    echo "<script>";
+                    echo "alert('user info updated successfully!')";
+                    echo "</script>";
+                }else{
+                    echo "<script>";
+                    echo "alert('error updating user info!')" . mysqli_error($link);
+                    echo "<script>";
+                }
 
 		}elseif(isset($_POST['newpassword'])){//user changes password
             $oldpass = $_POST['oldpassword'];
@@ -82,6 +67,7 @@
             $email = $_POST['email'];
             $insertnewpass = "UPDATE customer SET password='$hashnewpass' WHERE email='$email';";
             $passwordcheck = "SELECT password FROM customer WHERE email = '$email';";
+            ini_set('display_errors',1);
             $check = mysqli_query($link, $passwordcheck);
             $row = mysqli_fetch_array($check);
             $pwstring = $row['password'];
@@ -144,7 +130,7 @@ $check2 = mysqli_query($link, $policy);
 $policy2 = mysqli_fetch_array($check2);
 $policycheck = $policy2['policy'];
 
-if($policycheck == 1){//check policy box if already accepted policy
+if($policycheck == 1){//check box if already accepted policy
     echo "<script>";
     echo "document.getElementById('policybox').checked = true;";
     echo "document.getElementById('policybox').value = 1;";

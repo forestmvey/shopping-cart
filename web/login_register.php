@@ -53,7 +53,7 @@
     <h1>Register: </h1>
     <p>Email: <input type="text" name="registeremail" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" id="registeremail" title="email"></p>
     <p>Name: <input type="text" id="name" name="name" title="name" pattern="[\sa-zA-Z]{2,15}"></p>
-    <p>Address: <input type="text" id="address" name="address" title="# streetname rd" pattern="^\d+\s[a-zA-Z]+\s[a-zA-Z]+"></p>
+    <p>Address: <input type="text" id="address" name="address" title="address" pattern="[\sa-zA-Z0-9]{4,20}"></p>
     <p>Password: <input type="password" name="registerpassword" pattern="[a-zA-Z0-9]{4,10}" id="registerpassword" title="4 to 10 characters letters and numbers only"></p>
     <p>Confirm Password: <input type="password" name="confirmpassword" pattern="[a-zA-Z0-9]{4,10}" id="confirmpassword" title="4 to 10 characters letters and numbers only"></p>
     <input type="submit" value="SUBMIT"  />

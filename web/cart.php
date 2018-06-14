@@ -134,9 +134,17 @@
 				</tr>
 				<td align='center' style='width:60%'>$" . number_format($total, 2) . "</td>
 				</table>";
-				echo "<input type='image' src='https://t3.ftcdn.net/jpg/00/30/30/64/240_F_30306492_54Fq37acp3NBQHlfSkQ1WQrpBS2yyOyt.jpg' alt='Checkout' height='48' width='96'>";
             } 
 			?>
+            <?php require_once('./config.php'); ?>
+
+            <form action="charge.php" method="post">
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="<?php echo $stripe['publishable_key']; ?>"
+                    data-description="Payment Form"
+                    data-amount="<?php echo $total*100; ?>"
+                    data-locale="auto"></script>
+            </form>
     </article>
     </body>
 
