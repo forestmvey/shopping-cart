@@ -21,7 +21,7 @@
   ));
 
 $amount = number_format(($totalamt / 100), 2);
-  echo '<h3>Successfully charged $'.$amount.' </h3>Thank you for shopping at Tuk Tuk Heaven';
+  echo '<h3>Successfully charged $'.$amount.' </h3>Thank you for shopping!';
   // Clear the cart:
   unset($_SESSION['cart']);
   include ('includes/footer.html');
