@@ -33,10 +33,13 @@
     </div>
     <article>
     <?php
-    if(!isset($_POST['category'])){
-        $category=0;//displays all items in products
+    if(isset($_POST['category'])){//Customer selects a new category filter
+        $category = $_POST['category'];
+        $_SESSION['currentcat'] = $category;
+    }elseif(isset($_SESSION['currentcat'])){//Customers category is returned after leaving photos or adding item to cart
+        $category = $_SESSION['currentcat'];
     }else{
-        $category = $_POST['category'];//displays only specified category
+        $category=0;//displays all items in products
     }
 
         echo "<form action='photos.php' method='POST'>
@@ -55,6 +58,7 @@
             echo "<option value='$id'";
             if ($category == $id)
                 echo " selected";
+    
             echo ">$cat</option>";
         }
         
@@ -154,4 +158,3 @@ else if ($category != "0" && $category != "") {
 ?>
 </body>
 </html>
-
