@@ -139,6 +139,8 @@
 		<th style='width:20%'>Blurry Photo</th>
 		<th style='width:20%'>Quantity</th>
 		<th style='width:20%'>Price</th>
+		<th style='width:50%'>Billing Address</th>
+		<th style='width:50%'>Shipping Address</th>
 		<th style='width:20%'>Date of Purchase</th>
 		<th style='width:20%'>Status</th>";
 	
@@ -149,6 +151,8 @@
 		echo "<td style='width:30%'>" . "<img src ='$img' alt '$img' width='200' height='100'>" . "</td>";
 		echo "<td style='width:30%'>" . $row['quantity'] . "</td>";
 		echo "<td style='width:30%'>" . $row['price'] . "</td>";
+		echo "<td style='width:50%'>" . $row['bill_address'] . "</td>";
+		echo "<td style='width:50%'>" . $row['mail_address'] . "</td>";
 		echo "<td style='width:30%'>" . $row['date'] . "</td>";
 		echo "<td style='width:30%'>" . $row['status'] . "</td>";
     }
