@@ -135,7 +135,7 @@
 	}else{
 		echo "<table align='center' border='5px solid' style='width:50%' bordercolor='#313C53'>
 		<tr>
-		<th style='width:20%'>Order Number</th>
+		<th style='width:20%'>Order #</th>
 		<th style='width:20%'>Blurry Photo</th>
 		<th style='width:20%'>Quantity</th>
 		<th style='width:20%'>Price</th>
