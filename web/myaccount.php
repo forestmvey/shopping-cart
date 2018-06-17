@@ -33,9 +33,7 @@
     </nav>
     </div>
     <article>
-        <h1> Welcome to Blurry Photos 4 You! </h1>
-        <p class="paragraph">We provide the best blurry photos the market can provide. Ranging from scenic to industrial, we can guarantee that you can find a photo you will want to hang up in your home.</p>
-        <br>
+        
 	<?php
         if(isset($_POST['name'])){//update user info
 			$name = $_POST['name'];
@@ -120,27 +118,41 @@
     <p>Confirm Password: <input type="password" name="confirmpassword" pattern="[a-zA-Z0-9]{4,10}" id="confirmpassword" title="4 to 10 characters letters and numbers only"></p>
     <input type="submit" value="SUBMIT"  />
     </form>
+	<h2>Order History</h2>
     <?php
 	// Display order history
 	$userid = $_SESSION['userid'];
 	
-	echo "<table align='center' border='5px solid' style='width:50%' bordercolor='#313C53'>
-	<tr>
-	<th style='width:50%'>Order Number</th>
-	<th style='width:50%'>Quantity</th>
-	<th style='width:50%'>Price</th>
-	<th style='width:50%'>Date of Purchase</th>";
+	
 	
 	$orderhist = "SELECT * from orderhistory where customer_id = '$userid'";
 	$result =  mysqli_query($link, $orderhist);
-	while ($row = mysqli_fetch_array($result)){
-	echo "<tr>";
-	echo "<td style='width:60%'>" . $row['order_id'] . "</td>";
-	echo "<td style='width:60%'>" . $row['quantity'] . "</td>";
-    echo "<td style='width:60%'>" . $row['price'] . "</td>";
-	echo "<td style='width:60%'>" . $row['date'] . "</td>";
-	echo "<td style='width:60%'>" . $row['status'] . "</td>";
+	$row_count = mysqli_num_rows($result);
+	// if nothing has been ordered yet, dont display anything!
+	if ($row_count == 0){
+		echo "<p>Nothing ordered yet!</p>";
+	
+	}else{
+		echo "<table align='center' border='5px solid' style='width:50%' bordercolor='#313C53'>
+		<tr>
+		<th style='width:20%'>Order Number</th>
+		<th style='width:20%'>Blurry Photo</th>
+		<th style='width:20%'>Quantity</th>
+		<th style='width:20%'>Price</th>
+		<th style='width:20%'>Date of Purchase</th>
+		<th style='width:20%'>Status</th>";
+	
+		while ($row = mysqli_fetch_array($result)){
+		$img = $row['image'];
+		echo "<tr>";
+		echo "<td style='width:30%'>" . $row['order_id'] . "</td>";
+		echo "<td style='width:30%'>" . "<img src ='$img' alt '$img' width='200' height='100'>" . "</td>";
+		echo "<td style='width:30%'>" . $row['quantity'] . "</td>";
+		echo "<td style='width:30%'>" . $row['price'] . "</td>";
+		echo "<td style='width:30%'>" . $row['date'] . "</td>";
+		echo "<td style='width:30%'>" . $row['status'] . "</td>";
     }
+	}
 	?>
     <footer class="footer">Copyright &copy;2018</footer>
 		 
