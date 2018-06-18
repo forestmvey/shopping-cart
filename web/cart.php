@@ -144,6 +144,7 @@
                     data-description="Payment Form"
                     data-amount="<?php echo $total*100; ?>"
                     data-locale="auto"></script>
+                    <input type="hidden" name="totalamt" value="<?php echo $total*100; ?>" />
             </form>
     </article>
     </body>
