@@ -96,7 +96,6 @@
 					 $subTotal = (($row['price']*$row['quantity'])+$tax);
 					 $rowQuantity = $row['quantity'];
                      $total += $subTotal;
-                     $total = number_format($total, 2);
 					 $totalTax += $tax;
                      echo "<tr>";
                      echo "<td align='center'>" . $row['name'] . "</td>";
