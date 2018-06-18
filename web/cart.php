@@ -92,6 +92,7 @@
 		             $img = $row['image'];
                      $nm = $row['name'];
 					 $tax = (($row['quantity']*$row['price'])*.1);
+					 $tax = number_format($tax, 2);
 					 $subTotal = (($row['price']*$row['quantity'])+$tax);
 					 $rowQuantity = $row['quantity'];
                      $total += $subTotal;
