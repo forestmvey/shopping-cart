@@ -125,7 +125,7 @@
 	
 	
 	
-	$orderhist = "SELECT * from orderhistory where customer_id = '$userid'";
+	$orderhist = "SELECT * from orderhistory where customer_id = '$userid' order by order_id AND product_name";
 	$result =  mysqli_query($link, $orderhist);
 	$row_count = mysqli_num_rows($result);
 	// if nothing has been ordered yet, dont display anything!
