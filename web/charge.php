@@ -101,15 +101,16 @@ $amount = number_format(($totalamt / 100), 2);
       }
       
     }
-    $deleteAllItems = "DELETE FROM cart WHERE customer_id = '$userID'";	
-    mysqli_query($link, $deleteAllItems);
+/*
     echo "<h3>Successfully charged $".$amount." </h3>Thank you for shopping";
     echo "<form action='index.php'>";
                  echo "<input type='submit' value='Return Home'>";
                  echo "<br>";
 				 echo "</form>";
 
-  }else{  //Insert with same billing and mailing addresses
+ */
+header('location:write_receipt.php');
+        }else{  //Insert with same billing and mailing addresses
 
     
 
@@ -132,14 +133,15 @@ $amount = number_format(($totalamt / 100), 2);
         echo mysqli_error($insert) . " Error recording order history";
       }
     }
-    $deleteAllItems = "DELETE FROM cart WHERE customer_id = '$userID'";	
-    mysqli_query($link, $deleteAllItems);
-    echo "<h3>Successfully charged $".$amount." </h3>Thank you for shopping";
+ 
+    header('location:write_receipt.php');
+    /*echo "<h3>Successfully charged $".$amount." </h3>Thank you for shopping";
     echo "<form action='index.php'>";
                  echo "<input type='submit' value='Return Home'>";
                  echo "<br>";
 				 echo "</form>";
-  }
+  */
+        }
 
   
 	// This checks if the admin is logged in and allows them to 

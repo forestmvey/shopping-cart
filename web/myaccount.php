@@ -158,7 +158,7 @@
     }
 	}
 	?>
-    <footer class="footer">Copyright &copy;2018</footer>
+    
 		 
 <?php
 //Check if user has accepted privacy policy
