@@ -51,6 +51,7 @@
         <br>
         <?php
         include ('connection.php');
+     
         // show all products
         $userID = $_SESSION['userid'];
         // echo $userID;
