@@ -1,3 +1,33 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="default.css">
+    <meta charset="utf-8">
+
+    <title>Blurry Photos 4 You!</title>
+    <style type="text/css"></style>
+	
+</head>
+
+<body>
+    <header>
+        Blurry Photos 4 You!
+    </header>
+    <div>
+    <nav>
+        <ul>
+            <li><a href="index.php" title="Main page">Main</a></li>
+            <li><a href="photos.php" title="Photos">Photos</a></li>
+            <li><a href="cart.php" title="Cart" class="viewing">View Cart</a></li>
+            <li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
+            <li><a href="myaccount.php" id="myaccount" style="visibility:hidden;" title="MyAccount">My Account</a></li>
+			<li><a href="logout.php" id="logout" style="visibility:hidden;" title="Logout">Logout</a></li>
+            <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
+        </ul>
+    </nav>
+    </div>
+
 <?php
   session_start();
   include('includes/header.html');
@@ -10,7 +40,7 @@
   
   $totalamt = $_POST['totalamt'];
   
-  echo "Total amt: $totalamt";
+  
   $customer = \Stripe\Customer::create(array(
       'email' => $email,
       'source'  => $token
@@ -23,7 +53,7 @@
   ));
 
 $amount = number_format(($totalamt / 100), 2);
-  echo '<h3>Successfully charged $'.$amount.' </h3>Thank you for shopping at Tuk Tuk Heaven';
+
   
 
 
@@ -59,15 +89,25 @@ $amount = number_format(($totalamt / 100), 2);
       $productname = $row['name'];
 
       $insert = "INSERT INTO orderhistory (order_id, customer_id, product_id, product_name, image, quantity,
-      price, date, bill_address, mail_address, status) values ('$orderid2', '$userID', '$productid', '$productname' 
+      price, date, bill_address, mail_address, status) values ('$orderid2', '$userID', '$productid', '$productname', 
       '$image', '$quantity', '$price', now(), '$billaddr', '$mailaddr', '$status')";
 
+
+    
       if(mysqli_query($link, $insert)){
-        echo "worked";
+        echo "<br>" . $productid . " " . $productname . " " . $price . " " . $quantity;
       }else{
-        echo "nope";
+        echo mysqli_error($insert) . " Error recording order history";
       }
+      
     }
+    $deleteAllItems = "DELETE FROM cart WHERE customer_id = '$userID'";	
+    mysqli_query($link, $deleteAllItems);
+    echo "<h3>Successfully charged $".$amount." </h3>Thank you for shopping";
+    echo "<form action='index.php'>";
+                 echo "<input type='submit' value='Return Home'>";
+                 echo "<br>";
+				 echo "</form>";
 
   }else{  //Insert with same billing and mailing addresses
 
@@ -87,16 +127,44 @@ $amount = number_format(($totalamt / 100), 2);
       '$image', '$quantity', '$price', now(), '$billaddr', '$mailaddr', '$status')";
 
       if(mysqli_query($link, $insert)){
-        echo "worked";
+        echo "<br>" . $productid . " " . $productname . " " . $price . " " . $quantity;
       }else{
-        echo "nope";
+        echo mysqli_error($insert) . " Error recording order history";
       }
     }
-
+    $deleteAllItems = "DELETE FROM cart WHERE customer_id = '$userID'";	
+    mysqli_query($link, $deleteAllItems);
+    echo "<h3>Successfully charged $".$amount." </h3>Thank you for shopping";
+    echo "<form action='index.php'>";
+                 echo "<input type='submit' value='Return Home'>";
+                 echo "<br>";
+				 echo "</form>";
   }
 
-
-
-
-  //include ('includes/footer.html');
+  
+	// This checks if the admin is logged in and allows them to 
+    // add products to the database on when the admin is logged in
+    // and is disabled when the admin is logged out
+    if(isset($_SESSION['adminprivilege'])){
+        echo "<script>";
+        echo "document.getElementById('addprod').style.visibility = 'visible';";
+        echo "</script>";
+   
+    }
+	
+	if(isset($_SESSION['userid'])){
+		echo "<script>";
+		echo "document.getElementById('logout').style.visibility = 'visible';";
+		echo "document.getElementById('myaccount').style.visibility = 'visible';";
+		echo "</script>";
+	}
+	
+//include ('includes/footer.html');
 ?>
+
+
+  
+
+</body>
+
+</html>
