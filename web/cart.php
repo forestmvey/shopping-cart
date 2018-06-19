@@ -46,9 +46,7 @@
     </nav>
     </div>
     <article>
-        <h1> Welcome to Blurry Photos 4 You! </h1>
-        <p class="paragraph">We provide the best blurry photos the market can provide. Ranging from scenic to industrial, we can guarantee that you can find a photo you will want to hang up in your home.</p>
-        <br>
+        
         <?php
         include ('connection.php');
      
