@@ -112,7 +112,7 @@ if ($category == "" || $category == "0") {
 else if ($category != "0" && $category != "") {
     $result = mysqli_query($link," select * 
                                     from product p, productcategory pc
-                                    where p.prod_id = pc.product_id
+                                    where p.id = pc.product_id
                                     and pc.category_id = '$category'");
 
     if ($result)   {
