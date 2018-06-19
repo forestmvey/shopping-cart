@@ -14,7 +14,7 @@
 <?php
     session_start();
     ini_set('display_errors',1);
-    include('mysqli_connect.php');
+    include('connection.php');
 ?>
     <header>
         Blurry Photos 4 You!

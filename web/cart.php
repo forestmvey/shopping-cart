@@ -51,6 +51,7 @@
         <br>
         <?php
         include ('connection.php');
+     
         // show all products
         $userID = $_SESSION['userid'];
         // echo $userID;
@@ -139,7 +140,7 @@
 			?>
             <?php require_once('./config.php'); ?>
 
-            <form action="charge.php" method="post">
+            <form action="charge.php" method="post" obSubmit="JavaScript:addrExpr()">
             <input type="checkbox" id="billaddr" name="billaddr" onClick="billAddrFunction();"> Billing address different than shipping address. <br>
             <input type='text' id='billingaddress' pattern="[\sa-zA-Z0-9]{4,20}" name="billingaddress" style="visibility:hidden;">
             
@@ -155,6 +156,7 @@
 
     </article>
 <script>
+
 function billAddrFunction() {
     if(document.getElementById('billaddr').checked){
         document.getElementById('billingaddress').style.visibility = 'visible';
@@ -162,6 +164,7 @@ function billAddrFunction() {
         document.getElementById('billingaddress').style.visibility = 'hidden';
     }
 }
+
 </script>
 	
     <?php
