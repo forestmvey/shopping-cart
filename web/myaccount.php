@@ -119,48 +119,7 @@
     <p>Confirm Password: <input type="password" name="confirmpassword" pattern="[a-zA-Z0-9]{4,10}" id="confirmpassword" title="4 to 10 characters letters and numbers only"></p>
     <input type="submit" value="SUBMIT"  />
     </form>
-	<h2>Order History</h2>
-    <?php
-	// Display order history
-	$userid = $_SESSION['userid'];
 	
-	
-	
-	$orderhist = "SELECT * from orderhistory where customer_id = '$userid' order by order_id AND product_name";
-	$result =  mysqli_query($link, $orderhist);
-	$row_count = mysqli_num_rows($result);
-	// if nothing has been ordered yet, dont display anything!
-	if ($row_count == 0){
-		echo "<p>Nothing ordered yet!</p>";
-	
-	}else{
-		echo "<table align='center' border='5px solid' style='width:50%' bordercolor='#313C53'>
-		<tr>
-		<th style='width:20%'>Order #</th>
-		<th style='width:20%'>Blurry Photo</th>
-		<th style='width:20%'>Quantity</th>
-		<th style='width:20%'>Price</th>
-		<th style='width:50%'>Billing Address</th>
-		<th style='width:50%'>Shipping Address</th>
-		<th style='width:20%'>Date of Purchase</th>
-		<th style='width:20%'>Status</th>";
-	
-		while ($row = mysqli_fetch_array($result)){
-		$img = $row['image'];
-		echo "<tr>";
-		echo "<td style='width:30%'>" . $row['order_id'] . "</td>";
-		echo "<td style='width:30%'>" . "<img src ='$img' alt '$img' width='200' height='100'>" . "</td>";
-		echo "<td style='width:30%'>" . $row['quantity'] . "</td>";
-		echo "<td style='width:30%'>" . $row['price'] . "</td>";
-		echo "<td style='width:50%'>" . $row['bill_address'] . "</td>";
-		echo "<td style='width:50%'>" . $row['mail_address'] . "</td>";
-		echo "<td style='width:30%'>" . $row['date'] . "</td>";
-		echo "<td style='width:30%'>" . $row['status'] . "</td>";
-    }
-	}
-	?>
-    
-		 
 <?php
 //Check if user has accepted privacy policy
 $policy = "Select policy from customer where email = '$useremail'";
