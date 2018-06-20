@@ -46,9 +46,16 @@ $hashpass = sha1($_password);
 //connection
 include('connection.php');
 
+// check for if new admin account.
+if (isset($_POST['newadmin']) && $_POST['newadmin']== 'yes'){
+	$admin = 1;
+} else {
+	$admin = 0;
+}
+
 //insert customer registration
-$insert = "INSERT INTO customer (name, password, email, address, policy) 
-values('$_name', '$hashpass', '$_email', '$_address', 2)";
+$insert = "INSERT INTO customer (name, password, email, address, policy, admin) 
+values('$_name', '$hashpass', '$_email', '$_address', 2, $admin)";
 
 //validate email already not taken
 $emailcheck = "SELECT email FROM customer WHERE email = '$_email'";

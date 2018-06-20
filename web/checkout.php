@@ -118,13 +118,14 @@
             <input type="checkbox" id="billaddr" name="billaddr" onClick="billAddrFunction();"> Billing address different than shipping address. <br>
             <input type='text' id='billingaddress' pattern="[\sa-zA-Z0-9]{4,20}" name="billingaddress" style="visibility:hidden;">
             
-            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            
+                    <input type="hidden" name="totalamt" value="<?php echo $total*100; ?>" />
+            </form>
+			<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                     data-key="<?php echo $stripe['publishable_key']; ?>"
                     data-description="Payment Form"
                     data-amount="<?php echo $total*100; ?>"
                     data-locale="auto"></script>
-                    <input type="hidden" name="totalamt" value="<?php echo $total*100; ?>" />
-            </form>
     </article>
     </body>
 
