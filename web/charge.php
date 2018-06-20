@@ -23,6 +23,7 @@
             <li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
             <li><a href="myaccount.php" id="myaccount" style="visibility:hidden;" title="MyAccount">My Account</a></li>
 			<li><a href="logout.php" id="logout" style="visibility:hidden;" title="Logout">Logout</a></li>
+            <li><a href="orderhistory.php" id="orderhistory" style="visibility:hidden;" title="OrderHistory">Order History</a></li>
             <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
@@ -101,14 +102,6 @@ $amount = number_format(($totalamt / 100), 2);
       }
       
     }
-/*
-    echo "<h3>Successfully charged $".$amount." </h3>Thank you for shopping";
-    echo "<form action='index.php'>";
-                 echo "<input type='submit' value='Return Home'>";
-                 echo "<br>";
-				 echo "</form>";
-
- */
 header('location:write_receipt.php');
         }else{  //Insert with same billing and mailing addresses
 
@@ -135,12 +128,6 @@ header('location:write_receipt.php');
     }
  
     header('location:write_receipt.php');
-    /*echo "<h3>Successfully charged $".$amount." </h3>Thank you for shopping";
-    echo "<form action='index.php'>";
-                 echo "<input type='submit' value='Return Home'>";
-                 echo "<br>";
-				 echo "</form>";
-  */
         }
 
   
@@ -157,7 +144,8 @@ header('location:write_receipt.php');
 	if(isset($_SESSION['userid'])){
 		echo "<script>";
 		echo "document.getElementById('logout').style.visibility = 'visible';";
-		echo "document.getElementById('myaccount').style.visibility = 'visible';";
+        echo "document.getElementById('myaccount').style.visibility = 'visible';";
+        echo "document.getElementById('orderhistory').style.visibility = 'visible';";
 		echo "</script>";
 	}
 	

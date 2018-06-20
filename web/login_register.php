@@ -26,6 +26,7 @@
             <li><a href="login_register.php" title="LoginRegister" class="viewing">Login/Register</a></li>
 			<li><a href="myaccount.php" title="MyAccount" id="myaccount"style="visibility:hidden;">My Account</a></li>
             <li><a href="logout.php" title="Logout" id="logout" style="visibility:hidden;">Logout</a></li>
+            <li><a href="orderhistory.php" id="orderhistory" style="visibility:hidden;" title="OrderHistory">Order History</a></li>
             <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
@@ -110,7 +111,8 @@
 	//displays logout and my account only when user is signed in
 		echo "<script>";
         echo "document.getElementById('logout').style.visibility = 'visible';";
-		echo "document.getElementById('myaccount').style.visibility = 'visible';";
+        echo "document.getElementById('myaccount').style.visibility = 'visible';";
+        echo "document.getElementById('orderhistory').style.visibility = 'visible';";
         echo "</script>";
 	}
 
