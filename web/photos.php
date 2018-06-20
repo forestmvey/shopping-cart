@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="default.css">
+    <link rel="stylesheet" href="buttons.css">
     <meta charset="utf-8">
 
     <title>Blurry Photos 4 You!</title>
@@ -89,14 +90,15 @@ if ($category == "" || $category == "0") {
         
                 $img = $row['image'];
                 $nm = $row['name'];
+                echo "<link rel='stylesheet' href='buttons.css'>";
                 echo "<tr>";
                 echo "<td style='width:60%'>" . $row['name'] . "</td>";
                 echo "<td style='width:60%'>" . $row['size'] . "</td>";
                 echo "<td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
                 echo "<td style='width:70%'>" . $row['price'] . "</td>";
                 echo "<form action = 'addToCart.php' method = 'POST'>";
-                echo "<td style='width:60%'>" . "<input type='text' pattern='^[1-9]\d*$' name='quantity' value='1' size='2' />" . "</td>";
-                echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";
+                echo "<td style='width:60%'>" . "<input type='text' pattern='^[1-9]\d*$' name='quantity' value='1' size='2'/>" . "</td>";
+                echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart' class='okButton'>" . "</td>";
         ?>
         <input type='hidden' name='prodid' value="<?php echo $row['id']?>"/>
 <?php
