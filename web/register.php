@@ -22,6 +22,7 @@
             <li><a href="login_register.php" title="LoginRegister">Login/Register</a></li>
 			<li><a href="myaccount.php" id="myaccount" style="visibility:hidden;" title="MyAccount">My Account</a></li>
 			<li><a href="logout.php" id="logout" style="visibility:hidden;" title="Logout">Logout</a></li>
+            <li><a href="orderhistory.php" id="orderhistory" style="visibility:hidden;" title="OrderHistory">Order History</a></li>
             <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
@@ -77,7 +78,8 @@ if(isset($_SESSION['adminprivilege'])){
 if(isset($_SESSION['userid'])){
 	echo "<script>";
 	echo "document.getElementById('logout').style.visibility = 'visible';";
-	echo "document.getElementById('myaccount').style.visibility = 'visible';";
+    echo "document.getElementById('myaccount').style.visibility = 'visible';";
+    echo "document.getElementById('orderhistory').style.visibility = 'visible';";
 	echo "</script>";
 	}
 
