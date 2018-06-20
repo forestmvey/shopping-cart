@@ -137,6 +137,8 @@
 				</table>";
             } 
 			?>
+            <?php require_once('./config.php'); ?>
+
             <?php require_once('./config.php'); 
             if ($row_count != 0){
             echo "<form action='checkout.php' method='post'>
@@ -144,6 +146,7 @@
             </form>";
             }
             ?>
+
     </article>
     </body>
 
