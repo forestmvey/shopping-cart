@@ -64,23 +64,20 @@
         
         ?>
         </select>
-        <button value='filter selection' id='filter'>Ok</button> 
+        <button value='filter selection' id='filter' class="okButton">Ok</button>
         <br>
         </form>
-        <br>
-
-
 <?php
 // show all products
 
-echo "<table align='center' border='5px solid' style='width:50%' bordercolor='#313C53'>
+echo "<table align='center' border='5px solid' style='width:100%' bordercolor='#313C53'>
 <tr>
-<th style='width:50%'>Name</th>
-<th style='width:50%'>Size</th>
-<th style='width:50%'>Photo</th>
-<th style='width:50%'>Price</th>
-<th style='width:50%'>Quantity</th>
-<th style='width:50%'>Add to Cart</th>";
+<th style='width:60%'>Name</th>
+<th style='width:60%'>Size</th>
+<th style='width:60%'>Photo</th>
+<th style='width:70%'>Price</th>
+<th style='width:60%'>Quantity</th>
+<th style='width:60%'>Add to Cart</th>";
 
 // Display all products when customer moves to the photos.php page
 if ($category == "" || $category == "0") {
@@ -96,7 +93,7 @@ if ($category == "" || $category == "0") {
                 echo "<td style='width:60%'>" . $row['name'] . "</td>";
                 echo "<td style='width:60%'>" . $row['size'] . "</td>";
                 echo "<td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
-                echo "<td style='width:60%'>" . $row['price'] . "</td>";
+                echo "<td style='width:70%'>" . $row['price'] . "</td>";
                 echo "<form action = 'addToCart.php' method = 'POST'>";
                 echo "<td style='width:60%'>" . "<input type='text' pattern='^[1-9]\d*$' name='quantity' value='1' size='2' />" . "</td>";
                 echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";
@@ -113,7 +110,8 @@ else if ($category != "0" && $category != "") {
     $result = mysqli_query($link," select * 
                                     from product p, productcategory pc
                                     where p.id = pc.product_id
-                                    and pc.category_id = '$category'");
+                                    and pc.category_id = '$category'
+                                    order by id");
 
     if ($result)   {
     $row_count = mysqli_num_rows($result);
@@ -124,7 +122,7 @@ else if ($category != "0" && $category != "") {
     echo "<td style='width:60%'>" . $row['name'] . "</td>";
     echo "<td style='width:60%'>" . $row['size'] . "</td>";
     echo "<td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
-    echo "<td style='width:60%'>" . $row['price'] . "</td>";
+    echo "<td style='width:70%'>" . $row['price'] . "</td>";
 	echo "<form action = 'addToCart.php' method = 'POST'>";
     echo "<td style='width:60%'>" . "<input type='text' pattern='^[1-9]\d*$' name='quantity' value='1' size='2' />" . "</td>";
     echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";

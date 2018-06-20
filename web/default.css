@@ -81,3 +81,17 @@ nav ul li a {
     clear: left;
     text-align: center;
 }
+
+.okButton {
+    border-radius: 12px;
+    background-color: #9CFF00;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
