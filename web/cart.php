@@ -64,8 +64,9 @@
                 // print 'Retreived '. $row_count . ' rows from the <b> product </b> table<BR><BR>';
 				 //checkout button here
 				 if ($row_count != 0){
+                 echo "<link rel='stylesheet' href='buttons.css'>";
 				 echo "<form action='deleteAllItems.php'>";
-                 echo "<input type='submit' value='Delete all items from cart'>";
+                 echo "<input type='submit' value='Delete all items from cart' class='okButton'>";
                  echo "<br>";
 				 echo "</form>";
 				 } else {
@@ -104,22 +105,25 @@
 					 echo "<td align='center'>" . $row['quantity'] . "</td>";
 					 echo "<td align='center'>" . "$" . $row['price'] . "</td>";
 					 echo "<td align='center'>" . "$" . number_format($tax, 2) . "</td>";
-					 echo "<td align='center'>" . "$" . number_format($subTotal, 2) . "</td>";
+                     echo "<td align='center'>" . "$" . number_format($subTotal, 2) . "</td>";
+                     echo "<link rel='stylesheet' href='buttons.css'>";
 					 echo "<form action='cartAddOne.php' method='POST'>";
-					 echo "<td align='center'>" . "<input type='image' src='http://icongal.com/gallery/image/268146/add_button_new_edit_car_plus_green_equal.png' alt='Submit' width='40' height='40'>" . "</td>";
+					 echo "<td align='center'>" . "<button class='okButton'>". "+" . "</td>";
 					 ?>
 					 <input type='hidden' name='prodid2' value="<?php echo $row['id'];?>"/>
 					 <?php
-					 echo "</form>";
+                     echo "</form>";
+                     echo "<link rel='stylesheet' href='buttons.css'>";
 					 echo "<form action='cartRemoveOne.php' method = 'POST'>";
-					 echo "<td align='center'>" . "<input type='image' src='http://www.sciencekids.co.nz/images/pictures/math/minussymbol.jpg' alt='Submit' width='48' height='48'>" . "</td>";
+					 echo "<td align='center'>" . "<button class='okButton'>". "-" . "</td>";
 					 ?>
 					 <input type='hidden' name='prodid2' value="<?php echo $row['id'];?>"/>
 					 <input type='hidden' name='removeQuantity' value="<?php echo $row['quantity'];?>"/>
 					 <?php
-					 echo "</form>";					 
+                     echo "</form>";
+                     echo "<link rel='stylesheet' href='buttons.css'>";				 
 					 echo "<form action='cartRemoveItem.php' method = 'POST'>";
-					 echo "<td align='center'>" . "<input type='image' src='http://www.clker.com/cliparts/D/2/b/U/X/Q/remove-all-button-png-hi.png' alt='submit' width='76' height='40'>" . "</td>";
+					 echo "<td align='center'>" . "<button class='okButton'>" . "Remove All" . "</td>";
 					 ?>
 					 <input type='hidden' name='prodid2' value="<?php echo $row['id'];?>"/>
 					 <?php
@@ -141,8 +145,9 @@
 
             <?php require_once('./config.php'); 
             if ($row_count != 0){
+            echo "<link rel='stylesheet' href='buttons.css'>";
             echo "<form action='checkout.php' method='post'>
-            <input type='submit' value='Proceed to checkout'>
+            <input type='submit' value='Proceed to checkout' class='okButton'>
             </form>";
             }
             ?>

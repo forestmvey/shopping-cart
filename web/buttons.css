@@ -13,3 +13,7 @@
     margin: 4px 2px;
     cursor: pointer;
 }
+
+.okButton:hover {
+    background-color: #9CFF00
+}
