@@ -94,19 +94,19 @@ if ($result=mysqli_query($link,$prodQuantity)){
 	}
 header('location: photos.php');
 }
-echo "<form action = 'photos.php'>";
-echo "<td style='width:60%'>" . "<input type='submit' value='Return to homepage'>" . "</td>";
-echo "</form>";
-echo "<form action = 'cart.php'>";
-echo "<td style='width:60%'>" . "<input type='submit' value='View cart'>" . "</td>";
-echo "</form>";
+// echo "<form action = 'photos.php'>";
+// echo "<td style='width:60%'>" . "<input type='submit' value='Return to homepage'>" . "</td>";
+// echo "</form>";
+// echo "<form action = 'cart.php'>";
+// echo "<td style='width:60%'>" . "<input type='submit' value='View cart'>" . "</td>";
+// echo "</form>";
 } else {
 	$_SESSION['savedQuantity'] = $value;
 	$_SESSION['savedProduct'] = $rowid;
-	echo "Please log in or register to add this item to your cart.";
-	echo "<form action = 'login_register.php'>";
-	echo "<td style='width:60%'>" . "<input type='submit' value='Login/Register'>" . "</td>";
-	echo "</form>";
+	echo "<p align='center'>Please log in or register to add this item to your cart.</p>";
+	// echo "<form action = 'login_register.php'>";
+	// echo "<td style='width:60%'>" . "<input type='submit' value='Login/Register'>" . "</td>";
+	// echo "</form>";
 }
 ?>
 
