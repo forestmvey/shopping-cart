@@ -47,7 +47,7 @@
 	// Display order history
 	$userid = $_SESSION['userid'];
 
-	$orderscheck = "SELECT DISTINCT order_id AS 'Order' FROM orderhistory WHERE customer_id = '$userid'";
+	$orderscheck = "SELECT DISTINCT order_id AS 'Order', date FROM orderhistory WHERE customer_id = '$userid'";
 	$orders = mysqli_query($link, $orderscheck);
 	$ordertotalcheck = "SELECT order_id, quantity, price, date FROM orderhistory WHERE customer_id = '$userid'";
 	$ordertotal = mysqli_query($link, $ordertotalcheck);
@@ -56,10 +56,9 @@
 	echo "<form action='orderhistory.php' method='POST'>";
 	while($row = mysqli_fetch_array($orders)){
 		$total = 0;
-		$date;
+		$date = $row['date'];
 		while($totalrow = mysqli_fetch_array($ordertotal)){
 			$total = $totalrow['quantity'] * $totalrow['price'] + $total;
-			$date = $totalrow['date'];
 		}
 		$tax = $total*0.1;
 		$total = $tax;

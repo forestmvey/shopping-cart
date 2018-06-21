@@ -8,9 +8,12 @@
 
     <title>Blurry Photos 4 You!</title>
     <style type="text/css"></style>
+    <script type="text/javascript">
+
+</script>
 </head>
 
-<body>
+<body onLoad="window.opener.location.reload(); window.opener.document.body.scrollTop=#url.scroll#; window.close();">
 <?php
     session_start();
     ini_set('display_errors',1);
@@ -79,7 +82,7 @@
 <?php
 // show all products
 
-echo "<table align='center' border='5px solid' style='width:100%' bordercolor='#313C53'>
+echo "<table align='center' border='5px solid' style='width:50%' bordercolor='#313C53'>
 <tr>
 <th style='width:60%'>Name</th>
 <th style='width:60%'>Size</th>
@@ -194,5 +197,5 @@ else if ($category != "0" && $category != "") {
 
 
 ?>
-</body>
+
 </html>
