@@ -36,12 +36,11 @@
         </ul>
     </nav>
     </div>
-
-	<h2>Order History</h2>
 	<form action="orderhistory.php" method="POST">
 	<input type="text" title="search" id="search" name="search" value="<?php if(isset($_POST['search']) && $search != ''){ echo "$search";} ?>">
 	<input type="submit" value="Search">
 	</form>
+	<h2>Order History</h2>
 
     <?php
 	// Display order history
