@@ -97,6 +97,7 @@ $dimensions = mysqli_query($link, "SELECT DISTINCT UPPER(size) FROM product ORDE
         
                 $img = $row['image'];
                 $nm = $row['name'];
+				$price = $row['price'];
                 echo "<link rel='stylesheet' href='buttons.css'>";
                 echo "<tr>";
 				//echo "<td style='width:60%'>" . $row['id'] . "</td>";
@@ -105,7 +106,7 @@ $dimensions = mysqli_query($link, "SELECT DISTINCT UPPER(size) FROM product ORDE
                 echo "<td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
 				echo "<td style='width:60%'>" . $row['price'] . "</td>";
 				echo "<form action='changeprice.php' method='POST' onsubmit='return validation();'>";
-                echo "<td style='width:60%'>" . "<input type='text' pattern='^[1-9]\d*$' name='quantity' value='1' size='2'/>" . "</td>";
+                echo "<td style='width:60%'>" . "<input type='text' pattern='[0-9]+(\.[0-9][0-9]?)?' title='Numbers Only' name='changeprice' id='changeprice' value='$price'/>" . "</td>";
                 echo "<td style='width:60%'>" . "<input type='submit' value='Change Price' class='okButton'>" . "</td>";
 				echo "</form>";
         }
@@ -124,7 +125,7 @@ function validation() {
 		return false;
 	}
 	if(document.getElementById('changeprice').value == ''){
-		alert("You must include a product price");
+		alert("You must include a valid product price");
 		return false;
 	}
 	if(document.getElementById('name').value == ''){
