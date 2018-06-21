@@ -79,8 +79,10 @@ $dimensions = mysqli_query($link, "SELECT DISTINCT UPPER(size) FROM product ORDE
 	echo "</form>";
 
 	//edit price of product
-	//echo "<p> Edit Product prices</p>":
-	echo "<p> Change Price </p></p>";
+	?>
+	<?php
+	
+	echo "<p> Change Price: </p></p>";
 	echo "<table align='center' border='5px solid' style='width:100%' bordercolor='#313C53'>
 	<tr>
 	
@@ -88,9 +90,10 @@ $dimensions = mysqli_query($link, "SELECT DISTINCT UPPER(size) FROM product ORDE
 	<th style='width:60%'>Size</th>
 	<th style='width:60%'>Photo</th>
 	<th style='width:60%'>Original Price</th>
+	
 	<th style='width:60%'>Change Price</th>";
 	$result = mysqli_query($link,'select * from product');
-    if ($result)   {
+    if ($result)   { 
         $row_count = mysqli_num_rows($result);
 
         while ($row = mysqli_fetch_array($result)) {
@@ -100,16 +103,20 @@ $dimensions = mysqli_query($link, "SELECT DISTINCT UPPER(size) FROM product ORDE
 				$price = $row['price'];
                 echo "<link rel='stylesheet' href='buttons.css'>";
                 echo "<tr>";
-				//echo "<td style='width:60%'>" . $row['id'] . "</td>";
+				
                 echo "<td style='width:60%'>" . $row['name'] . "</td>";
                 echo "<td style='width:60%'>" . $row['size'] . "</td>";
                 echo "<td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
 				echo "<td style='width:60%'>" . $row['price'] . "</td>";
-				echo "<form action='changeprice.php' method='POST' onsubmit='return validation();'>";
+				echo "<form action='changeprice.php' method='POST' onsubmit='return validation2();'>";
                 echo "<td style='width:60%'>" . "<input type='text' pattern='[0-9]+(\.[0-9][0-9]?)?' title='Numbers Only' name='changeprice' id='changeprice' value='$price'/>" . "</td>";
                 echo "<td style='width:60%'>" . "<input type='submit' value='Change Price' class='okButton'>" . "</td>";
-				echo "</form>";
-        }
+				?>
+				<input type='hidden' name='id' value="<?php echo $row['id']?>"/>
+				<?php echo "</form>";
+		}
+				
+        
 	}
 	
 ?>
@@ -124,12 +131,15 @@ function validation() {
 		alert("You must include a product price");
 		return false;
 	}
-	if(document.getElementById('changeprice').value == ''){
-		alert("You must include a valid product price");
-		return false;
-	}
+	
 	if(document.getElementById('name').value == ''){
 		alert("You must include a photoname");
+		return false;
+	}
+}
+function validation2(){
+	if(document.getElementById('changeprice').value == ''){
+		alert("You must include a valid product price");
 		return false;
 	}
 }
