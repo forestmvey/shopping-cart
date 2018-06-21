@@ -82,6 +82,28 @@
 			echo "<p>Nothing ordered yet!</p>";
 	
 		}else{
+			$totalTax = 0;
+			while ($row = mysqli_fetch_array($result)){
+				$tax = (($row['quantity']*$row['price'])*.1);
+				$tax = number_format($tax, 2);
+				$subTotal = (($row['price']*$row['quantity'])+$tax);
+				$rowQuantity = $row['quantity'];
+				$total += $subTotal;
+				$totalTax += $tax;
+				$total += $totalTax;
+			}
+			echo "<link rel='stylesheet' href='default.css'>";
+			echo "<table border='5px solid' class='center' bordercolor='#313C53'>
+			<tr>
+			<th style='width:50%' >Total Tax</th>
+			</tr>
+			<td align='center'>$" . number_format($totalTax, 2) . "</td>
+			<tr>
+			<th style='width:50%' position='absolute'>Total</th>
+			</tr>
+			<td align='center' style='width:60%'>$" . number_format($total, 2) . "</td>
+			</table>";
+
 			echo "<table align='center' border='5px solid' style='width:50%' bordercolor='#313C53'>
 			<tr>
 			<th style='width:20%'>Order #</th>
@@ -95,6 +117,8 @@
 			<th style='width:50%'>Sub-total</th>
 			<th style='width:50%'>Tax</th>";
 			
+			$result =  mysqli_query($link, $orderhist);
+			$row_count = mysqli_num_rows($result);
 			$totalTax = 0;
 			while ($row = mysqli_fetch_array($result)){
 				$img = $row['image'];
@@ -116,16 +140,7 @@
 				echo "<td align='center'>" . "$" . number_format($subTotal, 2) . "</td>";
 				echo "<td align='center'>" . "$" . number_format($tax, 2) . "</td>";
 			}
-			echo "<table border='5px solid' bordercolor='#313C53'>
-			<tr>
-			<th style='width:50%' position='absolute'>Total Tax</th>
-			</tr>
-			<td align='center'>$" . number_format($totalTax, 2) . "</td>
-			<tr>
-			<th style='width:50%' position='absolute'>Total</th>
-			</tr>
-			<td align='center' style='width:60%'>$" . number_format($total, 2) . "</td>
-			</table>";
+			
 			
 		}
 	}elseif(isset($_POST['search']) && $search != ''){
