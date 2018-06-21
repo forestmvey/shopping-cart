@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="default.css">
+    <link rel="stylesheet" href="form.css">
     <meta charset="utf-8">
 
     <title>Blurry Photos 4 You!</title>
@@ -100,25 +101,52 @@
             
         ?>
 		
-		
-  	<form action="myaccount.php" method="POST">
+	<div class="formDiv">
+  	<form action="myaccount.php" method="POST" class="form center">
     <h1>Account Info: </h1>
-    <p>Email: <input type="text" name="email" id="email" value="<?php echo $row['email']; ?>" title="email"></p>
-    <p>Name: <input type="text" id="name" name="name" value="<?php echo $row['name']; ?>" title="name"></p>
-    <p>Address: <input type="text" id="address" name="address" value="<?php echo $row['address']; ?>" title="address"></p>
-	<p>Password: <input type="password" name="password" pattern="[a-zA-Z0-9]{4,10}" id="password" title="4 to 10 characters letters and numbers only"></p>
-    <input type="checkbox" id="policybox" name="policybox" value="1"> Accept Terms and Services! <br>
+    <label>Email:</label>
+    <br>
+        <input type="text" name="email" id="email" value="<?php echo $row['email']; ?>" title="email">
+    <br>
+    <label>Name:</label>
+    <br> 
+        <input type="text" id="name" name="name" value="<?php echo $row['name']; ?>" title="name">
+    </br>
+    <label>Address:</label>
+    <br>
+        <input type="text" id="address" name="address" value="<?php echo $row['address']; ?>" title="address">
+	</br>
+    <label>Password:</label>
+    <br>    
+        <input type="password" name="password" pattern="[a-zA-Z0-9]{4,10}" id="password" title="4 to 10 characters letters and numbers only">
+    <br>
+    <input type="checkbox" id="policybox" name="policybox" value="1"> Accept Terms and Services! 
+    <br>
     <input type="submit" value="SUBMIT"  />
     </form>
+    </div>
 
-    <form action="myaccount.php" method="POST">
+    <div class="formDiv">
+    <form action="myaccount.php" method="POST" class="form center">
     <h1>Change password</h1>
-    <p>Email: <input type="text" name="email" id="email" value="<?php echo $row['email']; ?>" title="email"></p>
-    <p>Previous Password: <input type="password" name="oldpassword" pattern="[a-zA-Z0-9]{4,10}" id="oldpassword" title="4 to 10 characters letters and numbers only"></p>
-    <p>New Password: <input type="password" name="newpassword" pattern="[a-zA-Z0-9]{4,10}" id="newpassword" title="4 to 10 characters letters and numbers only"></p>
-    <p>Confirm Password: <input type="password" name="confirmpassword" pattern="[a-zA-Z0-9]{4,10}" id="confirmpassword" title="4 to 10 characters letters and numbers only"></p>
-    <input type="submit" value="SUBMIT"  />
+    <label>Email:</label>
+    <br>
+        <input type="text" name="email" id="email" value="<?php echo $row['email']; ?>" title="email">
+    <br>
+    <label>Previous Password:</label>
+    <br>
+        <input type="password" name="oldpassword" pattern="[a-zA-Z0-9]{4,10}" id="oldpassword" title="4 to 10 characters letters and numbers only">
+    <br>
+    <label>New Password:</label>
+    <br>
+        <input type="password" name="newpassword" pattern="[a-zA-Z0-9]{4,10}" id="newpassword" title="4 to 10 characters letters and numbers only">
+    <br>
+    <label>Confirm Password:</label>
+    <br>
+        <input type="password" name="confirmpassword" pattern="[a-zA-Z0-9]{4,10}" id="confirmpassword" title="4 to 10 characters letters and numbers only">
+        <input type="submit" value="SUBMIT"  />
     </form>
+    </div>
 	
 <?php
 //Check if user has accepted privacy policy
