@@ -91,11 +91,19 @@
 			<th style='width:50%'>Billing Address</th>
 			<th style='width:50%'>Shipping Address</th>
 			<th style='width:20%'>Date of Purchase</th>
-			<th style='width:20%'>Status</th>";
+			<th style='width:20%'>Status</th>
+			<th style='width:50%'>Sub-total</th>
+			<th style='width:50%'>Tax</th>";
 			
-			
+			$totalTax = 0;
 			while ($row = mysqli_fetch_array($result)){
 				$img = $row['image'];
+				$tax = (($row['quantity']*$row['price'])*.1);
+				$tax = number_format($tax, 2);
+				$subTotal = (($row['price']*$row['quantity'])+$tax);
+				$rowQuantity = $row['quantity'];
+				$total += $subTotal;
+				$totalTax += $tax;
 				echo "<tr>";
 				echo "<td style='width:30%'>" . $row['order_id'] . "</td>";
 				echo "<td style='width:30%'>" . "<img src ='$img' alt '$img' width='200' height='100'>" . "</td>";
@@ -105,7 +113,19 @@
 				echo "<td style='width:50%'>" . $row['mail_address'] . "</td>";
 				echo "<td style='width:30%'>" . $row['date'] . "</td>";
 				echo "<td style='width:30%'>" . $row['status'] . "</td>";
+				echo "<td align='center'>" . "$" . number_format($subTotal, 2) . "</td>";
+				echo "<td align='center'>" . "$" . number_format($tax, 2) . "</td>";
 			}
+			echo "<table border='5px solid' bordercolor='#313C53'>
+			<tr>
+			<th style='width:50%' position='absolute'>Total Tax</th>
+			</tr>
+			<td align='center'>$" . number_format($totalTax, 2) . "</td>
+			<tr>
+			<th style='width:50%' position='absolute'>Total</th>
+			</tr>
+			<td align='center' style='width:60%'>$" . number_format($total, 2) . "</td>
+			</table>";
 			
 		}
 	}elseif(isset($_POST['search']) && $search != ''){

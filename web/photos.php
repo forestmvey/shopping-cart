@@ -15,6 +15,9 @@
     session_start();
     ini_set('display_errors',1);
     include ('connection.php');
+    if(isset($_POST['search'])){
+		$search = $_POST['search'];
+	}
 ?>
     <header>
         Blurry Photos 4 You!
@@ -69,6 +72,10 @@
         <button value='filter selection' id='filter' class="okButton">Ok</button>
         <br>
         </form>
+        <form action="photos.php" method="POST">
+	    <input type="text" title="search" id="search" name="search" value="<?php if(isset($_POST['search']) && $search != ''){ echo "$search";} ?>">
+	    <input type="submit" value="Search">
+	    </form>
 <?php
 // show all products
 
@@ -82,7 +89,35 @@ echo "<table align='center' border='5px solid' style='width:100%' bordercolor='#
 <th style='width:60%'>Add to Cart</th>";
 
 // Display all products when customer moves to the photos.php page
-if ($category == "" || $category == "0") {
+if(isset($_POST['search']) && $search != ''){
+    $photos = "SELECT * from product where (SOUNDEX('$search') = SOUNDEX(name) OR name LIKE '%$search%') order by id AND name";
+    $result =  mysqli_query($link, $photos);
+    $row_count = mysqli_num_rows($result);
+    // if nothing has been ordered yet, dont display anything!
+    if ($row_count == 0){
+        echo "<p>Nothing matches your search!</p>";
+    
+    }else{
+        while ($row = mysqli_fetch_array($result)) {
+            
+                    $img = $row['image'];
+                    $nm = $row['name'];
+                    echo "<link rel='stylesheet' href='buttons.css'>";
+                    echo "<tr>";
+                    echo "<td style='width:60%'>" . $row['name'] . "</td>";
+                    echo "<td style='width:60%'>" . $row['size'] . "</td>";
+                    echo "<td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
+                    echo "<td style='width:70%'>" . $row['price'] . "</td>";
+                    echo "<form action = 'addToCart.php' method = 'POST'>";
+                    echo "<td style='width:60%'>" . "<input type='text' pattern='^[1-9]\d*$' name='quantity' value='1' size='2'/>" . "</td>";
+                    echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart' class='okButton'>" . "</td>";
+            ?>
+            <input type='hidden' name='prodid' value="<?php echo $row['id']?>"/>
+    <?php
+            echo "</form>";
+        }
+    }
+}elseif($category == "" || $category == "0") {
     $result = mysqli_query($link,'select * from product');
     if ($result)   {
         $row_count = mysqli_num_rows($result);

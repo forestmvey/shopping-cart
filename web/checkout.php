@@ -133,14 +133,18 @@
 <script>
 var btn1 = document.querySelector('#btn1 button');
 btn1.addEventListener('click', function(){
-    var patt = new RegExp("[\sa-zA-Z0-9]{4,20}");
-    var billad = document.getElementById('billingaddress').value;
-  if(patt.test(billad)){
-      return true;
-  }else{
-      alert('please enter a valid billing address!');
-      window.location="checkout.php";
-  }
+    if(document.getElementById('billaddr').checked){
+        var patt = new RegExp("[\sa-zA-Z0-9]{4,20}");
+        var billad = document.getElementById('billingaddress').value;
+        if(patt.test(billad)){
+             return true;
+        }else{
+             alert('please enter a valid billing address!');
+            window.location="checkout.php";
+        }
+    }else{
+        return true;
+    }
 });
 function billAddrFunction() {
     if(document.getElementById('billaddr').checked){
