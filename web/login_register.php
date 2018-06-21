@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="default.css">
+    <link rel="stylesheet" href="form.css">
     <meta charset="utf-8">
 
     <title>Blurry Photos 4 You!</title>
@@ -32,37 +33,60 @@
     </nav>
     </div>
     <article>
-        <h1> Welcome to Blurry Photos 4 You! </h1>
-        <p class="paragraph">We provide the best blurry photos the market can provide. Ranging from scenic to industrial, we can guarantee that you can find a photo you will want to hang up in your home.</p>
         <br>
     <!-- 
     Login form containing 2 inputs for email and password
     Password has a pattern to check if the password is valid or not
      -->
     </article>
-    <form action="login.php" method="POST" onsubmit="return loginvalidation();">
-    <h1>Login</h1>
-    <p>Email: <input type="text" id="email" name="email" title="email"></p>
-    <p>Password: <input type="password" name="password" pattern="[a-zA-Z0-9]{4,10}" id="password" title="4 to 10 characters letters and numbers only"></p>
+    <div class="formDiv">
+    <form action="login.php" method="POST" onsubmit="return loginvalidation();" class="form center">
+    <h1>Login:</h1>
+    <label>Email:</label>
+    <br>
+        <input type="text" id="email" name="email" title="email">
+    <br> 
+    <label>Password:</label>
+    <br>
+        <input type="password" name="password" pattern="[a-zA-Z0-9]{4,10}" id="password" title="4 to 10 characters letters and numbers only">
+    <br>
     <input type="submit" value="SUBMIT"  />
     </form>
+    </div>
     <!--  
     Registration form contain 5 inputs for email, name, address, password, and confirm password
     Both password inputs have a pattern match to check if the passwords are valid or not 
     -->
-	
-	<form action="register.php" method="POST" onsubmit="return registervalidation();">
+	<div class="formDiv">
+	<form action="register.php" method="POST" onsubmit="return registervalidation();" class="form center">
     <h1>Register: </h1>
-    <p>Email: <input type="text" name="registeremail" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" id="registeremail" title="email"></p>
-    <p>Name: <input type="text" id="name" name="name" title="name" pattern="[\sa-zA-Z]{2,15}"></p>
-    <p>Address: <input type="text" id="address" name="address" title="address" pattern="[\sa-zA-Z0-9]{4,20}"></p>
-    <p>Password: <input type="password" name="registerpassword" pattern="[a-zA-Z0-9]{4,10}" id="registerpassword" title="4 to 10 characters letters and numbers only"></p>
-    <p>Confirm Password: <input type="password" name="confirmpassword" pattern="[a-zA-Z0-9]{4,10}" id="confirmpassword" title="4 to 10 characters letters and numbers only"></p>
+    <label>Email:</label>
+    <br> 
+        <input type="text" name="registeremail" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" id="registeremail" title="email">
+    <br>
+    <label>Name:</label>
+    <br> 
+        <input type="text" id="name" name="name" title="name" pattern="[\sa-zA-Z]{2,15}">
+    <br>
+    <label>Address:</label>
+    <br> 
+        <input type="text" id="address" name="address" title="address" pattern="[\sa-zA-Z0-9]{4,20}">
+    <br>
+    <label>Password:</label> 
+    <br>    
+        <input type="password" name="registerpassword" pattern="[a-zA-Z0-9]{4,10}" id="registerpassword" title="4 to 10 characters letters and numbers only">
+    <br>
+    <label>Confirm Password:</label>
+    <br> 
+        <input type="password" name="confirmpassword" pattern="[a-zA-Z0-9]{4,10}" id="confirmpassword" title="4 to 10 characters letters and numbers only">
 	<?php if(isset($_SESSION['adminprivilege'])){
 		echo "<p>Adding Admin Account?<input type='checkbox' name='newadmin' value='yes'/></p>";
 	}
-		?>
+        ?>
+    <br>    
     <input type="submit" value="SUBMIT"  />
+    </form>
+    </div>
     <!-- 
     Validation 
      -->
@@ -101,7 +125,6 @@
         }
     </script>
 
-    <footer class="footer">Copyright &copy;2018</footer>
 <?php
     // This checks if the admin is logged in and allows them to 
     // add products to the database on when the admin is logged in

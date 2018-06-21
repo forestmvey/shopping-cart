@@ -71,7 +71,6 @@ session_start();
 	}
 
 ?>
-    <footer class="footer">Copyright &copy;2018</footer>
 
 </body>
 
