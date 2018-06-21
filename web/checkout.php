@@ -114,7 +114,7 @@
 			?>
             <?php require_once('./config.php'); ?>
 
-            <form action="charge.php" method="post" obSubmit="JavaScript:addrExpr()">
+            <form action="charge.php" id="btn1" method="post">
             <input type="checkbox" id="billaddr" name="billaddr" onClick="billAddrFunction();"> Billing address different than shipping address. <br>
             <input type='text' id='billingaddress' pattern="[\sa-zA-Z0-9]{4,20}" name="billingaddress" style="visibility:hidden;">
             
@@ -130,7 +130,17 @@
 
     </article>
 <script>
-
+var btn1 = document.querySelector('#btn1 button');
+btn1.addEventListener('click', function(){
+    var patt = new RegExp("[\sa-zA-Z0-9]{4,20}");
+    var billad = document.getElementById('billingaddress').value;
+  if(patt.test(billad)){
+      return true;
+  }else{
+      alert('please enter a valid billing address!');
+      window.location="checkout.php";
+  }
+});
 function billAddrFunction() {
     if(document.getElementById('billaddr').checked){
         document.getElementById('billingaddress').style.visibility = 'visible';
