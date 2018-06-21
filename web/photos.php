@@ -61,7 +61,7 @@
          
         //search for all categories to display in form
 
-        $cats = mysqli_query($link, "SELECT DISTINCT * FROM category");
+        $cats = mysqli_query($link, "SELECT DISTINCT * FROM category ORDER BY id, name");
 
         while($row = mysqli_fetch_array($cats)){
             $cat = $row['name'];
