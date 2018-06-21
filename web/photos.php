@@ -8,12 +8,11 @@
 
     <title>Blurry Photos 4 You!</title>
     <style type="text/css"></style>
-    <script type="text/javascript">
 
-</script>
 </head>
 
-<body onLoad="window.opener.location.reload(); window.opener.document.body.scrollTop=#url.scroll#; window.close();">
+<body>
+
 <?php
     session_start();
     ini_set('display_errors',1);
@@ -40,6 +39,10 @@
     </nav>
     </div>
     <article>
+    <form action="photos.php" method="POST">
+	    <input type="text" title="search" id="search" name="search" value="<?php if(isset($_POST['search']) && $search != ''){ echo "$search";} ?>">
+	    <input type="submit" value="Search">
+	    </form>
     <?php
     if(isset($_POST['category'])){//Customer selects a new category filter
         $category = $_POST['category'];
@@ -75,10 +78,6 @@
         <button value='filter selection' id='filter' class="okButton">Ok</button>
         <br>
         </form>
-        <form action="photos.php" method="POST">
-	    <input type="text" title="search" id="search" name="search" value="<?php if(isset($_POST['search']) && $search != ''){ echo "$search";} ?>">
-	    <input type="submit" value="Search">
-	    </form>
 <?php
 // show all products
 
