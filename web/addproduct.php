@@ -78,6 +78,39 @@ $dimensions = mysqli_query($link, "SELECT DISTINCT UPPER(size) FROM product ORDE
 	echo "<input type='submit' value='SUBMIT'  />";
 	echo "</form>";
 
+	//edit price of product
+	//echo "<p> Edit Product prices</p>":
+	echo "<p> Change Price </p></p>";
+	echo "<table align='center' border='5px solid' style='width:100%' bordercolor='#313C53'>
+	<tr>
+	
+	<th style='width:60%'>Name</th>
+	<th style='width:60%'>Size</th>
+	<th style='width:60%'>Photo</th>
+	<th style='width:60%'>Original Price</th>
+	<th style='width:60%'>Change Price</th>";
+	$result = mysqli_query($link,'select * from product');
+    if ($result)   {
+        $row_count = mysqli_num_rows($result);
+
+        while ($row = mysqli_fetch_array($result)) {
+        
+                $img = $row['image'];
+                $nm = $row['name'];
+                echo "<link rel='stylesheet' href='buttons.css'>";
+                echo "<tr>";
+				//echo "<td style='width:60%'>" . $row['id'] . "</td>";
+                echo "<td style='width:60%'>" . $row['name'] . "</td>";
+                echo "<td style='width:60%'>" . $row['size'] . "</td>";
+                echo "<td style='width:60%'>" . "<img src ='$img' alt='$nm' width='200' height='100'>" . "</td>";
+				echo "<td style='width:60%'>" . $row['price'] . "</td>";
+				echo "<form action='changeprice.php' method='POST' onsubmit='return validation();'>";
+                echo "<td style='width:60%'>" . "<input type='text' pattern='^[1-9]\d*$' name='quantity' value='1' size='2'/>" . "</td>";
+                echo "<td style='width:60%'>" . "<input type='submit' value='Change Price' class='okButton'>" . "</td>";
+				echo "</form>";
+        }
+	}
+	
 ?>
 <script>
 function validation() {
@@ -87,6 +120,10 @@ function validation() {
 		return false;
 	}
 	if(document.getElementById('price').value == ''){
+		alert("You must include a product price");
+		return false;
+	}
+	if(document.getElementById('changeprice').value == ''){
 		alert("You must include a product price");
 		return false;
 	}
@@ -121,6 +158,6 @@ function validation() {
 	}
 
 ?>
-<footer class="footer">Copyright &copy;2018</footer>
+
 </body>
 </html>
