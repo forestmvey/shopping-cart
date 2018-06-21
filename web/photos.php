@@ -121,6 +121,7 @@ else if ($category != "0" && $category != "") {
     while ($row = mysqli_fetch_array($result)) {
 	$img = $row['image'];
     $nm = $row['name'];
+    echo "<link rel='stylesheet' href='buttons.css'>";
     echo "<tr>";
     echo "<td style='width:60%'>" . $row['name'] . "</td>";
     echo "<td style='width:60%'>" . $row['size'] . "</td>";
@@ -128,7 +129,7 @@ else if ($category != "0" && $category != "") {
     echo "<td style='width:70%'>" . $row['price'] . "</td>";
 	echo "<form action = 'addToCart.php' method = 'POST'>";
     echo "<td style='width:60%'>" . "<input type='text' pattern='^[1-9]\d*$' name='quantity' value='1' size='2' />" . "</td>";
-    echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart'>" . "</td>";
+    echo "<td style='width:60%'>" . "<input type='submit' value='Add to cart' class='okButton'>" . "</td>";
 	?>
 	<input type='hidden' name='prodid' value="<?php echo $row['id']?>"/>
 	<?php
