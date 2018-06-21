@@ -46,7 +46,7 @@ if(!isset($_SESSION['adminprivilege'])){
 include('connection.php');
 
 //find all categories
-$cats = mysqli_query($link, "SELECT DISTINCT * FROM category");
+$cats = mysqli_query($link, "SELECT DISTINCT * FROM category order by categroy_id");
 $dimensions = mysqli_query($link, "SELECT DISTINCT UPPER(size) FROM product ORDER BY UPPER(size) ASC");
 
 	echo "<form action='addproductvars.php' method='POST' onsubmit='return validation();'>";
@@ -92,7 +92,7 @@ $dimensions = mysqli_query($link, "SELECT DISTINCT UPPER(size) FROM product ORDE
 	<th style='width:60%'>Original Price</th>
 	
 	<th style='width:60%'>Change Price</th>";
-	$result = mysqli_query($link,'select * from product');
+	$result = mysqli_query($link,'select * from product order by id');
     if ($result)   { 
         $row_count = mysqli_num_rows($result);
 
