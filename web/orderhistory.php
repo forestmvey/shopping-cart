@@ -91,16 +91,16 @@
 				$total += $totalTax;
 			}
 			echo "<link rel='stylesheet' href='default.css'>";
-			echo "<table border='5px solid' class='center' bordercolor='#313C53'>
-			<tr>
-			<th style='width:50%' >Total Tax</th>
-			</tr>
-			<td align='center'>$" . number_format($totalTax, 2) . "</td>
-			<tr>
-			<th style='width:50%' position='absolute'>Total</th>
-			</tr>
-			<td align='center' style='width:60%'>$" . number_format($total, 2) . "</td>
-			</table>";
+			echo "<table border='5px solid' class='center 'bordercolor='#313C53'>
+				<tr>
+				<th>Total Tax</th>
+				</tr>
+				<td>$" . number_format($totalTax, 2) . "</td>
+				<tr>
+				<th>Total</th>
+				</tr>
+				<td>$" . number_format($total, 2) . "</td>
+				</table>";
 
 			echo "<table align='center' border='5px solid' style='width:50%' bordercolor='#313C53'>
 			<tr>
