@@ -17,3 +17,13 @@
 .okButton:hover {
     background-color: #455268;
 }
+
+.button-container form,
+.button-container form div {
+    float: left;
+}
+
+.button-container input[type=submit] {
+    float: left;
+    vertical-align: middle;
+}

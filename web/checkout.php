@@ -70,7 +70,7 @@
                  }
                  if ($row_count >= 1) {
                     echo "<br>";
-                    echo "<table border='5px solid' style='width:50%' bordercolor='#313C53'>
+                    echo "<table border='5px solid' style='width:50%' bordercolor='#313C53' align='center'>
                     <tr>
                     <th style='width:50%'>Name</th>
                     <th style='width:50%'>Photo</th>
@@ -100,7 +100,9 @@
 					 echo "<td align='center'>" . "$" . number_format($tax, 2) . "</td>";
 					 echo "<td align='center'>" . "$" . number_format($subTotal, 2) . "</td>";				 
                 }
-				echo "<table border='5px solid' bordercolor='#313C53'>
+                
+
+				echo "<table border='5px solid' bordercolor='#313C53' align='center'>
 				<tr>
 				<th style='width:50%'>Total Tax</th>
 				</tr>
@@ -114,10 +116,11 @@
 			?>
             <?php require_once('./config.php'); ?>
 
-            <form action="charge.php" id="btn1" method="post">
-            <input type="checkbox" id="billaddr" name="billaddr" onClick="billAddrFunction();"> Billing address different than shipping address. <br>
-            <input type='text' id='billingaddress' pattern="[\sa-zA-Z0-9]{4,20}" name="billingaddress" style="visibility:hidden;">
-            
+            <form action="charge.php" id="btn1" method="post" align='center'>
+            <input type="checkbox" id="billaddr" name="billaddr" onClick="billAddrFunction();"><strong> Billing address different than shipping address? </strong>
+            <br>
+            <input type='text' align='center' id='billingaddress' pattern="[\sa-zA-Z0-9]{4,20}" name="billingaddress" style="visibility:hidden;">
+                    <br>
                     <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                     data-key="<?php echo $stripe['publishable_key']; ?>"
                     data-description="Payment Form"
