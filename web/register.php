@@ -65,10 +65,10 @@ $check = mysqli_query($link, $emailcheck);
 if(mysqli_num_rows($check) > 0){
     echo 'This email is already taken';
 }elseif(mysqli_query($link, $insert)) {
-    echo 'account successfully created!';
-	echo "<form action = 'login_register.php'>";
-	echo "<td style='width:60%'>" . "<input type='submit' value='Click here to login'>" . "</td>";
-	echo "</form>";
+    echo "<script>
+    alert('You have successfully created an account, please login now');
+    window.location='login_register.php';
+    </script>";
 }else{
     echo 'invalid account info';
 }
