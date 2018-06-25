@@ -37,26 +37,41 @@
     <article>
         
 	<?php
+
         if(isset($_POST['name'])){//update user info
-			$name = $_POST['name'];
+            $name = $_POST['name'];
 			$email = $_POST['email'];
             $address = $_POST['address'];
-            if(isset($_POST['policybox'])){
-                $updatepolicy = $_POST['policybox'];
-            }else{
-                $updatepolicy = 0;
-            }
-			
-            $insertnew ="UPDATE customer SET name='$name', email='$email',policy='$updatepolicy', address = '$address' WHERE email='$email';";
-                if(mysqli_query($link, $insertnew)){
-                    echo "<script>";
-                    echo "alert('user info updated successfully!')";
-                    echo "</script>";
+            $passwordcheck = "SELECT password FROM customer WHERE email = '$email';";
+            $check = mysqli_query($link, $passwordcheck);
+            $row = mysqli_fetch_array($check);
+            $pwstring = $row['password'];
+            $password=$_POST['password'];
+            $hashpass = sha1($password);
+
+            if($pwstring == $hashpass){
+
+                if(isset($_POST['policybox'])){
+                    $updatepolicy = $_POST['policybox'];
                 }else{
-                    echo "<script>";
-                    echo "alert('error updating user info!')" . mysqli_error($link);
-                    echo "<script>";
+                    $updatepolicy = 0;
                 }
+			
+                $insertnew ="UPDATE customer SET name='$name', email='$email',policy='$updatepolicy', address = '$address' WHERE email='$email';";
+                    if(mysqli_query($link, $insertnew)){
+                        echo "<script>";
+                        echo "alert('user info updated successfully!')";
+                        echo "</script>";
+                    }else{
+                        echo "<script>";
+                        echo "alert('error updating user info!')" . mysqli_error($link);
+                        echo "<script>";
+                    }
+            }else{
+                echo "<script>";
+                echo "alert('Password entered was incorrect!')";
+                echo "</script>";
+            }
 
 		}elseif(isset($_POST['newpassword'])){//user changes password
             $oldpass = $_POST['oldpassword'];
