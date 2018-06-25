@@ -85,7 +85,7 @@
 			$totalTax = 0;
 			while ($row = mysqli_fetch_array($result)){
 				$tax = (($row['quantity']*$row['price'])*.1);
-				$tax = number_format($tax, 2);
+				//$tax = number_format($tax, 2);
 				$subTotal = (($row['price']*$row['quantity'])+$tax);
 				$rowQuantity = $row['quantity'];
 				$total += $subTotal;
@@ -123,7 +123,7 @@
 			while ($row = mysqli_fetch_array($result)){
 				$img = $row['image'];
 				$tax = (($row['quantity']*$row['price'])*.1);
-				$tax = number_format($tax, 2);
+				//$tax = number_format($tax, 2);
 				$subTotal = (($row['price']*$row['quantity'])+$tax);
 				$rowQuantity = $row['quantity'];
 				$total += $subTotal;
