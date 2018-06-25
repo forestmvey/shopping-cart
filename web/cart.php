@@ -66,19 +66,14 @@
 				 //checkout button here
 				 if ($row_count != 0){
                  echo "<link rel='stylesheet' href='buttons.css'>";
-                 echo "<div class='button-container'>";
                  echo "<form action='deleteAllItems.php' align='center'>";
-                 echo "<div>";
                  echo "<input type='submit' value='Delete all items from cart' class='okButton'>";
-                 echo "</div>";
                  echo "</form>";
                  echo "<link rel='stylesheet' href='buttons.css'>";   
                  echo "<form action='checkout.php' method='post' align='center'>";
-                 echo "<div>";
                  echo "<input type='submit' value='Proceed to checkout' class='okButton'>";
-                 echo "</div>";
                  echo "</form>";
-                 echo "</div>";
+                 echo "<br>";
                  }
                  else {
                     echo "<p align='center'>Your cart is empty!</p>";
