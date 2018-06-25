@@ -79,7 +79,7 @@
 <?php
 // show all products
 
-echo "<table align='center' border='5px solid' style='width:100%' bordercolor='#313C53'>
+echo "<table align='center' border='5px solid' style='width:50%' bordercolor='#313C53'>
 <tr>
 <th style='width:60%'>Name</th>
 <th style='width:60%'>Size</th>
