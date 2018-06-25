@@ -123,7 +123,10 @@ if($pwstring == $hashpass){
 		 }
 }
 else{
-	echo 'invalid password';
+	echo "<script>
+    alert('You have entered an incorrect username or password!');
+    window.location='login_register.php';
+    </script>";
 }
 
 

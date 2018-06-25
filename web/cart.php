@@ -50,6 +50,7 @@
         
         <?php
         include ('connection.php');
+        require_once('./config.php');
      
         // show all products
         $userID = $_SESSION['userid'];
@@ -65,16 +66,27 @@
 				 //checkout button here
 				 if ($row_count != 0){
                  echo "<link rel='stylesheet' href='buttons.css'>";
-				 echo "<form action='deleteAllItems.php'>";
+                 echo "<div class='button-container'>";
+                 echo "<form action='deleteAllItems.php' align='center'>";
+                 echo "<div>";
                  echo "<input type='submit' value='Delete all items from cart' class='okButton'>";
-                 echo "<br>";
-				 echo "</form>";
-				 } else {
-				 echo "Your cart is empty!";
+                 echo "</div>";
+                 echo "</form>";
+                 echo "<link rel='stylesheet' href='buttons.css'>";   
+                 echo "<form action='checkout.php' method='post' align='center'>";
+                 echo "<div>";
+                 echo "<input type='submit' value='Proceed to checkout' class='okButton'>";
+                 echo "</div>";
+                 echo "</form>";
+                 echo "</div>";
                  }
+                 else {
+                    echo "<p align='center'>Your cart is empty!</p>";
+                    }
+				 }
                  if ($row_count >= 1) {
                     echo "<br>";
-                    echo "<table border='5px solid' style='width:50%' bordercolor='#313C53'>
+                    echo "<table border='5px solid' style='width:50%' bordercolor='#313C53' align='center'>
                     <tr>
                     <th style='width:50%'>Name</th>
                     <th style='width:50%'>Photo</th>
@@ -123,13 +135,14 @@
                      echo "</form>";
                      echo "<link rel='stylesheet' href='buttons.css'>";				 
 					 echo "<form action='cartRemoveItem.php' method = 'POST'>";
-					 echo "<td align='center'>" . "<button class='okButton'>" . "Remove All" . "</td>";
+                     echo "<td align='center'>" . "<button class='okButton'>" . "Remove All" . "</td>";
+                     echo "</form>"
 					 ?>
 					 <input type='hidden' name='prodid2' value="<?php echo $row['id'];?>"/>
 					 <?php
 					 echo "</form>";					 
                 }
-				echo "<table border='5px solid' bordercolor='#313C53'>
+				echo "<table border='5px solid' bordercolor='#313C53' align='center'>
 				<tr>
 				<th style='width:50%'>Total Tax</th>
 				</tr>
@@ -139,18 +152,7 @@
 				</tr>
 				<td align='center' style='width:60%'>$" . number_format($total, 2) . "</td>
 				</table>";
-            } 
 			?>
-            <?php require_once('./config.php'); ?>
-
-            <?php require_once('./config.php'); 
-            if ($row_count != 0){
-            echo "<link rel='stylesheet' href='buttons.css'>";
-            echo "<form action='checkout.php' method='post'>
-            <input type='submit' value='Proceed to checkout' class='okButton'>
-            </form>";
-            }
-            ?>
 
     </article>
     </body>

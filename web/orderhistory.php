@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="default.css">
+	<link rel="stylesheet" href="default.css">
+	<link rel="stylesheet" href="buttons.css">
     <meta charset="utf-8">
 
     <title>Blurry Photos 4 You!</title>
@@ -35,19 +36,14 @@
             <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
-    </div>
-
-	<h2>Order History</h2>
-	<form action="orderhistory.php" method="POST">
-	<input type="text" title="search" id="search" name="search" value="<?php if(isset($_POST['search']) && $search != ''){ echo "$search";} ?>">
-	<input type="submit" value="Search">
-	</form>
+	</div>
+	<h2 align='center'>Order History</h2>
 
     <?php
 	// Display order history
 	$userid = $_SESSION['userid'];
 
-	$orderscheck = "SELECT DISTINCT order_id AS 'Order' FROM orderhistory WHERE customer_id = '$userid'";
+	$orderscheck = "SELECT DISTINCT order_id AS 'Order', date FROM orderhistory WHERE customer_id = '$userid'";
 	$orders = mysqli_query($link, $orderscheck);
 	$ordertotalcheck = "SELECT order_id, quantity, price, date FROM orderhistory WHERE customer_id = '$userid'";
 	$ordertotal = mysqli_query($link, $ordertotalcheck);
@@ -56,19 +52,23 @@
 	echo "<form action='orderhistory.php' method='POST'>";
 	while($row = mysqli_fetch_array($orders)){
 		$total = 0;
-		$date;
+		$date = $row['date'];
 		while($totalrow = mysqli_fetch_array($ordertotal)){
 			$total = $totalrow['quantity'] * $totalrow['price'] + $total;
-			$date = $totalrow['date'];
 		}
 		$tax = $total*0.1;
 		$total = $tax;
 		
 	?>
-	<input type="submit" name="order" value="<?php echo $row['Order']; ?>"><?php echo "Order #:" . $row['Order'] . "</button>" . " Order Date: " . $date; ?><br>
-	
+	<input type="submit" class='okButton' align='right' name="order" value="<?php echo $row['Order']; ?>"><?php echo "Order #" . $row['Order'] . "</button>" . " Order Date: " . $date; ?>
+	<br>
+	<?php } ?>
+	<form action="orderhistory.php" method="POST" align="center">
+	<input type="text" title="search" id="search" name="search" value="<?php if(isset($_POST['search']) && $search != ''){ echo "$search";} ?>">
+	<input type="submit" value="Search" class='okButton'>
+	</form>
 	<?php
-	}
+	
 	
 	
 	echo "</form>";
@@ -93,13 +93,13 @@
 				$total += $totalTax;
 			}
 			echo "<link rel='stylesheet' href='default.css'>";
-			echo "<table border='5px solid' class='center' bordercolor='#313C53'>
+			echo "<table border='5px solid' bordercolor='#313C53' align='center'>
 			<tr>
-			<th style='width:50%' >Total Tax</th>
+			<th style='width:50%'>Total Tax</th>
 			</tr>
 			<td align='center'>$" . number_format($totalTax, 2) . "</td>
 			<tr>
-			<th style='width:50%' position='absolute'>Total</th>
+			<th style='width:50%'>Total</th>
 			</tr>
 			<td align='center' style='width:60%'>$" . number_format($total, 2) . "</td>
 			</table>";

@@ -8,9 +8,11 @@
 
     <title>Blurry Photos 4 You!</title>
     <style type="text/css"></style>
+
 </head>
 
 <body>
+
 <?php
     session_start();
     ini_set('display_errors',1);
@@ -55,7 +57,7 @@
          
         //search for all categories to display in form
 
-        $cats = mysqli_query($link, "SELECT DISTINCT * FROM category");
+        $cats = mysqli_query($link, "SELECT DISTINCT * FROM category ORDER BY id, name");
 
         while($row = mysqli_fetch_array($cats)){
             $cat = $row['name'];
@@ -70,12 +72,12 @@
         ?>
         </select>
         <button value='filter selection' id='filter' class="okButton">Ok</button>
-        <br>
-        </form>
         <form action="photos.php" method="POST">
+        <label><strong>Search:</strong></label>
 	    <input type="text" title="search" id="search" name="search" value="<?php if(isset($_POST['search']) && $search != ''){ echo "$search";} ?>">
-	    <input type="submit" value="Search">
+	    <input type="submit" value="Search" class="okButton">
 	    </form>
+        </form>
 <?php
 // show all products
 
@@ -194,5 +196,5 @@ else if ($category != "0" && $category != "") {
 
 
 ?>
-</body>
+
 </html>
