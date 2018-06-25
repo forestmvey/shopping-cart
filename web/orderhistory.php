@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="default.css">
+	<link rel="stylesheet" href="default.css">
+	<link rel="stylesheet" href="buttons.css">
     <meta charset="utf-8">
 
     <title>Blurry Photos 4 You!</title>
@@ -35,12 +36,8 @@
             <li><a href="addproduct.php" id="addprod" style="visibility:hidden;" title="AddProduct">Add Product</a></li>
         </ul>
     </nav>
-    </div>
-	<form action="orderhistory.php" method="POST">
-	<input type="text" title="search" id="search" name="search" value="<?php if(isset($_POST['search']) && $search != ''){ echo "$search";} ?>">
-	<input type="submit" value="Search">
-	</form>
-	<h2>Order History</h2>
+	</div>
+	<h2 align='center'>Order History</h2>
 
     <?php
 	// Display order history
@@ -63,10 +60,15 @@
 		$total = $tax;
 		
 	?>
-	<input type="submit" name="order" value="<?php echo $row['Order']; ?>"><?php echo "Order #:" . $row['Order'] . "</button>" . " Order Date: " . $date; ?><br>
-	
+	<input type="submit" class='okButton' align='right' name="order" value="<?php echo $row['Order']; ?>"><?php echo "Order #" . $row['Order'] . "</button>" . " Order Date: " . $date; ?>
+	<br>
+	<?php } ?>
+	<form action="orderhistory.php" method="POST" align="center">
+	<input type="text" title="search" id="search" name="search" value="<?php if(isset($_POST['search']) && $search != ''){ echo "$search";} ?>">
+	<input type="submit" value="Search" class='okButton'>
+	</form>
 	<?php
-	}
+	
 	
 	
 	echo "</form>";
@@ -91,16 +93,16 @@
 				$total += $totalTax;
 			}
 			echo "<link rel='stylesheet' href='default.css'>";
-			echo "<table border='5px solid' class='center 'bordercolor='#313C53'>
-				<tr>
-				<th>Total Tax</th>
-				</tr>
-				<td>$" . number_format($totalTax, 2) . "</td>
-				<tr>
-				<th>Total</th>
-				</tr>
-				<td>$" . number_format($total, 2) . "</td>
-				</table>";
+			echo "<table border='5px solid' bordercolor='#313C53' align='center'>
+			<tr>
+			<th style='width:50%'>Total Tax</th>
+			</tr>
+			<td align='center'>$" . number_format($totalTax, 2) . "</td>
+			<tr>
+			<th style='width:50%'>Total</th>
+			</tr>
+			<td align='center' style='width:60%'>$" . number_format($total, 2) . "</td>
+			</table>";
 
 			echo "<table align='center' border='5px solid' style='width:50%' bordercolor='#313C53'>
 			<tr>
